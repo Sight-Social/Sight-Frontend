@@ -20,10 +20,19 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 
+/* WHAT IS A SLICE?
+A slice is the portion of Redux code that relates to a specific set of data and 
+actions within the store 's state. A slice reducer is the reducer responsible 
+for handling actions and updating the data for a given slice.
+*/
 export const counterSlice = createSlice({
   name: 'counter',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
+  /* WHAT IS A REDUCER?
+  Reducers are functions that take the current state and an action as arguments, 
+  and return a new state result. In other words, (state, action) => newState.
+  */
   reducers: {
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
