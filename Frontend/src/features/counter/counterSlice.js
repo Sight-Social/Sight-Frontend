@@ -1,6 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchCount } from './counterAPI';
 
+// api call useEffect user
+/* FOCALPOINT SLICE */
+/* const initialState = {
+  focalpoints: [],
+  user: ,
+}; */
+
 const initialState = {
   value: 0,
   status: 'idle',
