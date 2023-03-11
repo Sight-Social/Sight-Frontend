@@ -1,43 +1,36 @@
-/* import axios from 'axios';
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const SET_USER = 'SET_USER';
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+const backendURL = 'http://localhost:3000/login';
 
-export const setUser = (user) => ({
-  type: SET_USER,
-  payload: user,
-});
-
-export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
-});
-
-export const loginSuccess = (user) => ({
-  type: LOGIN_SUCCESS,
-  payload: user,
-});
-
-export const loginFailure = (error) => ({
-  type: LOGIN_FAILURE,
-  payload: error,
-});
-
-export const login = (credentials) => {
-  return async (dispatch) => {
-    dispatch(loginRequest());
-
+export const userLogin = createAsyncThunk(
+  'login/userLogin',
+  async ({username, email, password}, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://localhost:3000/login',
-        credentials
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const res = await axios.post(
+        `${backendURL}`,
+        { username, email, password },
+        config
       );
-      const user = response.data.user;
-      dispatch(loginSuccess(user));
+
+      if (res.status === 200){
+        console.log('[LoginActions.js] Login successful');
+        console.log('[LoginActions.js] res.data: ', res.data);
+        return res.data.user;
+      }
+      if (res.status === 400){
+        console.log('[LoginActions.js] Login failed');
+        console.log('[LoginActions.js] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      return rejectWithValue(error.response.data.message);
     }
-  };
-};
- */
+  }
+);

@@ -1,13 +1,18 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { userLogin } from './loginActions.js';
 /* import { fetchCount } from './counterAPI'; */
 
 /* LOGIN SLICE */
 const initialState = {
+  loading: false,
+  error: null,
+  success: false,
   username: '',
   email: '',
   password: '',
   googleId: '',
   accessToken: '',
+  userToken: '',
   avatar: '',
 };
 
@@ -26,7 +31,6 @@ export const loginSlice = createSlice({
       state.username = username;
       state.email = email;
       state.password = password;
-      /* AXIOS STUFF HERE??? */
     },
     logout: (state) => {
       state.username = '';
@@ -35,6 +39,28 @@ export const loginSlice = createSlice({
     },
     signup: (state) => {},
   },
+  extraReducers: {
+    //Login user
+    [userLogin.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [userLogin.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.username = payload.username
+      state.email = payload.email
+      state.password = payload.password
+      state.googleId = payload.googleId
+      state.accessToken = payload.accessToken
+      state.userToken = payload.userToken
+      state.avatar = payload.avatar
+      state.success = true
+    },
+    [userLogin.rejected]: (state, { payload }) => {
+      state.loading = false
+      state.error = payload
+    },
+  }
 });
 
 export const { login, logout, signup } = loginSlice.actions;

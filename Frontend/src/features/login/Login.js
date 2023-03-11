@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
+import { userLogin } from './loginActions';
+import HeroState from '../HeroState';
 import {
   Text,
   Container,
@@ -20,32 +22,41 @@ import {
 import { login, selectUsername, selectPassword } from './loginSlice';
 
 export function Login() {
-  const usrname = useSelector(selectUsername);
-  const pword = useSelector(selectPassword);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const usrname = useSelector(selectUsername);
+  const pswd = useSelector(selectPassword);
+  const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  /* const { user, error } = useSelector((state) => state.user); */
+  useEffect(() => {
+    console.log('Login.js: useEffect() user:', user);
+    if (user.username) {
+      navigate(`/user/${user.username}`);
+    }
+  }, [navigate, user])
 
-  const handleLogin = (e) => {
+  async function handleLogin(e){
     e.preventDefault();
-    console.log('need help login');
-    dispatch(
-      login({
-        userData: {
-          username: username,
-          email: email,
-          password: password,
-        },
-      })
-    );
-  };
+    console.log('Login.js: handleLogin() dispatching userLogin with:');
+    console.log({ username, email, password});
+    try {
+      const action = await dispatch(userLogin({ username, email, password }));
+      console.log('Login.js: handleLogin() user after dispatch:', action.payload);
+      navigate(`/user/${action.payload.username}`);
+    } catch (err) {
+      console.log('Login.js: handleLogin() error:', err);
+    }
+  }
+  
 
   /* <Icon to='/'>Sight</Icon> */
   return (
+    <>
+      <HeroState />
     <Container>
       <FormWrap>
         <FormContent>
@@ -85,6 +96,7 @@ export function Login() {
         </FormContent>
       </FormWrap>
     </Container>
+    </>
   );
 }
 
