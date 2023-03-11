@@ -1,4 +1,4 @@
-import axios from 'axios';
+/* import axios from 'axios';
 
 export const SET_USER = 'SET_USER';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -40,3 +40,4 @@ export const login = (credentials) => {
     }
   };
 };
+ */

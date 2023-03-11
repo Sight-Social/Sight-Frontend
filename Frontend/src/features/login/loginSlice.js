@@ -6,6 +6,9 @@ const initialState = {
   username: '',
   email: '',
   password: '',
+  googleId: '',
+  accessToken: '',
+  avatar: '',
 };
 
 /* WHAT IS A SLICE?
@@ -16,25 +19,25 @@ for handling actions and updating the data for a given slice.
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  /* WHAT IS A REDUCER?
-  Reducers are functions that take the current state and an action as arguments, 
-  and return a new state result. In other words, (state, action) => newState.
-  */
   reducers: {
     login: (state) => {
-      /* state.value += 1; */
-      console.log('[RDX] LOGGING IN!!!');
+      state.username = 'noble';
+      state.email = 'elsherifsammy@gmail.com';
+      state.password = 'password';
     },
     logout: (state) => {
-      /* state.value -= 1; */
+      state.username = '';
+      state.email = '';
+      state.password = '';
     },
-    signup: (state) => {
-      /* state.value += action.payload; */
-    },
+    signup: (state) => {},
   },
 });
 
 export const { login, logout, signup } = loginSlice.actions;
+
+export const selectUsername = (state) => state.user.username;
+export const selectPassword = (state) => state.user.password;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

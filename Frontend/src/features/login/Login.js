@@ -15,63 +15,66 @@ import {
   IconWrapper,
 } from './LoginElements';
 /* import SightWhiteIcon from '../../../assets/icons/Sight-White-32.svg'; */
-import { login } from '../../actions/loginActions';
+
+import { login, selectUsername, selectPassword } from './loginSlice';
 
 export function Login() {
+  const usrname = useSelector(selectUsername);
+  const pword = useSelector(selectPassword);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const dispatch = useDispatch();
-  const { user, error } = useSelector((state) => state.user);
+
+  /* const { user, error } = useSelector((state) => state.user); */
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login(email, password, username));
+    console.log('need help login');
+    dispatch(login());
   };
-
+  /* <Icon to='/'>Sight</Icon> */
   return (
-    <>
-      <Container>
-        <FormWrap>
-          {/* <Icon to='/'>Sight</Icon> */}
-          <FormContent>
-            <Form onSubmit={handleLogin}>
-              <IconWrapper>
-                {/* <SightIcon src={SightWhiteIcon} /> */}
-              </IconWrapper>
-              <FormH1>Login</FormH1>
-              <FormLabel htmlFor='for'>Email</FormLabel>
-              <FormInput
-                type='email'
-                required
-                autoComplete='current-email'
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <FormLabel htmlFor='for'>Username</FormLabel>
-              <FormInput
-                type='username'
-                required
-                autoComplete='current-username'
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <FormLabel htmlFor='for'>Password</FormLabel>
-              <FormInput
-                type='password'
-                required
-                autoComplete='current-password'
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <FormButton type='submit'>
-                Login{/*  {user ? 'Continue' : 'Log in'} */}
-              </FormButton>
-              {/*  {error && <div>{error}</div>} */}
-              <Text to='/signup'>Sign Up</Text>
-              <Text to='/reset-password'>Forgot password</Text>
-            </Form>
-          </FormContent>
-        </FormWrap>
-      </Container>
-    </>
+    <Container>
+      <FormWrap>
+        <FormContent>
+          <Form onSubmit={handleLogin}>
+            {/* <IconWrapper>
+              <SightIcon src={SightWhiteIcon} />
+            </IconWrapper> */}
+            <FormH1>Login</FormH1>
+            <FormLabel htmlFor='for'>Email</FormLabel>
+            <FormInput
+              type='email'
+              required
+              autoComplete='current-email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <FormLabel htmlFor='for'>Username</FormLabel>
+            <FormInput
+              type='username'
+              required
+              autoComplete='current-username'
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <FormLabel htmlFor='for'>Password</FormLabel>
+            <FormInput
+              type='password'
+              required
+              autoComplete='current-password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormButton type='submit'>
+              Login {/* {user ? 'Continue' : 'Log in'} */}
+            </FormButton>
+            {/* {error && <div>{error}</div>} */}
+            {/* <Text to='/signup'>Sign Up</Text>
+            <Text to='/reset-password'>Forgot password</Text> */}
+          </Form>
+        </FormContent>
+      </FormWrap>
+    </Container>
   );
 }
 

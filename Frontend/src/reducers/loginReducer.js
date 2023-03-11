@@ -1,4 +1,4 @@
-import {
+/* import {
   SET_USER,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -6,12 +6,12 @@ import {
 } from '../actions/loginActions';
 
 const initialState = {
-  user: null,
+  user: 'something',
   loading: false,
-  error: null,
+  error: 'someError',
 };
 
-const loginReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
@@ -43,4 +43,5 @@ const loginReducer = (state = initialState, action) => {
   }
 };
 
-export default loginReducer;
+export default reducer;
+ */

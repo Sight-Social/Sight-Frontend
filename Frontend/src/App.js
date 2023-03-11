@@ -52,7 +52,9 @@ function App() {
           </a>
         </span>
       </header>
-      <Login />
+      <div>
+        <Login />
+      </div>
     </div>
   );
 }
