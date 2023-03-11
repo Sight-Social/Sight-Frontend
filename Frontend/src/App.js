@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import { Login } from './features/login/Login';
-import { ProfilePage } from './features/profile/ProfilePage';
+import { Profile } from './features/profile/Profile';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes} from 'react-router-dom';
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
       <Routes>
       {user.username !== '' ? (
         <>
-          <Route path={profilePath} element={<ProfilePage />} />
+          <Route path={profilePath} element={<Profile />} />
         </>
       ) : (
         <>
