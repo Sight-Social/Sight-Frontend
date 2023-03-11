@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Text,
   Container,
@@ -32,8 +33,17 @@ export function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('need help login');
-    dispatch(login());
+    dispatch(
+      login({
+        userData: {
+          username: username,
+          email: email,
+          password: password,
+        },
+      })
+    );
   };
+
   /* <Icon to='/'>Sight</Icon> */
   return (
     <Container>

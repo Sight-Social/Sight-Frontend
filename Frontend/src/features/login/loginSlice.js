@@ -20,10 +20,13 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    login: (state) => {
-      state.username = 'noble';
-      state.email = 'elsherifsammy@gmail.com';
-      state.password = 'password';
+    login: (state, action) => {
+      console.log(action.payload.userData);
+      const { username, email, password } = action.payload.userData;
+      state.username = username;
+      state.email = email;
+      state.password = password;
+      /* AXIOS STUFF HERE??? */
     },
     logout: (state) => {
       state.username = '';
