@@ -20,7 +20,7 @@ import {
   EditableUsername,
   Spacer,
 } from './ProfileElements.js';
-
+import FocalPoints from '../../components/FocalPoint/FocalPoints';
 import YouTubeVideo from '../youtubeVideo/YouTubeVideo';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -157,6 +157,7 @@ export function Profile() {
             : null}
         </PinnedInsights>
         {/* FOCAL POINT GRID */}
+        <FocalPoints />
         <Footer />
       </Container>
     </MainContainer>

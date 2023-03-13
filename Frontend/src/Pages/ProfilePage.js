@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { WebAppNav } from '../features/WebAppNav';
+import { WebAppNav } from '../components/WebAppNav';
 import { Profile } from '../features/profile/Profile';
 import styled from 'styled-components';
 
