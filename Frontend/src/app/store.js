@@ -6,7 +6,7 @@ import focalpointReducer from '../features/focalpoints/focalpointSlice';
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    user: loginReducer,
+    profile: loginReducer,
     focalpoint: focalpointReducer,
     /* login: loginReducer, */
   },
