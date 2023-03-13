@@ -106,10 +106,10 @@ export function WebAppNav() {
         className='flex-column'
         style={{ paddingLeft: '15px' }}
       >
-        {/* {user.focalpoints
-          ? user.focalpoints.map((focalpoint, index) => (
+        {focalpoints
+          ? focalpoints.map((focalpoint, index) => (
               <Nav.Link
-                href={`/user/${user.username}/focalpoints/${focalpoint._id}`}
+                href={`/user/${username}/focalpoints/${focalpoint._id}`}
                 style={{
                   color: '#AEAEAE',
                   transition: 'color 0.3s ease-in-out',
@@ -121,7 +121,7 @@ export function WebAppNav() {
                 {focalpoint.title}
               </Nav.Link>
             ))
-          : null} */}
+          : null}
       </Nav>
     </NavContainer>
   );

@@ -7,6 +7,7 @@ import { Profile } from './features/profile/Profile';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ProfilePage } from './Pages/ProfilePage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
