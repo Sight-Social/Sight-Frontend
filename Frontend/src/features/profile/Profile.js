@@ -17,12 +17,7 @@ import {
   ProfileDetailsWrapper,
   ProfilePicture,
   ProfilePictureWrapper,
-  CenterMobile,
   EditableUsername,
-  NavContainer,
-  NavSubHeader,
-  ProfileContainer,
-  SpaceDetailsAndProfileButton,
   Spacer,
 } from './ProfileElements.js';
 
@@ -31,8 +26,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
-export function Profile(){
-  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(state => state.user);
+export function Profile() {
+  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(
+    (state) => state.user
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(username);
 
@@ -74,7 +71,6 @@ export function Profile(){
         <UserProfile>
           {' '}
           {/* USER PROFILE WRAPPER */}
-          {/* <CenterMobile> */}
           <ProfilePictureWrapper>
             <ProfilePicture src={avatar} />
           </ProfilePictureWrapper>
@@ -89,17 +85,19 @@ export function Profile(){
                 <BtnsWrapper>
                   <BtnWrap>
                     <Button
-                      variant="secondary"
-                      size="md"
-                      onClick={handleCancelProfileChange}>
+                      variant='secondary'
+                      size='md'
+                      onClick={handleCancelProfileChange}
+                    >
                       Cancel
                     </Button>{' '}
                   </BtnWrap>
                   <BtnWrap>
                     <Button
-                      variant="secondary"
-                      size="md"
-                      onClick={handleSaveProfile}>
+                      variant='secondary'
+                      size='md'
+                      onClick={handleSaveProfile}
+                    >
                       Save Profile
                     </Button>{' '}
                   </BtnWrap>
@@ -111,16 +109,16 @@ export function Profile(){
                 <ProfilePath>{email}</ProfilePath>
                 <BtnsWrapper>
                   <BtnWrap>
-                    <Button variant="secondary"
-                    size="md">
+                    <Button variant='secondary' size='md'>
                       Share
                     </Button>{' '}
                   </BtnWrap>
                   <BtnWrap>
                     <Button
-                      variant="secondary"
-                      size="md"
-                      onClick={handleEditProfile}>
+                      variant='secondary'
+                      size='md'
+                      onClick={handleEditProfile}
+                    >
                       Edit Profile
                     </Button>{' '}
                   </BtnWrap>
@@ -128,28 +126,31 @@ export function Profile(){
               </>
             )}
           </ProfileDetailsWrapper>
-            <Button variant="secondary"
-             style ={{
-              height: "40%",
-              width:"150px",
-              marginTop: "20px"}}
-            onClick={handleLogout}>Logout</Button>
-          {/* </CenterMobile> */}
+          <Button
+            variant='secondary'
+            style={{
+              height: '40%',
+              width: '150px',
+              marginTop: '20px',
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </UserProfile>
         <Subheader>Pinned Insights</Subheader>
         <PinnedInsights>
           {pinned_insights
             ? pinned_insights.map((insight, index) => (
                 <>
-              
                   <YouTubeVideo
                     key={index}
-                    className="pinned-insight"
+                    className='pinned-insight'
                     videoId={insight.video_id}
-                    height="250"
-                    width="300"
+                    height='250'
+                    width='300'
                   />
-            
+
                   <Spacer />
                 </>
               ))
@@ -160,4 +161,4 @@ export function Profile(){
       </Container>
     </MainContainer>
   );
-};
+}

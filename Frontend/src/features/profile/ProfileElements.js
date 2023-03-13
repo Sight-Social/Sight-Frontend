@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
-  /*font-family: 'Futura';
-  /* background-color: var(--clr-black); */
-
-  /* background-color: var(--clr-gray); */
-
   background: hsla(0, 0%, 7%, 1);
 
   background: linear-gradient(
@@ -30,6 +25,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  width: 80vw;
 `;
 
 export const NavContainer = styled.div`
@@ -66,7 +62,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80vw;
+  /* width: 80vw; */
 `;
 
 export const UserProfile = styled.div`

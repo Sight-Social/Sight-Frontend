@@ -46,27 +46,28 @@ export const loginSlice = createSlice({
       state.error = null;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
-      state.loading = false
-      state.username = payload.username
-      state.email = payload.email
-      state.password = payload.password
-      state.googleId = payload.googleId
-      state.accessToken = payload.accessToken
-      state.userToken = payload.userToken
-      state.avatar = payload.avatar
-      state.success = true
+      state.loading = false;
+      state.username = payload.username;
+      state.email = payload.email;
+      state.password = payload.password;
+      state.googleId = payload.googleId;
+      state.accessToken = payload.accessToken;
+      state.userToken = payload.userToken;
+      state.avatar = payload.avatar;
+      state.success = true;
+      state.focalpoints = payload.focalpoints;
     },
     [userLogin.rejected]: (state, { payload }) => {
-      state.loading = false
-      state.error = payload
+      state.loading = false;
+      state.error = payload;
     },
-  }
+  },
 });
 
 export const { login, logout, signup } = loginSlice.actions;
 
-export const selectUsername = (state) => state.profile.username;
-export const selectPassword = (state) => state.profile.password;
+export const selectUsername = (state) => state.user.username;
+export const selectPassword = (state) => state.user.password;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
