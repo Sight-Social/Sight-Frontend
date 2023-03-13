@@ -56,6 +56,7 @@ export const loginSlice = createSlice({
       state.avatar = payload.avatar;
       state.success = true;
       state.focalpoints = payload.focalpoints;
+      state.pinned_insights = payload.pinned_insights;
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
