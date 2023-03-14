@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Login } from './features/login/Login';
+import { HomePage } from './Pages/Home.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ProfilePage } from './Pages/ProfilePage';
@@ -21,7 +22,8 @@ function App() {
           </>
         ) : (
           <>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='/login' element={<Login />} />
           </>
         )}
       </Routes>

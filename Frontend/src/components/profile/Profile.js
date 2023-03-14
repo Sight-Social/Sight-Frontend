@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import Footer from '../footer/Footer';
+import Footer from '../PageComponents/Footer/Footer';
 import {
   MainContainer,
   Container,
