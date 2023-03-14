@@ -1,13 +1,11 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Login } from './features/login/Login';
-import { HomePage } from './Pages/Home.js';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 
+import { HomePage } from './Pages/Home.js';
 import { ProfilePage } from './Pages/ProfilePage';
 import { Login } from './features/login/Login';
 import { clearUser, setUser } from './/user/userSlice';

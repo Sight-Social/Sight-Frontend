@@ -16,7 +16,7 @@ import {
   SightIcon,
   IconWrapper,
 } from './LoginElements';
-/* import SightWhiteIcon from '../../../assets/icons/Sight-White-32.svg'; */
+import SightWhiteIcon from '../../assets/icons/Sight-White-32.svg';
 
 import { login } from './loginSlice';
 import { setUser } from '../../user/userSlice';

@@ -78,7 +78,7 @@ const loginSlice = createSlice({
   },
 });
 
-export const { login, logout, signup } = loginSlice.actions;
+export const { logout, signup } = loginSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
