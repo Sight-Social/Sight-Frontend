@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUsername } from '../../user/userThunk.js';
+import { setUser } from '../../user/userSlice.js';
 import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
@@ -30,7 +32,9 @@ export function Profile() {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(username);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const handleEditProfile = () => {
     setIsEditing(!isEditing);
   };
@@ -40,9 +44,10 @@ export function Profile() {
   async function handleSaveProfile() {
     setIsEditing(false);
     try {
-      const res = await axios.put(`http://localhost:3000/user/${email}`, {
-        username: editedName,
-      });
+      console.log('[Profile.js] editName ', editedName);
+      dispatch(updateUsername({oldUsername: username, newUsername: editedName}));
+      navigate(`/user/${editedName}`);
+
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +55,7 @@ export function Profile() {
   const handleCancelProfileChange = () => {
     setIsEditing(false);
   };
-  const navigate = useNavigate();
+
   const handleLogout = () => {
     console.log('[NavBar/index.js] Logout btn clicked');
     sessionStorage.removeItem('user');

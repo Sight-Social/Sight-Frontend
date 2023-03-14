@@ -61,13 +61,17 @@ const loginSlice = createSlice({
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Login failed';
+          state.isAuthenticated = false;
         } else {
           console.log('[LoginSlice.js] login.fulfilled payload: ', payload);
           state.loading = false;
           state.success = true;
+          state.isAuthenticated = true;
         }
       })
       .addCase(login.rejected, (state, { payload }) => {
+        console.log('[LoginSlice.js] login.rejected payload: ', payload)
+        alert('Login failed. Please try again.');
         state.loading = false;
         state.error = payload;
       });

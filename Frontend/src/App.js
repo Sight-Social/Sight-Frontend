@@ -16,7 +16,7 @@ import { clearUser, setUser } from './/user/userSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, username } = useSelector((state) => state.user);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));

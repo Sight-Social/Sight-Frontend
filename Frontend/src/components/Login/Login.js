@@ -22,15 +22,13 @@ import { setUser } from '../../user/userSlice';
 export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const action = await dispatch(login({ username, email, password }));
+      const action = await dispatch(login({ username, password }));
       if (action.payload.username) {
         dispatch(setUser(action.payload));
         navigate(`/user/${action.payload.username}`);
@@ -56,13 +54,6 @@ export function Login() {
                 <SightIcon src={SightWhiteIcon} />
               </IconWrapper>
               <FormH1>Login</FormH1>
-              <FormLabel htmlFor='for'>Email</FormLabel>
-              <FormInput
-                type='email'
-                required
-                autoComplete='current-email'
-                onChange={(e) => setEmail(e.target.value)}
-              />
               <FormLabel htmlFor='for'>Username</FormLabel>
               <FormInput
                 type='username'

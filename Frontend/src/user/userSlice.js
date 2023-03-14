@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { updateUsername } from './userThunk';
 
 const initialState = {
     isAuthenticated: false,
@@ -28,7 +29,7 @@ const userSlice = createSlice({
             state.focalpoints = action.payload.focalpoints;
             state.pinned_insights = action.payload.pinned_insights;
             state.subscriptions = action.payload.subscriptions;
-            state.isAuthenticated = action.payload.isAuthenticated;
+            state.isAuthenticated = true;
             localStorage.setItem('user', JSON.stringify(action.payload));
         },
         clearUser: (state, action) => {
@@ -43,7 +44,28 @@ const userSlice = createSlice({
             state.pinned_insights = [];
             state.subscriptions = [];
             localStorage.clear();
-        }
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(updateUsername.fulfilled, (state, action) => {
+                console.log('[userSlice.js] updateUsername.fulfilled called');
+                console.log('[userSlice.js] action.payload: ', action.payload);
+                state.username = action.payload.username;
+                state.email = action.payload.email;
+                state.password = action.payload.password;
+                state.googleId = action.payload.googleId;
+                state.avatar = action.payload.avatar;
+                state.focalpoints = action.payload.focalpoints;
+                state.pinned_insights = action.payload.pinned_insights;
+                state.subscriptions = action.payload.subscriptions;
+                state.isAuthenticated = true;
+                localStorage.setItem('user', JSON.stringify(action.payload));
+            })
+            .addCase(updateUsername.rejected, (state, action) => {
+                console.log('[userSlice.js] updateUsername.rejected called');
+                state.error = action.payload;
+            });
     },
 });
 
