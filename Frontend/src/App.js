@@ -2,8 +2,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
 import { useEffect } from 'react';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Login } from './features/login/Login';
+import { HomePage } from './Pages/Home.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 
@@ -39,7 +40,8 @@ function App() {
           </>
         ) : (
           <>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='/login' element={<Login />} />
           </>
         )}
       </Routes>

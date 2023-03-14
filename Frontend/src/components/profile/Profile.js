@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import Footer from '../footer/Footer';
+import Footer from '../PageComponents/Footer/Footer';
 import {
   MainContainer,
   Container,
@@ -20,14 +20,12 @@ import {
   EditableUsername,
   Spacer,
 } from './ProfileElements.js';
-import FocalPoints from '../../components/FocalPoint/FocalPoints';
+import FocalPoints from '../FocalPoint/FocalPoints';
 import YouTubeVideo from '../youtubeVideo/YouTubeVideo';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
-  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(
+  const { username, email, avatar, pinned_insights } = useSelector(
     (state) => state.user
   );
   const [isEditing, setIsEditing] = useState(false);
@@ -62,15 +60,11 @@ export function Profile() {
 
   let feedURL = `${username}/feed`;
   let profileURL = `${username}`;
-  // http://localhost:3001/user/noble/focalpoints/63fcc092450eb140564facd3
+
   return (
     <MainContainer>
       <Container>
-        {' '}
-        {/* WRAPS PROFILE, PINNED INSIGHTS, & FOCAL POINTS */}
         <UserProfile>
-          {' '}
-          {/* USER PROFILE WRAPPER */}
           <ProfilePictureWrapper>
             <ProfilePicture src={avatar} />
           </ProfilePictureWrapper>
@@ -142,7 +136,7 @@ export function Profile() {
         <PinnedInsights>
           {pinned_insights
             ? pinned_insights.map((insight, index) => (
-                <>
+                <div key={index}>
                   <YouTubeVideo
                     key={index}
                     className='pinned-insight'
@@ -150,13 +144,11 @@ export function Profile() {
                     height='250'
                     width='300'
                   />
-
                   <Spacer />
-                </>
+                </div>
               ))
             : null}
         </PinnedInsights>
-        {/* FOCAL POINT GRID */}
         <FocalPoints />
         <Footer />
       </Container>

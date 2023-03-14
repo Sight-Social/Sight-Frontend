@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import '../../App.css';
+import '../../../App.css';
 
 export const Container = styled.div`
   display: flex;
@@ -57,4 +57,5 @@ export const Link = styled.a`
   color: white;
   text-align: center;
   margin-bottom: 5px;
+  text-decoration: none;
 `;

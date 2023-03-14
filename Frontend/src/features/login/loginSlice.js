@@ -78,4 +78,16 @@ const loginSlice = createSlice({
   },
 });
 
+export const { login, logout, signup } = loginSlice.actions;
+
+// The function below is called a selector and allows us to select a value from
+// the state. Selectors can also be defined inline where they're used instead of
+// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
+/* export const selectCount = (state) => state.counter.value; */
+export const email = (state) => state.user.email;
+export const username = (state) => state.user.username;
+export const password = (state) => state.user.password;
+export const focalpoints = (state) => state.user.focalpoints;
+export const pinned_insights = (state) => state.user.pinned_insights;
+
 export default loginSlice.reducer;

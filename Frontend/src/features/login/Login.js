@@ -30,7 +30,7 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  async function handleLogin(e){
+  async function handleLogin(e) {
     e.preventDefault();
     try {
       const action = await dispatch(login({ username, email, password }));
@@ -47,51 +47,50 @@ export function Login() {
       console.log('Login.js: handleLogin() error:', err);
     }
   }
-  
 
-  /* <Icon to='/'>Sight</Icon> */
   return (
     <>
-      <HeroState />
-    <Container>
-      <FormWrap>
-        <FormContent>
-          <Form onSubmit={handleLogin}>
-            {/* <IconWrapper>
-              <SightIcon src={SightWhiteIcon} />
-            </IconWrapper> */}
-            <FormH1>Login</FormH1>
-            <FormLabel htmlFor='for'>Email</FormLabel>
-            <FormInput
-              type='email'
-              required
-              autoComplete='current-email'
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <FormLabel htmlFor='for'>Username</FormLabel>
-            <FormInput
-              type='username'
-              required
-              autoComplete='current-username'
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <FormLabel htmlFor='for'>Password</FormLabel>
-            <FormInput
-              type='password'
-              required
-              autoComplete='current-password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <FormButton type='submit'>
-              Login {/* {user ? 'Continue' : 'Log in'} */}
-            </FormButton>
-            {/* {error && <div>{error}</div>} */}
-            {/* <Text to='/signup'>Sign Up</Text>
+      <Container>
+        <FormWrap>
+          <Icon to='/'>Sight</Icon>
+          <FormContent>
+            <Form onSubmit={handleLogin}>
+              <IconWrapper>
+                <SightIcon src={SightWhiteIcon} />
+              </IconWrapper>
+              <FormH1>Login</FormH1>
+              <FormLabel htmlFor='for'>Email</FormLabel>
+              <FormInput
+                type='email'
+                required
+                autoComplete='current-email'
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <FormLabel htmlFor='for'>Username</FormLabel>
+              <FormInput
+                type='username'
+                required
+                autoComplete='current-username'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <FormLabel htmlFor='for'>Password</FormLabel>
+              <FormInput
+                type='password'
+                required
+                autoComplete='current-password'
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <FormButton type='submit'>
+                Login {/* {user ? 'Continue' : 'Log in'} */}
+              </FormButton>
+              {/* {error && <div>{error}</div>} */}
+              {/* <Text to='/signup'>Sign Up</Text>
             <Text to='/reset-password'>Forgot password</Text> */}
-          </Form>
-        </FormContent>
-      </FormWrap>
-    </Container>
+            </Form>
+          </FormContent>
+        </FormWrap>
+        {/* <HeroState /> */}
+      </Container>
     </>
   );
 }
