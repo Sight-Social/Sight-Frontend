@@ -1,13 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import userReducer from '../user/userSlice';
 import loginReducer from '../features/login/loginSlice';
 import focalpointReducer from '../features/focalpoints/focalpointSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    user: loginReducer,
+    user: userReducer,
+    login: loginReducer,
     focalpoint: focalpointReducer,
-    /* login: loginReducer, */
   },
 });

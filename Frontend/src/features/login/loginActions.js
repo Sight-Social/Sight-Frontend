@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const backendURL = 'http://localhost:3000/login';
 
-export const userLogin = createAsyncThunk(
-  'login/userLogin',
+export const login = createAsyncThunk(
+  'login/login',
   async ({username, email, password}, { rejectWithValue }) => {
     try {
       const config = {

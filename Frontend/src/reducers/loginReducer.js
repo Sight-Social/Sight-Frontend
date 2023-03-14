@@ -1,4 +1,4 @@
-/* import {
+import {
   SET_USER,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -6,22 +6,34 @@
 } from '../actions/loginActions';
 
 const initialState = {
-  user: 'something',
+  user: {
+    isAuthenticated: false
+  }
   loading: false,
-  error: 'someError',
+  error: null,
 };
 
+
+//this is what you are dispatching actions to
+//reducers live in the store and are the only thing that can update the state
+//the reducer will take the action it recevies and update the state
+//the state will be updated in the store
+//the store will update the components
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
-        ...state,
+
+        //1. ...state is the current state
+        ...state, 
+        //2 .user is the key in the state object
+        //3. action.payload is the value you are setting the key to
         user: action.payload,
       };
     case LOGIN_REQUEST:
       return {
         ...state,
-        loading: true,
+        loading: true, //this is used to show a loading spinner
         error: null,
       };
     case LOGIN_SUCCESS:
@@ -44,4 +56,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
- */

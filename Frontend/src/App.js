@@ -1,26 +1,41 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import { Login } from './features/login/Login';
-import { Profile } from './features/profile/Profile';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
+
 import { ProfilePage } from './Pages/ProfilePage';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import { Login } from './features/login/Login';
+import { clearUser, setUser } from './/user/userSlice';
 
 function App() {
-  let user = useSelector((state) => state.user);
-  let profilePath = `/user/${user.username}`;
-  console.log('profilePath:', profilePath);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
+  let profilePath = '/';
+  if (user.isAuthenticated) {
+    console.log('App.js: user.isAuthenticated: ', user.isAuthenticated);
+    profilePath = `/user/${user.username}`;
+  }
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      dispatch(setUser(storedUser));
+    }
+  }, [dispatch]);
+
+  console.log('App.js: ', user);
   return (
     <Router>
       <Routes>
-        {user.username !== '' ? (
+        {user.isAuthenticated ? (
           <>
             <Route path={profilePath} element={<ProfilePage />} />
+            <Route path='/' element={<Login />} />
           </>
         ) : (
           <>

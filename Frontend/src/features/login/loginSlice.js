@@ -1,78 +1,81 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { userLogin } from './loginActions.js';
-/* import { fetchCount } from './counterAPI'; */
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { setUser, clearUser } from '../../user/userSlice';
 
-/* LOGIN SLICE */
+const backendURL = 'http://localhost:3000/login';
+
 const initialState = {
+  isAuthenticated: false,
   loading: false,
   error: null,
-  success: false,
   username: '',
   email: '',
   password: '',
   googleId: '',
-  accessToken: '',
-  userToken: '',
   avatar: '',
+  focalpoints: [],
+  pinned_insights: [],
 };
 
-/* WHAT IS A SLICE?
-A slice is the portion of Redux code that relates to a specific set of data and 
-actions within the store 's state. A slice reducer is the reducer responsible 
-for handling actions and updating the data for a given slice.
-*/
-export const loginSlice = createSlice({
+export const login = createAsyncThunk(
+  'login/login',
+  async ({ username, email, password }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const res = await axios.post(
+        `${ backendURL }`,
+        { username, email, password },
+        config
+      );
+
+      if (res.status === 200) {
+        console.log('[LoginActions.js] Login successful');
+        console.log('[LoginActions.js] res.data: ', res.data);
+        return res.data.user;
+      } else if (res.status === 400) {
+        console.log('[LoginActions.js] Login failed');
+        console.log('[LoginActions.js] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-    login: (state, action) => {
-      console.log(action.payload.userData);
-      const { username, email, password } = action.payload.userData;
-      state.username = username;
-      state.email = email;
-      state.password = password;
-    },
-    logout: (state) => {
-      state.username = '';
-      state.email = '';
-      state.password = '';
-    },
-    signup: (state) => {},
-  },
-  extraReducers: {
-    //Login user
-    [userLogin.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [userLogin.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.username = payload.username;
-      state.email = payload.email;
-      state.password = payload.password;
-      state.googleId = payload.googleId;
-      state.accessToken = payload.accessToken;
-      state.userToken = payload.userToken;
-      state.avatar = payload.avatar;
-      state.success = true;
-      state.focalpoints = payload.focalpoints;
-      state.pinned_insights = payload.pinned_insights;
-    },
-    [userLogin.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.isAuthenticated = false;
+          state.loading = false;
+          state.error = 'Login failed';
+        } else {
+          console.log('[LoginSlice.js] login.fulfilled payload: ', payload);
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(login.rejected, (state, { payload }) => {
+        state.isAuthenticated = false;
+        state.loading = false;
+        state.error = payload;
+      });
   },
 });
-
-export const { login, logout, signup } = loginSlice.actions;
-
-export const selectUsername = (state) => state.user.username;
-export const selectPassword = (state) => state.user.password;
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-/* export const selectCount = (state) => state.counter.value; */
 
 export default loginSlice.reducer;

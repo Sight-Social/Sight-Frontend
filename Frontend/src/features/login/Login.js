@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { userLogin } from './loginActions';
 import HeroState from '../HeroState';
 import {
   Text,
@@ -19,34 +18,31 @@ import {
 } from './LoginElements';
 /* import SightWhiteIcon from '../../../assets/icons/Sight-White-32.svg'; */
 
-import { login, selectUsername, selectPassword } from './loginSlice';
+import { login } from './loginSlice';
+import { setUser } from '../../user/userSlice';
 
 export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const usrname = useSelector(selectUsername);
-  const pswd = useSelector(selectPassword);
   const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    console.log('Login.js: useEffect() user:', user);
-    if (user.username) {
-      navigate(`/user/${user.username}`);
-    }
-  }, [navigate, user])
-
   async function handleLogin(e){
     e.preventDefault();
-    console.log('Login.js: handleLogin() dispatching userLogin with:');
-    console.log({ username, email, password});
     try {
-      const action = await dispatch(userLogin({ username, email, password }));
-      console.log('Login.js: handleLogin() user after dispatch:', action.payload);
-      navigate(`/user/${action.payload.username}`);
+      const action = await dispatch(login({ username, email, password }));
+      if (action.payload.username) {
+        dispatch(setUser(action.payload));
+        navigate(`/user/${action.payload.username}`);
+      }
+      else {
+        alert('Login failed. Please try again.');
+        window.location.reload();
+      }
+    
     } catch (err) {
       console.log('Login.js: handleLogin() error:', err);
     }
