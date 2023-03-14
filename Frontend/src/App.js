@@ -10,6 +10,8 @@ import { ProfilePage } from './Pages/ProfilePage';
 import { LoginPage } from './Pages/LoginPage';
 import { SignupPage } from './Pages/SignupPage';
 import { FeedPage } from './Pages/FeedPage';
+import { SelFocalPointPage } from './Pages/SelFocalPointPage';
+
 import { clearUser, setUser } from './/user/userSlice';
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
       <Routes>
         {user.isAuthenticated ? (
           <>
+            <Route path="/user/:username/focalpoints/:focalpointId" element={<SelFocalPointPage />} />
             <Route path="/user/:username/feed" element={<FeedPage />} />
             <Route path="/user/:username" element={<ProfilePage />} />
             <Route path='/' element={<HomePage />} />
