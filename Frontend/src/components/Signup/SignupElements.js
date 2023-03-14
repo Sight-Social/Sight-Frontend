@@ -11,33 +11,12 @@ export const Container = styled.div`
   z-index: 0;
   overflow: hidden;
   background: var(--clr-accent);
+  /* background: linear-gradient(
+    108deg,
+    rgba(1, 147, 86, 1) 0%,
+    rgba(10, 201, 122, 1) 100%
+  ); */
 `;
-
-export const FormWrap = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  @media screen and (max-width: 400px) {
-    height: 80%;
-  }
-`;
-
-export const Icon = styled(Link)`
-  margin-left: 32px;
-  margin-top: 32px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 32px;
-
-  @media screen and (max-width: 480px) {
-    margin-left: 16px;
-    margin-top: 8px;
-  }
-`;
-
 export const FormContent = styled.div`
   height: 100%;
   display: flex;
@@ -97,17 +76,6 @@ export const FormButton = styled.button`
   cursor: pointer;
 `;
 
-export const GoogleButton = styled.button`
-  background: var(--clr-light);
-  padding: 10px 0;
-  border: none;
-  border-radius: 8px;
-  color: black;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-`;
-
 export const Text = styled(Link)`
   text-align: center;
   margin-top: 24px;
@@ -130,4 +98,18 @@ export const IconWrapper = styled.div`
   justify-content: center;
   margin-top: -30px;
   margin-bottom: 20px;
+`;
+
+export const Icon = styled(Link)`
+  margin-left: 32px;
+  margin-top: 32px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 32px;
+
+  @media screen and (max-width: 480px) {
+    margin-left: 16px;
+    margin-top: 8px;
+  }
 `;

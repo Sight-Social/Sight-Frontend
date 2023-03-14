@@ -11,6 +11,7 @@ const initialState = {
     avatar: '',
     focalpoints: [],
     pinned_insights: [],
+    subscriptions: [],
 };
 
 const userSlice = createSlice({
@@ -27,6 +28,7 @@ const userSlice = createSlice({
             state.avatar = action.payload.avatar;
             state.focalpoints = action.payload.focalpoints;
             state.pinned_insights = action.payload.pinned_insights;
+            state.subscriptions = action.payload.subscriptions;
             localStorage.setItem('user', JSON.stringify(action.payload));
         },
         clearUser: (state, action) => {
@@ -39,6 +41,7 @@ const userSlice = createSlice({
             state.avatar = '';
             state.focalpoints = [];
             state.pinned_insights = [];
+            state.subscriptions = [];
             localStorage.clear();
         }
     },

@@ -7,17 +7,18 @@ import { Route, Routes } from 'react-router-dom';
 
 import { HomePage } from './Pages/Home.js';
 import { ProfilePage } from './Pages/ProfilePage';
-import { Login } from './features/login/Login';
+import { LoginPage } from './Pages/LoginPage';
+import { SignupPage } from './Pages/SignupPage';
+import { FeedPage } from './Pages/FeedPage';
 import { clearUser, setUser } from './/user/userSlice';
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  let profilePath = '/';
-  if (user.isAuthenticated) {
-    console.log('App.js: user.isAuthenticated: ', user.isAuthenticated);
-    profilePath = `/user/${user.username}`;
+
+  if (user) {
+    console.log('App.js user: ', user);
   }
 
   useEffect(() => {
@@ -28,18 +29,22 @@ function App() {
   }, [dispatch]);
 
   console.log('App.js: ', user);
+
+  //Remember: Routes are rendered in order, so the most specific routes should be at the top
   return (
     <Router>
       <Routes>
         {user.isAuthenticated ? (
           <>
-            <Route path={profilePath} element={<ProfilePage />} />
-            <Route path='/' element={<Login />} />
+            <Route path="/user/:username/feed" element={<FeedPage />} />
+            <Route path="/user/:username" element={<ProfilePage />} />
+            <Route path='/' element={<HomePage />} />
           </>
         ) : (
           <>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignupPage />} />
             <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={<Login />} />
           </>
         )}
       </Routes>

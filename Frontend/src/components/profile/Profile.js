@@ -21,7 +21,7 @@ import {
   Spacer,
 } from './ProfileElements.js';
 import FocalPoints from '../FocalPoint/FocalPoints';
-import YouTubeVideo from '../youtubeVideo/YouTubeVideo';
+import YouTubeVideo from '../YouTubeVideo/YouTubeVideo';
 import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
