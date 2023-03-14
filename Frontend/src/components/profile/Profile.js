@@ -34,7 +34,7 @@ export function Profile() {
   const [editedName, setEditedName] = useState(username);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const handleEditProfile = () => {
     setIsEditing(!isEditing);
   };
@@ -45,9 +45,10 @@ export function Profile() {
     setIsEditing(false);
     try {
       console.log('[Profile.js] editName ', editedName);
-      dispatch(updateUsername({oldUsername: username, newUsername: editedName}));
+      dispatch(
+        updateUsername({ oldUsername: username, newUsername: editedName })
+      );
       navigate(`/user/${editedName}`);
-
     } catch (error) {
       console.log(error);
     }

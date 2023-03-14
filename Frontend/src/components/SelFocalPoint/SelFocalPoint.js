@@ -1,13 +1,11 @@
 import { MainContainer } from './SelFocalPointElements';
-//import InsightGrid from '../../Insight/InsightGrid/index.js';
+import { InsightGrid } from '../Insight/InsightGrid';
+
 //import Footer from '../PageComponents/Footer/Footer';
-export default function SelFocalPoint() {
-    //      <InsightGrid /> add this back in
+export function SelFocalPoint() {
   return (
     <MainContainer>
-        <h1>Selected Focal Point Page</h1>
-        <p>Insight grid goes here</p>
+      <InsightGrid />
     </MainContainer>
   );
-};
-
+}

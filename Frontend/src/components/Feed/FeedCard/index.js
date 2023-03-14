@@ -4,7 +4,7 @@ import { Container, Body, Footer } from './FeedCardElements';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function FeedCard(){
+function FeedCard() {
   const [showMenu, setShowMenu] = useState(false);
   const handleShowMenu = (showMenu) => {
     setShowMenu(!showMenu);
@@ -19,17 +19,10 @@ function FeedCard(){
         <YouTubeVideo videoId={insight.videoId} />
       </Body>
       <Footer>
-          <Menu />
+        <Menu />
       </Footer>
     </Container>
   );
-  
-  
-  
-  
-  
-  
-  
-};
+}
 
 export default FeedCard;
