@@ -9,6 +9,35 @@ export const IntroContainer = styled.div`
   box-sizing: border-box;
 `;
 
+export const ImageContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  overflow: hidden;
+`;
+
+export const ImageLeft = styled.img`
+  position: absolute;
+  left: 0;
+  transition: all 0.5s ease;
+  height: 100px;
+`;
+
+export const ImageMiddle = styled.img`
+  z-index: 1;
+  height: 300px;
+  padding: 0px 20px;
+  background-color: var(--clr-black);
+`;
+
+export const ImageRight = styled.img`
+  position: absolute;
+  right: 0;
+  transition: all 0.5s ease;
+  height: 100px;
+`;
+
 export const IntroRoundedDiv = styled.div`
   position: absolute;
   background: var(--clr-black);
