@@ -78,7 +78,7 @@ export function Feed() {
       </ToolBar>
       <Container>
         {queue.map((card, index) => (
-          <Card key={card.videoId} videoId={card.videoId} />
+          <Card key={card.videoId} insight={{videoId: card.videoId, insightId: card.insightId}} />
         ))}
         <div id="sentinel" style={{ height: '1px' }}></div>
       </Container>

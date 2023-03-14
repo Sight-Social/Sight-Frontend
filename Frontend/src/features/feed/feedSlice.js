@@ -5,7 +5,7 @@ const populateInitialQueue = (subscriptions) => {
     let queue = [];
     for (let i = 0; i < 3; i++) {
         const insights = subscriptions[i].insights;
-        queue.push({ videoId: insights[i].videoId });
+        queue.push({ insightId: insights[i]._id, videoId: insights[i].videoId });
     }
     return queue;
 }
@@ -58,7 +58,7 @@ export const loadMoreCards = createAsyncThunk(
         //Get the insights for the subscription
         const insights = subscription.insights;
         //Add an insight to the queue
-        newCards.push({videoId: insights[insightIndex].videoId});
+        newCards.push({insightId: insights[insightIndex]._id, videoId: insights[insightIndex].videoId});
   
         // Update counters
         subIndex = (subIndex + 1) % subscriptions.length;

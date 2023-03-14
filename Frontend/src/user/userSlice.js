@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateUsername } from './userThunk';
+import { updateUsername, addInsightToFocalPoint } from './userThunk';
 
 const initialState = {
     isAuthenticated: false,
@@ -64,6 +64,25 @@ const userSlice = createSlice({
             })
             .addCase(updateUsername.rejected, (state, action) => {
                 console.log('[userSlice.js] updateUsername.rejected called');
+                state.error = action.payload;
+            })
+            .addCase(addInsightToFocalPoint.fulfilled, (state, action) => {
+                console.log('[userSlice.js] addInsightToFocalPoint.fulfilled called');
+                console.log('[userSlice.js] action.payload: ', action.payload);
+                for (let i = 0; i < state.focalpoints.length; i++) {
+                    if (state.focalpoints[i]._id === action.payload.focalpointId) {
+                        console.log('found the focalpoint in state')
+                        state.focalpoints[i].insights.push(action.payload.insight)
+
+                        // Update localStorage
+                        let user = JSON.parse(localStorage.getItem('user'));
+                        user.focalpoints[i].insights.push(action.payload.insight);
+                        localStorage.setItem('user', JSON.stringify(user));
+                    }
+                }
+            })
+            .addCase(addInsightToFocalPoint.rejected, (state, action) => {
+                console.log('[userSlice.js] addInsightToFocalPoint.rejected called');
                 state.error = action.payload;
             });
     },

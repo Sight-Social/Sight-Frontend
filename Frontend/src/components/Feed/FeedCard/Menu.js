@@ -5,32 +5,25 @@ import { Dropdown } from 'react-bootstrap';
 import { StyledDropdown, StyledItem, StyledBsPlus } from './FeedCardElements';
 
 import { setUser } from '../../../user/userSlice';
+import { addInsightToFocalPoint } from '../../../user/userThunk';
 
-export function Menu() {
-  const user = useSelector((state) => state.user);
+export function Menu({ insight }) {
+  const focalpoints = useSelector((state) => state.user.focalpoints); //list all focalpoints
+  const username = useSelector((state) => state.user.username); //for API call in addInsightToFocalPoint userThunk
   const dispatch = useDispatch();
+  console.log('Menu.js insight: ', insight)
+  console.log('Menu.js focalpoints: ', focalpoints);
 
-  const insight = user.subscriptions[0].insights[0];
-    async function addInsightToFP(focalpointId, insight){
-        try {
-            const res = await axios.post(`http://localhost:3000/user/${user.username}/focalpoints/${focalpointId}`, {
-                username: user.username,
-                email: user.email,
-                focalpoint_id: focalpointId,
-                videoId: insight.videoId,
-                title: insight.title,
-                description: insight.description,
-                publishedAt: insight.publishedAt,
-                thumbnail: insight.thumbnail,
-                publishedAt: insight.publishedAt,
-                viewCount: insight.viewCount + 1,
-              });
-              //update user in App.js
-              dispatch(setUser(res.data));
+  async function addInsightToFP(focalpointId, insight){
+    console.log('Menu.js addInsightToFP focalpointId: ', focalpointId);
+    console.log('Menu.js addInsightToFP insight: ', insight);
+        try {                            
+            dispatch(addInsightToFocalPoint({username, focalpointId, insight }));
         } catch (error) {
             console.log(error);
         }
-    }
+  }
+
 
   return (
     <>
@@ -39,7 +32,7 @@ export function Menu() {
           <StyledBsPlus />
         </Dropdown.Toggle>
         <Dropdown.Menu >
-          {user.focalpoints.map((focalpoint) => (
+          {focalpoints.map((focalpoint) => (
             <StyledItem
                 key={focalpoint._id}
                 onClick={() => addInsightToFP(focalpoint._id, insight)}
