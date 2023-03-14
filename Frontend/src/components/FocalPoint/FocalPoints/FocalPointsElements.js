@@ -86,6 +86,6 @@ export const MainContainer = styled.div`
   /* width: auto; */
   width: 100%;
   height: 100%;
-
+  margin-top: 50px;
   background-color: var(--clr-black);
 `;

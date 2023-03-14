@@ -138,8 +138,8 @@ export function Profile() {
             Logout
           </Button>
         </UserProfile>
-        <Subheader>Pinned Insights</Subheader>
-        <PinnedInsights>
+        {/* <Subheader>Pinned Insights</Subheader> */}
+        {/* <PinnedInsights>
           {pinned_insights
             ? pinned_insights.map((insight, index) => (
                 <div key={index}>
@@ -154,7 +154,7 @@ export function Profile() {
                 </div>
               ))
             : null}
-        </PinnedInsights>
+        </PinnedInsights> */}
         <FocalPoints />
         <Footer />
       </Container>
