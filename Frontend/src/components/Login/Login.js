@@ -18,6 +18,7 @@ import SightWhiteIcon from '../../assets/icons/Sight-White-32.svg';
 
 import { login } from '../../features/login/loginSlice';
 import { setUser } from '../../user/userSlice';
+import { setFeedSubscriptions } from '../../features/feed/feedSlice';
 
 export function Login() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export function Login() {
       const action = await dispatch(login({ username, password }));
       if (action.payload.username) {
         dispatch(setUser(action.payload));
+        dispatch(setFeedSubscriptions(action.payload.subscriptions));
         navigate(`/user/${action.payload.username}`);
       }
       else {

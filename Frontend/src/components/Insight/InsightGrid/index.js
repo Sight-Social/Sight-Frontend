@@ -38,7 +38,7 @@ import musicLogo from '../../../assets/backgrounds/musicBackground.png';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import Feed from '../../Feed/Feed.js';
+import { Feed } from '../../Feed/Feed.js';
 /* import AddFocalPoint from '../../FocalPoint/AddFocalPoint'; */
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector } from 'react-redux';

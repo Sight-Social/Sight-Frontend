@@ -2,8 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Dropdown } from 'react-bootstrap';
-import { BsPlus } from 'react-icons/bs';
-import { StyledDropdown, StyledItem } from './FeedCardElements';
+import { StyledDropdown, StyledItem, StyledBsPlus } from './FeedCardElements';
 
 import { setUser } from '../../../user/userSlice';
 
@@ -37,11 +36,7 @@ export function Menu() {
     <>
       <StyledDropdown>
         <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-          <BsPlus 
-            style={{ 
-                fontSize: "28px",
-                padding: "0",
-                margin: "0"}}/>
+          <StyledBsPlus />
         </Dropdown.Toggle>
         <Dropdown.Menu >
           {user.focalpoints.map((focalpoint) => (

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import Navbar from '../components/PageComponents/NavBar';
-import Feed from '../components/Feed/Feed';
+import { Feed } from '../components/Feed/Feed';
 import Footer from '../components/PageComponents/Footer/Footer';
 import Sidebar from '../components/PageComponents/Sidebar';
 import WebAppNav from '../components/WebAppNav';
@@ -13,6 +13,7 @@ export function FeedPage(){
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
 
   const Wrapper = styled.div`
     display: flex;
@@ -27,7 +28,6 @@ export function FeedPage(){
   `;
   return (
     <>
-      <Sidebar isOpen={isOpen} toggle={toggle} />
       <Wrapper>
         <WebAppNav />
         <FeedWrapper>

@@ -48,24 +48,24 @@ export const PlusButton = styled.button`
   border: none;
 `;
 
-export const StyledDropdown = styled(Dropdown)`
+export const StyledBsPlus = styled(BsPlus)`
+  color: white;
+  font-size: 20px;
+`;
 
-    .dropdown-menu {
-        background-color: #1E1E1E;
-        border: none;
-        border-radius: 10px;
-        box-shadow: -5px 5px 10px rgba(25, 25, 25, 0.8);
-        color: white;
-        text-decoration: none;
-    }
+export const StyledDropdown = styled(Dropdown)`
+  .dropdown-menu {
+    background-color: #1E1E1E;
+    border: none;
+    border-radius: 10px;
+    box-shadow: -5px 5px 10px rgba(25, 25, 25, 0.8);
+    color: white;
+    text-decoration: none;
+  }
   .dropdown-toggle::after {
     display: none;
   }
-
   .dropdown-toggle {
-    background-image: url(${BsPlus});
-    background-repeat: no-repeat;
-    background-position: center;
     background-color: #1E1E1E;
     border: none;
     color: white;

@@ -1,33 +1,6 @@
-import { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Container, FilterButton } from './FeedFilterBarElements';
 
-function FeedFilterBar({ subscriptions, onToggle }) {
-  const [toggledOffIds, setToggledOffIds] = useState([]); // [subId1, subId2, ...]
-  const [show, setShow] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleDropdown = (isOpen) => {
-    setShow(isOpen);
-  };
-
-  useEffect(() => {
-    onToggle(toggledOffIds);
-  }, [toggledOffIds]);
-
-  const handleToggle = (e, subId) => {
-    e.stopPropagation();
-    if (toggledOffIds.includes(subId)) {
-      setToggledOffIds(toggledOffIds.filter((id) => id !== subId));
-    } else {
-      setToggledOffIds([...toggledOffIds, subId]);
-    }
-  };
-
-  console.log('toggledOffIds: ', toggledOffIds);
-
+function FeedFilterBar() {
   return (
     <Container>
         <FilterButton variant="secondary">All</FilterButton>
@@ -75,3 +48,4 @@ function FeedFilterBar({ subscriptions, onToggle }) {
 }
 
 export default FeedFilterBar;
+

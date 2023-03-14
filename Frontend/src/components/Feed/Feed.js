@@ -1,54 +1,50 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { loadMoreCards } from '../../features/feed/feedSlice';
 import Card from './FeedCard/index';
 import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
-import FilterBar from './FeedFilterBar';
+import FeedFilterBar from './FeedFilterBar';
 import { MainContainer, Container, Header, ToolBar } from './FeedElements';
 
 export function Feed() {
-  const [cards, setCards] = useState([]);
-  const [numCards, setNumCards] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef();
-  const { subscriptions  } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { queue, subscriptions, numCards } = useSelector((state) => state.feed);
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  console.log('Feed queue: ', queue);
 
   useEffect(() => {
-    //Loads cards in a round robin fashion
-    const loadCards = () => {
-      const newCards = [];
-      let indices = subscriptions.map(() => 0);
-      let i = 0;
-      let loadedAllVideos = false;
+    if (!isAuthenticated) {
+      console.log('Not authenticated');
+      return;
+    }
+  }, [isAuthenticated]);
 
-      while (!loadedAllVideos) {
-        const subscription = subscriptions[i];
-        const insights = subscription.insights;
-        const index = indices[i];
-
-        if (index < insights.length) {
-          newCards.push(
-            <Card />
-          );
-          indices[i]++;
-        }
-
-        i++;
-        if (i === subscriptions.length) {
-          i = 0;
-          loadedAllVideos = indices.every(
-            (index, j) => index >= subscriptions[j].insights.length
-          );
-        }
-      }
-      setCards(newCards);
-    };
-
-    loadCards();
-  }, [subscriptions]);
+  useEffect(() => {
+    if (isLoading && observerRef.current) {
+      setIsLoading(false);
+      observerRef.current = null;
+      console.log('useEffect: loadMoreCards')
+      console.log('queue: ', queue)
+      console.log('queue.length: ', queue.length)
+      dispatch(
+        loadMoreCards({
+          queue,
+          subscriptions,
+          numCardsToAdd: 3,
+        })
+      );
+    }
+  }, [isLoading]);
 
   //Intersection observer
+  //Creates an observer that loads more cards when the sentinel is in view
+  //View is defined as the bottom of the sentinel being at the bottom of the screen
+  //The sentinel is a div with a height of 1px
+  //The sentinel is placed at the bottom of the cards
   useEffect(() => {
     const options = {
       root: null,
@@ -71,57 +67,21 @@ export function Feed() {
     };
   }, []);
 
-  useEffect(() => {
-    if (isLoading && numCards < cards.length) {
-      setNumCards(numCards + 3);
-      setIsLoading(false);
-    }
-  }, [isLoading, numCards, cards]);
-
-  const onToggle = (toggledOffIds) => {
-    const newCards = [];
-    let indices = subscriptions.map(() => 0);
-    let i = 0;
-    let loadedAllVideos = false;
-
-    while (!loadedAllVideos) {
-      const subscription = subscriptions[i];
-      const insights = subscription.insights;
-      const index = indices[i];
-
-      if (index < insights.length) {
-        if (!toggledOffIds.includes(subscription.channelId)) {
-          newCards.push(
-            <Card />
-          );
-        }
-        indices[i]++;
-      }
-
-      i++;
-      if (i === subscriptions.length) {
-        i = 0;
-        loadedAllVideos = indices.every(
-          (index, j) => index >= subscriptions[j].insights.length
-        );
-      }
-    }
-    setCards(newCards);
-  };
-
   return (
     <MainContainer>
-      <ToolBar>
-        <Header>Feed</Header>
+      <Header>
+        <FeedFilterBar />
         <SearchBar />
+      </Header>
+      <ToolBar>
+        <Menu />
       </ToolBar>
-      <FilterBar onToggle={onToggle} />
       <Container>
-        {cards.slice(0, numCards)}
+        {queue.map((card, index) => (
+          <Card key={card.videoId} videoId={card.videoId} />
+        ))}
         <div id="sentinel" style={{ height: '1px' }}></div>
       </Container>
     </MainContainer>
   );
-};
-
-export default Feed;
+}
