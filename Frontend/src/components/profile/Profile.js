@@ -60,15 +60,11 @@ export function Profile() {
 
   let feedURL = `${username}/feed`;
   let profileURL = `${username}`;
-  // http://localhost:3001/user/noble/focalpoints/63fcc092450eb140564facd3
+
   return (
     <MainContainer>
       <Container>
-        {' '}
-        {/* WRAPS PROFILE, PINNED INSIGHTS, & FOCAL POINTS */}
         <UserProfile>
-          {' '}
-          {/* USER PROFILE WRAPPER */}
           <ProfilePictureWrapper>
             <ProfilePicture src={avatar} />
           </ProfilePictureWrapper>
@@ -140,7 +136,7 @@ export function Profile() {
         <PinnedInsights>
           {pinned_insights
             ? pinned_insights.map((insight, index) => (
-                <>
+                <div key={index}>
                   <YouTubeVideo
                     key={index}
                     className='pinned-insight'
@@ -148,13 +144,11 @@ export function Profile() {
                     height='250'
                     width='300'
                   />
-
                   <Spacer />
-                </>
+                </div>
               ))
             : null}
         </PinnedInsights>
-        {/* FOCAL POINT GRID */}
         <FocalPoints />
         <Footer />
       </Container>
