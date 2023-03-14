@@ -20,14 +20,12 @@ import {
   EditableUsername,
   Spacer,
 } from './ProfileElements.js';
-import FocalPoints from '../../components/FocalPoint/FocalPoints';
+import FocalPoints from '../FocalPoint/FocalPoints';
 import YouTubeVideo from '../youtubeVideo/YouTubeVideo';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
-  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(
+  const { username, email, avatar, pinned_insights } = useSelector(
     (state) => state.user
   );
   const [isEditing, setIsEditing] = useState(false);

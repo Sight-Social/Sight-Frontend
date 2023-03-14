@@ -17,15 +17,11 @@ import {
   SightIcon,
   IconWrapper,
 } from './LoginElements';
-/* import SightWhiteIcon from '../../../assets/icons/Sight-White-32.svg'; */
-
-import { login, selectUsername, selectPassword } from './loginSlice';
+import SightWhiteIcon from '../../assets/icons/Sight-White-32.svg';
 
 export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const usrname = useSelector(selectUsername);
-  const pswd = useSelector(selectPassword);
   const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState('');
@@ -37,65 +33,71 @@ export function Login() {
     if (user.username) {
       navigate(`/user/${user.username}`);
     }
-  }, [navigate, user])
+  }, [navigate, user]);
 
-  async function handleLogin(e){
+  async function handleLogin(e) {
     e.preventDefault();
     console.log('Login.js: handleLogin() dispatching userLogin with:');
-    console.log({ username, email, password});
+    console.log({ username, email, password });
     try {
       const action = await dispatch(userLogin({ username, email, password }));
-      console.log('Login.js: handleLogin() user after dispatch:', action.payload);
+      /* if (!action.err) {
+        dispatch(loadFocalpoints(action.payload.focalpoints)) // focalpointSlice
+        dispatch(loadCreators(action.payload.creators)) // creatorSlice
+      } */
+      console.log(
+        'Login.js: handleLogin() user after dispatch:',
+        action.payload
+      );
       navigate(`/user/${action.payload.username}`);
     } catch (err) {
       console.log('Login.js: handleLogin() error:', err);
     }
   }
-  
 
-  /* <Icon to='/'>Sight</Icon> */
   return (
     <>
-      <HeroState />
-    <Container>
-      <FormWrap>
-        <FormContent>
-          <Form onSubmit={handleLogin}>
-            {/* <IconWrapper>
-              <SightIcon src={SightWhiteIcon} />
-            </IconWrapper> */}
-            <FormH1>Login</FormH1>
-            <FormLabel htmlFor='for'>Email</FormLabel>
-            <FormInput
-              type='email'
-              required
-              autoComplete='current-email'
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <FormLabel htmlFor='for'>Username</FormLabel>
-            <FormInput
-              type='username'
-              required
-              autoComplete='current-username'
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <FormLabel htmlFor='for'>Password</FormLabel>
-            <FormInput
-              type='password'
-              required
-              autoComplete='current-password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <FormButton type='submit'>
-              Login {/* {user ? 'Continue' : 'Log in'} */}
-            </FormButton>
-            {/* {error && <div>{error}</div>} */}
-            {/* <Text to='/signup'>Sign Up</Text>
+      <Container>
+        <FormWrap>
+          <Icon to='/'>Sight</Icon>
+          <FormContent>
+            <Form onSubmit={handleLogin}>
+              <IconWrapper>
+                <SightIcon src={SightWhiteIcon} />
+              </IconWrapper>
+              <FormH1>Login</FormH1>
+              <FormLabel htmlFor='for'>Email</FormLabel>
+              <FormInput
+                type='email'
+                required
+                autoComplete='current-email'
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <FormLabel htmlFor='for'>Username</FormLabel>
+              <FormInput
+                type='username'
+                required
+                autoComplete='current-username'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <FormLabel htmlFor='for'>Password</FormLabel>
+              <FormInput
+                type='password'
+                required
+                autoComplete='current-password'
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <FormButton type='submit'>
+                Login {/* {user ? 'Continue' : 'Log in'} */}
+              </FormButton>
+              {/* {error && <div>{error}</div>} */}
+              {/* <Text to='/signup'>Sign Up</Text>
             <Text to='/reset-password'>Forgot password</Text> */}
-          </Form>
-        </FormContent>
-      </FormWrap>
-    </Container>
+            </Form>
+          </FormContent>
+        </FormWrap>
+        {/* <HeroState /> */}
+      </Container>
     </>
   );
 }

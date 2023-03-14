@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { WebAppNav } from '../components/WebAppNav';
-import { Profile } from '../features/profile/Profile';
+import { Profile } from '../components/profile/Profile';
 import styled from 'styled-components';
 
 export function ProfilePage() {

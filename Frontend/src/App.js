@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import { Login } from './features/login/Login';
-import { Profile } from './features/profile/Profile';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { ProfilePage } from './Pages/ProfilePage';

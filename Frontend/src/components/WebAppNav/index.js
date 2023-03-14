@@ -4,22 +4,19 @@ import {
   NavSubHeader,
   SightBanner,
 } from './WebAppNavElements.js';
-/* import { ReactComponent as SightLogo} from '../../assets/icons/Sight-White-32.svg'; */
-import { BsBrightnessHighFill } from 'react-icons/bs';
+import { ReactComponent as SightLogo } from '../../assets/icons/Sight-White-32.svg';
 import { IoMdPerson } from 'react-icons/io';
 import { RiDashboardLine } from 'react-icons/ri';
-import { CgBoard } from 'react-icons/cg';
 import { MdOutlineKeyboardArrowRight, MdTableRows } from 'react-icons/md';
 import { FaSlideshare } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 export function WebAppNav() {
-  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(
-    (state) => state.user
-  );
+  const focalpoints = useSelector((state) => state.user.focalpoints);
+  const username = useSelector((state) => state.user.username);
+
   let feedURL = `/user/${username}/feed`;
   let profileURL = `/user/${username}`;
-  console.log('WAN-FPS:', focalpoints);
   return (
     <NavContainer>
       <Nav
@@ -28,7 +25,7 @@ export function WebAppNav() {
         style={{ fontSize: '20px', paddingLeft: '5px' }}
       >
         <SightBanner>
-          {/* <SightLogo /> */}
+          <SightLogo />
           <Nav.Link
             href='/'
             style={{

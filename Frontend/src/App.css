@@ -1,3 +1,16 @@
+:root {
+  --clr-black: #121212;
+  --clr-light: #EDEDED;
+  /* --clr-gray: #E1E1E1; */
+  
+  --clr-gray: #252525;
+  --clr-accent: #00A3D7;
+  --screen-width-sm: 320px;
+  --screen-width-med: 768px;
+  --screen-width-lg: 1024px;
+
+}
+
 .App {
   text-align: center;  
 }

@@ -1,39 +1,33 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll/modules';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+
 import {
   MainContainer,
   Container,
-  Header,
-  HeaderLink,
   CardList,
   HeaderAndButtons,
   Title,
-  PinnedInsightsWrapper,
   NavContainer,
 } from './FocalPointsElements';
+import SearchBar from '../FocalPointsSearchBar';
+import AddButton from '../AddFpButton';
 
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import SearchBar from '../FocalPointsSearchBar';
 
 import hikingLogo from '../../../assets/backgrounds/hikingBackground.png';
 import financeLogo from '../../../assets/backgrounds/financeBackground.png';
 import fitnessLogo from '../../../assets/backgrounds/fitnessBackground.png';
 import biohackingLogo from '../../../assets/biohacking-logo.avif';
 import musicLogo from '../../../assets/backgrounds/musicBackground.png';
-import axios from 'axios';
-import AddButton from '../AddFpButton';
-import { animateScroll as scroll } from 'react-scroll/modules';
-import { useSelector } from 'react-redux';
 
 export function FocalPoints() {
-  const { username, email, avatar, pinned_insights, focalpoints } = useSelector(
-    (state) => state.user
-  );
+  const { username, email, focalpoints } = useSelector((state) => state.user);
 
   const [cardList, setCardList] = useState(focalpoints);
   const [view, setView] = useState('focalpoints');
@@ -55,17 +49,13 @@ export function FocalPoints() {
     setCardList([...cardList, { title: title, description }]);
 
     try {
-      //user/:username/focalpoints
       await axios.post(`http://localhost:3000/user/${username}/focalpoints`, {
         title: title,
         description: description,
         email: email,
       });
 
-      /* console.log('Checking CLs:' + cardList); */
       focalpoints = cardList;
-      /* handleUserUpdate(user); */
-      /* console.log('[USER-#?] ' + user.focalpoints); */
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +63,6 @@ export function FocalPoints() {
 
   const handleDeleteFP = async (selectedToDelete) => {
     try {
-      /* DELETE the ids of the FP's you want to delete   */
       await axios.delete(
         `http://localhost:3000/user/${username}/focalpoints/`,
         {
@@ -86,7 +75,6 @@ export function FocalPoints() {
       setCardList(
         cardList.filter((card) => !selectedToDelete.includes(card._id))
       );
-      /* handleUserUpdate(user); */
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +106,6 @@ export function FocalPoints() {
         editedName: editedName,
         editedDescription: editedDescription,
       });
-      /* handleUserUpdate(user); */
     } catch (error) {
       console.log(error);
     }
