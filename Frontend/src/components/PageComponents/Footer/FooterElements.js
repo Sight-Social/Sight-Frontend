@@ -57,4 +57,5 @@ export const Link = styled.a`
   color: white;
   text-align: center;
   margin-bottom: 5px;
+  text-decoration: none;
 `;

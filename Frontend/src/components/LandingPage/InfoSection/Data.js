@@ -38,7 +38,7 @@ export const FocalPoints = {
 export const Feed = {
   id: 'feed',
   /* Main Color Choices */
-  lightBg: false,
+  lightBg: true,
   lightText: false,
   lightTextDesc: false,
 
