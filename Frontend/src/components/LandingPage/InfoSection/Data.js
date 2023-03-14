@@ -8,7 +8,8 @@
 import fp from '../../../assets/LandingPage/FocalPoints.png';
 import feedImg from '../../../assets/LandingPage/FeedSettings.png';
 import discoverImg from '../../../assets/LandingPage/DiscoverSection.png';
-
+import FeedSettings from '../../../assets/LandingPage/FeedSettings.png';
+import FeedPic from '../../../assets/LandingPage/FeedRound.png';
 export const FocalPoints = {
   id: 'focalpoints',
   /* Main Color Choices */
@@ -76,6 +77,111 @@ export const Discover = {
   /* Image Styling */
   imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,
   img: discoverImg,
+  alt: 'Car',
+
+  /* Button Styling */
+  buttonLabel: 'Learn More',
+  dark: true,
+  primary: true,
+  darkText: true,
+};
+
+/* 
+1. Overall concept - Leverage your media consumption to learn about a topic or interest of yours.
+2. Aggregate your social media feeds
+3. Control your algorithm - curate your media consumption
+4. Save, sort, and share media from popular media platforms (Supported: YouTube, Instagram, Spotify and Twitter). 
+*/
+export const ContentCurationTool = {
+  id: 'cctool',
+  /* Main Color Choices */
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+
+  /* Text */
+  topLine: 'Aggregate your social media feeds',
+  headLine: 'One Feed',
+  description:
+    'Focus in on a single feed and learn about a topic or interest of yours.',
+
+  /* Image Styling */
+  imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,
+  img: FeedPic,
+  alt: 'Car',
+
+  /* Button Styling */
+  buttonLabel: 'Learn More',
+  dark: true,
+  primary: true,
+  darkText: true,
+};
+
+export const Aggregate = {
+  id: 'aggregate',
+  /* Main Color Choices */
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+
+  /* Text */
+  topLine: 'Aggregate your social media feeds',
+  headLine: 'One Feed',
+  description: 'Bring all of your social media accounts into one feed.',
+
+  /* Image Styling */
+  imgStart: true /* alter this property to flip the positioning of the svg and text + button from left to right */,
+  img: feedImg,
+  alt: 'Car',
+
+  /* Button Styling */
+  buttonLabel: 'Learn More',
+  dark: true,
+  primary: true,
+  darkText: true,
+};
+
+export const Algorithm = {
+  id: 'algorithm',
+  /* Main Color Choices */
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+
+  /* Text */
+  topLine: 'control your algorithm',
+  headLine: 'Feed Settings',
+  description:
+    'Take the controls to your algorithm. Use your feeds settings to directly control what you are recommended.',
+
+  /* Image Styling */
+  imgStart: true /* alter this property to flip the positioning of the svg and text + button from left to right */,
+  img: FeedSettings,
+  alt: 'Car',
+
+  /* Button Styling */
+  buttonLabel: 'Learn More',
+  dark: true,
+  primary: true,
+  darkText: true,
+};
+
+export const SaveSortShare = {
+  id: 'savesortshare',
+  /* Main Color Choices */
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+
+  /* Text */
+  topLine: 'Save by topic, Not by platform',
+  headLine: 'Focal Points',
+  description:
+    'Save, sort, and share media from popular media platforms (Supported: YouTube, Instagram, Spotify and Twitter).',
+
+  /* Image Styling */
+  imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,
+  img: fp,
   alt: 'Car',
 
   /* Button Styling */

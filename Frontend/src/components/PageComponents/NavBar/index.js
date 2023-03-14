@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import  clearUser  from '../../../features/login/loginSlice';
+import clearUser from '../../../features/login/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
@@ -16,6 +16,9 @@ import {
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import styled from 'styled-components';
 
 export function Navbar() {
   const [scrollNav, setScrollNav] = useState(false);
@@ -51,6 +54,21 @@ export function Navbar() {
   const toggleHome = () => {
     scroll.scrollToTop();
   };
+
+  const [radioValue, setRadioValue] = useState('1');
+
+  const radios = [
+    { name: '1', value: '1' },
+    { name: '2', value: '2' },
+  ];
+  const ButtonGroupWrapper = styled.div`
+    /* height: 50px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+  `;
 
   return (
     <>
@@ -137,7 +155,7 @@ export function Navbar() {
       </IconContext.Provider>
     </>
   );
-};
+}
 
 /* <BtnWrap>
                       <Button

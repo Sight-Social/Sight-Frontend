@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InfoContainer = styled.div`
   color: var(--clr-light);
   background: ${({ lightBg }) =>
-    lightBg ? 'var(--clr-light)' : 'var(--clr-gray)'};
+    lightBg ? 'var(--clr-light)' : 'var(--clr-black)'};
   /* border: solid red 5px; */
 
   @media screen and (max-width: 760px) {

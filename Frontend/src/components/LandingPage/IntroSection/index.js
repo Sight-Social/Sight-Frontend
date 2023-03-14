@@ -11,14 +11,11 @@ import {
 } from './InfoSectionElements';
 import LandingImage from '../../../assets/LandingPage/DiscoverSection.png';
 import Blur from '../../../assets/LandingPage/Blurs.png';
+import Button from 'react-bootstrap/Button';
 
 const IntroSection = () => {
   return (
     <>
-      {/* <IntroBg>
-        <IntroImage src={LandingImage} />
-      </IntroBg> */}
-
       <IntroContainer>
         <IntroRoundedDiv>
           <Blurs src={Blur} />
@@ -28,6 +25,16 @@ const IntroSection = () => {
           <IntroH1>Set One's Sights On</IntroH1>
           <IntroSubHeading>Phrase of Sight</IntroSubHeading>
           <IntroP>Bringing intention to your content consumption</IntroP>
+          <Button
+            variant='primary'
+            style={{
+              fontSize: '20px',
+              padding: '7px 20px',
+              marginTop: '20px',
+            }}
+          >
+            Sign in with Google
+          </Button>
         </IntroContent>
       </IntroContainer>
     </>

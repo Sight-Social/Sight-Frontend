@@ -258,14 +258,34 @@ export function FocalPoints() {
                   <Col key={focalpoint._id}>
                     <Link
                       to={`/user/${username}/focalpoints/${focalpoint._id}`}
+                      onClick={toggleHome}
                       style={{
                         textDecoration: 'none', // remove underline
                         color: 'inherit', // use default text color
                         cursor: 'pointer', // use pointer cursor
+                        borderRadius: '15px',
                       }}
                     >
-                      <Card bg='dark' text='light'>
-                        <Card.Img variant='top' src={imageSet[index]} />
+                      <Card
+                        bg='dark'
+                        text='light'
+                        style={{
+                          borderRadius: '15px',
+                          width: '100%',
+                        }}
+                      >
+                        <Card.Img
+                          variant='top'
+                          src={imageSet[index]}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: '25vh',
+                            width: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '15px 15px 0px 0px',
+                          }}
+                        />
                         <Card.Body>
                           <Card.Title>{focalpoint.title}</Card.Title>
                           <Card.Text>{focalpoint.description}</Card.Text>
@@ -301,28 +321,6 @@ export function FocalPoints() {
                   </div>
                 ))
               : null}
-            {/* {cardList
-              ? cardList.map((focalpoint, index) => (
-                  <Col key={focalpoint._id}>
-                    <Link
-                      to={`/user/${username}/focalpoints/${focalpoint._id}`}
-                      style={{
-                        textDecoration: 'none', // remove underline
-                        color: 'inherit', // use default text color
-                        cursor: 'pointer', // use pointer cursor
-                      }}
-                    >
-                      <Card bg='dark' text='light'>
-                        <Card.Img variant='top' src={imageSet[index]} />
-                        <Card.Body>
-                          <Card.Title>{focalpoint.title}</Card.Title>
-                          <Card.Text>{focalpoint.description}</Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </Link>
-                  </Col>
-                ))
-              : null} */}
           </Row>
         </Container>
       ) : (
