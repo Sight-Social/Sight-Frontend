@@ -20,7 +20,6 @@ const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             console.log('[userSlice.js] setUser action.payload: ', action.payload);
-            state.isAuthenticated = true;
             state.username = action.payload.username;
             state.email = action.payload.email;
             state.password = action.payload.password;
@@ -29,6 +28,7 @@ const userSlice = createSlice({
             state.focalpoints = action.payload.focalpoints;
             state.pinned_insights = action.payload.pinned_insights;
             state.subscriptions = action.payload.subscriptions;
+            state.isAuthenticated = action.payload.isAuthenticated;
             localStorage.setItem('user', JSON.stringify(action.payload));
         },
         clearUser: (state, action) => {

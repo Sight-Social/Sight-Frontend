@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import  clearUser  from '../../../features/login/loginSlice';
 import { useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
@@ -15,17 +17,21 @@ import {
   NavBtnLink,
 } from './NavbarElements';
 
-import Button from 'react-bootstrap/Button';
-
-const Navbar = ({ toggle, isAuthenticated, isProfile, username }) => {
+export function Navbar() {
   const [scrollNav, setScrollNav] = useState(false);
+  const [isProfile, setIsProfile] = useState(false);
+  const [toggle, setToggle] = useState(false);
+
   const navigate = useNavigate();
-  const feedPath = '/user/' + username + '/feed';
+  const { isAuthenticated, username } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const profilePath = '/user/' + username;
 
   const handleLogout = () => {
     console.log('[NavBar/index.js] Logout btn clicked');
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
+    dispatch(clearUser());
     navigate('/');
     window.location.reload();
   };
@@ -109,36 +115,22 @@ const Navbar = ({ toggle, isAuthenticated, isProfile, username }) => {
               </>
             )}
             {isAuthenticated ? (
-              isProfile ? (
-                <>
-                  <NavBtn>
-                    <NavBtnLink to={feedPath}>Feed</NavBtnLink>
-                  </NavBtn>
-                  <NavBtn>
-                    <NavBtnLink to='/' onClick={handleLogout}>
-                      Logout
-                    </NavBtnLink>
-                  </NavBtn>
-                </>
-              ) : (
-                <>
-                  <NavBtn>
-                    <NavBtnLink to={feedPath}>Feed</NavBtnLink>
-                  </NavBtn>
-                  <NavBtn>
-                    <NavBtnLink to={profilePath}>Profile</NavBtnLink>
-                  </NavBtn>
-                  <NavBtn>
-                    <NavBtnLink to='/' onClick={handleLogout}>
-                      Logout
-                    </NavBtnLink>
-                  </NavBtn>
-                </>
-              )
+              <>
+                <NavBtn>
+                  <NavBtnLink to='/' onClick={handleLogout}>
+                    Logout
+                  </NavBtnLink>
+                </NavBtn>
+                <NavBtn>
+                  <NavBtnLink to={profilePath}>Profile</NavBtnLink>
+                </NavBtn>
+              </>
             ) : (
-              <NavBtn>
-                <NavBtnLink to='/login'>Login</NavBtnLink>
-              </NavBtn>
+              <>
+                <NavBtn>
+                  <NavBtnLink to='/login'>Login</NavBtnLink>
+                </NavBtn>
+              </>
             )}
           </NavBarContainer>
         </Nav>

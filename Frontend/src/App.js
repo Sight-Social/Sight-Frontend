@@ -16,27 +16,21 @@ import { clearUser, setUser } from './/user/userSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-
-
-  if (user) {
-    console.log('App.js user: ', user);
-  }
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
+    if (storedUser || isAuthenticated) {
       dispatch(setUser(storedUser));
     }
-  }, [dispatch]);
-
-  console.log('App.js: ', user);
+  }, [dispatch, isAuthenticated]);
 
   //Remember: Routes are rendered in order, so the most specific routes should be at the top
+  console.log('isAuthenticated: ' + isAuthenticated)
   return (
     <Router>
       <Routes>
-        {user.isAuthenticated ? (
+        {isAuthenticated ? (
           <>
             <Route path="/user/:username/focalpoints/:focalpointId" element={<SelFocalPointPage />} />
             <Route path="/user/:username/feed" element={<FeedPage />} />

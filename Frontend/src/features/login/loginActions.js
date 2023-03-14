@@ -7,6 +7,14 @@ export const login = createAsyncThunk(
   'login/login',
   async ({username, email, password}, { rejectWithValue }) => {
     try {
+      // Trim whitespace
+      username = username.trim();
+      email = email.trim();
+      password = password.trim();
+
+      //Encrypt password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -14,7 +22,7 @@ export const login = createAsyncThunk(
       }
       const res = await axios.post(
         `${backendURL}`,
-        { username, email, password },
+        { username, email, password: hashedPassword },
         config
       );
 

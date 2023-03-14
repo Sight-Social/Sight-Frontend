@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { setUser, clearUser } from '../../user/userSlice';
 
 const backendURL = 'http://localhost:3000/login';
 
@@ -61,7 +59,6 @@ const loginSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         if (payload === undefined) {
-          state.isAuthenticated = false;
           state.loading = false;
           state.error = 'Login failed';
         } else {
@@ -71,7 +68,6 @@ const loginSlice = createSlice({
         }
       })
       .addCase(login.rejected, (state, { payload }) => {
-        state.isAuthenticated = false;
         state.loading = false;
         state.error = payload;
       });

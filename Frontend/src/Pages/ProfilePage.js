@@ -1,13 +1,13 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import { WebAppNav } from '../components/WebAppNav';
 import { Profile } from '../components/Profile/Profile';
 import styled from 'styled-components';
 
 export function ProfilePage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => {
+  //const [isOpen, setIsOpen] = useState(false);
+  /*const toggle = () => {
     setIsOpen(!isOpen);
-  };
+  };*/
 
   const Wrapper = styled.div`
     display: flex;
