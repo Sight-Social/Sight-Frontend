@@ -5,7 +5,7 @@ import Card from './FeedCard/index';
 import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
 import FeedFilterBar from './FeedFilterBar';
-import { MainContainer, Container, Header, ToolBar } from './FeedElements';
+import { MainContainer, Container, Header, Text } from './FeedElements';
 
 export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,12 +70,9 @@ export function Feed() {
   return (
     <MainContainer>
       <Header>
-        <FeedFilterBar />
+        <Text>Feed</Text>
         <SearchBar />
       </Header>
-      <ToolBar>
-        <Menu />
-      </ToolBar>
       <Container>
         {queue.map((card, index) => (
           <Card key={card.videoId} insight={{videoId: card.videoId, insightId: card.insightId}} />

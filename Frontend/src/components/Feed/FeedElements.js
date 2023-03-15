@@ -5,7 +5,6 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: black;
-  max-width: 80vw;
 `;
 
 export const Container = styled.div`
@@ -14,19 +13,20 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   border-radius: 10px;
+  width: 100%;
 `;
 
 export const Header = styled.h1`
+  display: flex;
+  flex-direction: row;
   font-size: 1.8rem;
-  color: #000;
+  padding-left: 65px;
+  width: 100%;
   color: white;
 `;
 
-export const ToolBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 50px;
-  width: 100%;
+export const Text = styled.p`
+  font-size: 1.8rem;
+  color: white;
+  width: 40%;
 `;

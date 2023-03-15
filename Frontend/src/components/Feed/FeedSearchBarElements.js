@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   width: 40%;
   height: 35px;
+  margin-left: 180px;
   background-color: var(--clr-black);
   border-radius: 10px;
 `;
@@ -11,7 +12,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   font-family: 'Futura';
   width: 100%;
-  padding: 10px;
+  padding-left: 15px;
   font-size: 16px;
   outline: none;
   border: none;

@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { BsPlus } from 'react-icons/bs';
 
-export const Container = styled.div`
+export const Container = styled(Card)`
   background-color: #1E1E1E;
   margin: 20px;
   background-size: cover;
@@ -13,7 +13,6 @@ export const Container = styled.div`
   //box-shadow: -5px 5px 10px rgba(25, 25, 25, 0.8);
   color: white;
   padding: 20px;
-  height: 100%;
   max-width: 100%;
   text-decoration: none;
   /*filter: blur(0px);
@@ -23,34 +22,28 @@ export const Container = styled.div`
 `;
 
 export const Body = styled(Card.Body)`
-  height: 100%;
-  font-size: 18px;
-  line-height: 1.5;
-  color: white;
-  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
 `;
 
 export const Footer = styled(Card.Footer)`
-  font-size: 14px;
-  line-height: 1.5;
-  color: white;
-  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 10px;
-`;
 
-export const PlusButton = styled.button`
-  background-color: #1E1E1E;
-  margin: 0px;
-  padding: 0px;
-  border: none;
 `;
 
 export const StyledBsPlus = styled(BsPlus)`
+  padding: 0px;
+  margin: 0px;
   color: white;
-  font-size: 20px;
+  font-size: 28px;
+
+  :hover {
+    color: var(--clr-accent);
+  }
 `;
 
 export const StyledDropdown = styled(Dropdown)`
@@ -69,6 +62,7 @@ export const StyledDropdown = styled(Dropdown)`
     background-color: #1E1E1E;
     border: none;
     color: white;
+    padding: 0px;
   }
 `;
 

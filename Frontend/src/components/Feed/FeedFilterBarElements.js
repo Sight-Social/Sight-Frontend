@@ -1,30 +1,40 @@
 import styled from 'styled-components';
-import Button from 'react-bootstrap/Button';
 
 export const Container = styled.div`
-    background-color: black;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 70%;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 40px;
 `;
 
-export const Select = styled.select`
-    color: white;
-    width: 200px;
-
-    border-radius: 5px;
-`;
-
-export const Option = styled.option`
+export const Header = styled.h1`
+    margin-top: 80px;
+    font-size: 1.4rem;
+    width: 100%;
     color: white;
 `;
 
-export const Input = styled.input`
-    color: white;
+export const List = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 `;
 
-export const FilterButton = styled(Button)`
-    variant: secondary;
-    min-width: 100px;
+export const ListItem = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+`;
+
+export const Image = styled.img`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+`;
+
+export const ChannelName = styled.h2`
+    font-size: 1.0rem;
+    color: white;
 `;
