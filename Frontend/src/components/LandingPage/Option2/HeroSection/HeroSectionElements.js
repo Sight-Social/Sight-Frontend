@@ -27,7 +27,7 @@ export const ImageLeft = styled.img`
 export const ImageMiddle = styled.img`
   z-index: 1;
   height: 300px;
-  padding: 0px 20px;
+  padding: 0px 80px;
   background-color: var(--clr-black);
 `;
 
