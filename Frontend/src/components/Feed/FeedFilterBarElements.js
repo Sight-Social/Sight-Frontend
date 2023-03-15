@@ -69,10 +69,10 @@ export const SubscriptionsContainer = styled.div`
 `;
 
 export const Header = styled.h1`
-    font-size: 1.4rem;
+    font-size: 1.38rem;
     width: 100%;
     color: white;
-    padding-top: 40px;
+    padding-top: 25px;
 `;
 
 
@@ -88,11 +88,12 @@ export const ListItem = styled.div`
     display: flex;
     align-items: center;
     margin-left: 24px;
+    margin-top: 3px;
     width: 100%;
 `;
 
 export const StyledButton = styled(Button)`
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 0px;
     background-color: #1E1E1E;
     border: none;
@@ -100,8 +101,8 @@ export const StyledButton = styled(Button)`
     box-shadow: -5px 5px 10px rgba(25, 25, 25, 0.8);
     color: white;
     text-decoration: none;
-    width: 60px;
-    height: 28px;
+    width: 78px;
+    height: 33px;
     font-size: .845rem;
     line-height: 1.0rem;
     :hover {
@@ -118,5 +119,6 @@ export const Image = styled.img`
 
 export const Label = styled.h2`
     font-size: 1.0rem;
+    margin-bottom: 0rem;
     color: white;
 `;

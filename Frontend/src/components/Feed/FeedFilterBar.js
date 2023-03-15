@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Spacer, Container, Header, List, ListItem, Image, Label, StyledButton,
         SubscriptionsContainer } from './FeedFilterBarElements';
 import { ToggleSwitch } from '../PageComponents/ToggleSwitch/ToggleSwitch';
+import { FaYoutube, FaSpotify, FaTwitter } from 'react-icons/fa';
 
 export function FeedFilterBar() {
   const { subscriptions } = useSelector((state) => state.feed);
@@ -37,7 +38,6 @@ export function FeedFilterBar() {
                     );
                 })}
             <ListItem>
-                <StyledButton>Save</StyledButton>
             </ListItem>
         </List>
         </SubscriptionsContainer>
@@ -45,18 +45,20 @@ export function FeedFilterBar() {
             <Header>Source</Header>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
+                <FaYoutube style={{color:"#FF0000", margin: "5px"}}/>
                 <Label>YouTube</Label>
             </ListItem>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
+                <FaSpotify style={{color:"#1DB954", margin: "5px"}}/>
                 <Label>Spotify</Label>
             </ListItem>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
+                <FaTwitter style={{color:"#00acee", margin: "5px"}}/>
                 <Label>Twitter</Label>
             </ListItem>
             <ListItem>
-                <StyledButton>Save</StyledButton>
             </ListItem>
         </List>
         <List>
@@ -74,8 +76,12 @@ export function FeedFilterBar() {
                 <Label>Tweets</Label>
             </ListItem>
             <ListItem>
-                <StyledButton>Save</StyledButton>
             </ListItem>
+        </List>
+        <List>
+        <ListItem>
+            <StyledButton>Save</StyledButton>
+        </ListItem>
         </List>
     </Container>
     );

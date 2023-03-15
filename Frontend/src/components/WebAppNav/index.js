@@ -32,8 +32,8 @@ export function WebAppNav() {
               color: 'white',
               transition: 'color 0.3s ease-in-out',
             }}
-            onMouseEnter={(e) => (e.target.style.color = '#AEAEAE')}
-            onMouseLeave={(e) => (e.target.style.color = 'white')}
+            onMouseEnter={(e) => (e.target.style.color = 'white')}
+            onMouseLeave={(e) => (e.target.style.color = 'vlr-white')}
           >
             Sight
           </Nav.Link>
@@ -44,7 +44,12 @@ export function WebAppNav() {
           onMouseEnter={(e) => (e.target.style.color = 'white')}
           onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
         >
-          <IoMdPerson />
+          <IoMdPerson 
+            style={{
+              color: 'white',
+              marginRight: '10px',
+              marginBottom: '3.5px'
+            }}/>
           Profile
         </Nav.Link>
         <Nav.Link
@@ -53,7 +58,13 @@ export function WebAppNav() {
           onMouseEnter={(e) => (e.target.style.color = 'white')}
           onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
         >
-          <RiDashboardLine />
+          <RiDashboardLine 
+            style={{
+              color: 'white',
+              marginRight: '10px',
+              marginBottom: '3.5px'
+            }}
+          />
           Feed
         </Nav.Link>
       </Nav>
@@ -65,7 +76,11 @@ export function WebAppNav() {
         }}
       />
       <NavSubHeader>
-        <MdTableRows />
+        <MdTableRows style={{
+          color: 'white',
+          marginRight: '10px',
+          marginBottom: '2.75px'
+        }} />
         Focal Points
       </NavSubHeader>
       <Nav
@@ -95,7 +110,11 @@ export function WebAppNav() {
           : null}
       </Nav>
       <NavSubHeader>
-        <FaSlideshare />
+        <FaSlideshare style={{
+          color: 'white',
+          marginRight: '10px',
+          marginBottom: '2.75px'
+        }} />
         Shared Focal Points
       </NavSubHeader>
       <Nav
