@@ -58,16 +58,17 @@ export const loadMoreCards = createAsyncThunk(
       while (numCardsAdded < numCardsToAdd) {
         //Get the next subscription
         const subscription = subscriptions[subIndex];
+        const channelId = subscription.channelId;
         //Get the insights for the subscription
         const insights = subscription.insights;
         //Check filters
         for (let i = 0; i < filters.subscriptions.length; i++) {
           for (let j = 0; j < filters.sources.length; j++) {
-            for (let k = 0; k < filters.mediaTypes.length; k++) {
+            for (let k = 0; k < filters.mediaType.length; k++) {
               if (filters.subscriptions[i].id === subscription._id
                 || filters.sources[j].id === insights[insightIndex].source
-                || filters.mediaTypes[k].id === insights[insightIndex].mediaType) {
-                    
+                || filters.mediaType[k].id === insights[insightIndex].mediaType) {
+                    console.log('skipping video due to filter: ', insights[insightIndex]._id)
                     subIndex = (subIndex + 1) % filters.subscriptions.length;
                     insightIndex = (insightIndex + 1) % insights.length;
                     continue;
@@ -75,12 +76,18 @@ export const loadMoreCards = createAsyncThunk(
             }
           }
         }
-        // If none of the conditions match, add the element to newCards            
+        // If none of the conditions match, add the element to newCards
+        console.log('adding video: ', insights[insightIndex]._id)            
         newCards.push({
           insightId: insights[insightIndex]._id,
+          channelId: channelId,
           videoId: insights[insightIndex].videoId,
+          title: insights[insightIndex].title,
+          description: insights[insightIndex].description,
+          thumbnail: insights[insightIndex].thumbnail,
           source: insights[insightIndex].source,
-          mediaType: insights[insightIndex].mediaType
+          mediaType: insights[insightIndex].mediaType,
+          tags: insights[insightIndex].tags,
         });
         // Update counters
         subIndex = (subIndex + 1) % subscriptions.length;
@@ -95,7 +102,10 @@ export const loadMoreCards = createAsyncThunk(
   
   
 
-const feedSlice = createSlice({
+
+
+
+  const feedSlice = createSlice({
   name: 'feed',
   initialState: setInitialState(),
   reducers: {

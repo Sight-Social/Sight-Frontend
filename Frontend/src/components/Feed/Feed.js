@@ -79,10 +79,30 @@ export function Feed() {
       </Header>
       <Container>
         {queue.map((card, index) => (
-          <Card key={card.videoId} insight={{videoId: card.videoId, insightId: card.insightId}} />
+          <Card key={card.videoId}
+           insight=
+          {{
+            insightId: card.insightId,
+            channelId: card.channelId,
+            videoId: card.videoId,
+            title: card.title,
+            description: card.description,
+            thumbnail: card.thumbnail,
+            source: card.source,
+            mediaType: card.mediaType,
+            tags: card.tags,
+
+          }}
+          />
         ))}
         <div id="sentinel" style={{ height: '1px' }}></div>
       </Container>
     </MainContainer>
   );
 }
+
+
+//add whole insight
+//or just add videoId and insightId
+
+//??
