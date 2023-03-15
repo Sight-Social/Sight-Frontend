@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 
 export const Spacer = styled.div`
-    height: 36px;
+    height: 105px;
 `;
 
 export const Container = styled.div`
@@ -44,7 +44,6 @@ export const SubscriptionsContainer = styled.div`
     align-items: center;
     width: 100%;
     height: 400px;
-    background-color: black;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -60,7 +59,7 @@ export const SubscriptionsContainer = styled.div`
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background-color: white;
+        background-color: #2b9ef0;
     }
 
     ::-webkit-scrollbar-track {
@@ -70,11 +69,12 @@ export const SubscriptionsContainer = styled.div`
 `;
 
 export const Header = styled.h1`
-    margin-top: 30px;
     font-size: 1.4rem;
     width: 100%;
     color: white;
+    padding-top: 40px;
 `;
+
 
 export const List = styled.div`
     display: flex;
@@ -110,8 +110,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const Image = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin: 10px;
 `;

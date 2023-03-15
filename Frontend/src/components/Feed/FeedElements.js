@@ -16,17 +16,24 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const RefreshSearchContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;    
+`;
+
 export const Header = styled.h1`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   font-size: 1.8rem;
-  padding-left: 65px;
-  width: 100%;
+  width: 97%;
   color: white;
+  padding-left: 5px;
 `;
 
 export const Text = styled.p`
   font-size: 1.8rem;
   color: white;
-  width: 40%;
 `;

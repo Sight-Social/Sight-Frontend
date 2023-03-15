@@ -5,7 +5,8 @@ import Card from './FeedCard/index';
 import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
 import FeedFilterBar from './FeedFilterBar';
-import { MainContainer, Container, Header, Text } from './FeedElements';
+import RefreshButton from '../PageComponents/RefreshButton/RefreshButton';
+import { MainContainer, RefreshSearchContainer, Container, Header, Text } from './FeedElements';
 
 export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +71,10 @@ export function Feed() {
     <MainContainer>
       <Header>
         <Text>Feed</Text>
-        <SearchBar />
+        <RefreshSearchContainer>
+          <RefreshButton />
+          <SearchBar />
+        </RefreshSearchContainer>
       </Header>
       <Container>
         {queue.map((card, index) => (
