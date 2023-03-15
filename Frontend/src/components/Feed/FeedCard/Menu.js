@@ -22,8 +22,6 @@ export function Menu({ insight }) {
         }
   }
 
-  console.log('Menu cardInsight: ', cardInsight)
-  console.log('Menu focalpoints: ', focalpoints)
   return (
     <>
       <StyledDropdown>

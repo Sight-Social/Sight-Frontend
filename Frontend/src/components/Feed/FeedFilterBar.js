@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilters } from '../../features/feed/feedSlice';
+import { setFilters, setQueue, modifyQueue } from '../../features/feed/feedSlice';
 import { useState } from 'react';
 import { Spacer, Container, Header, List, ListItem, Image, Label, StyledButton,
         SubscriptionsContainer } from './FeedFilterBarElements';
@@ -10,58 +10,20 @@ export function FeedFilterBar() {
   const dispatch = useDispatch();
   const { subscriptions } = useSelector((state) => state.feed);
   const { filters } = useSelector((state) => state.feed);
+  const { queue } = useSelector((state) => state.feed);
 
-  const handleToggle = (type, id) => {
-        const newFilters = filters;
-        console.log('newFilters: ', newFilters)
-        //Add or remove filter from filters object in store
-        switch (type) {
-            case "subscription":
-                if (newFilters === undefined) {
-                    newFilters.subscriptions.push(id);
-                }
-                else if (newFilters.subscriptions.includes(id)) {
-                    newFilters.subscriptions = newFilters.subscriptions.filter(
-                        (subscription) => subscription !== id
-                    );
-                }
-                else {
-                    newFilters.subscriptions.push(id);
-                }
-                break;
-            case "source":
-                if (newFilters === undefined) {
-                    newFilters.source.push(id);
-                }
-                else if (newFilters.source.includes(id)) {
-                    newFilters.source = newFilters.source.filter(
-                        (source) => source !== id
-                    );
-                }
-                else {
-                    newFilters.source.push(id);
-                }
-                break;
-            case "mediaType":
-                if (newFilters === undefined) {
-                    newFilters.mediaType.push(id);
-                }
-                else if (newFilters.mediaType.includes(id)) {
-                    newFilters.mediaType = newFilters.mediaType.filter(
-                        (mediaType) => mediaType !== id
-                    );
-                }
-                else {
-                    newFilters.mediaType.push(id);
-                }
-                break;
-            default:
-                console.log('Error: Invalid filter type');
-                break;
-        }
-        console.log('newFilters end: ', newFilters);
-        dispatch(setFilters(newFilters));
-    }
+  const handleToggle = (type, value) => {
+//Add or remove filter from filters object in store
+    // Create a new object with the updated properties
+    const updatedFilters = {
+        ...filters,
+        [type]: filters[type].includes(value)
+        ? filters[type].filter((filterValue) => filterValue !== value)
+        : [...filters[type], value],
+    };
+    dispatch(setFilters(updatedFilters));
+    dispatch(modifyQueue({queue: queue, filters: updatedFilters}));
+};
     
   return (
     <Container>
@@ -72,8 +34,8 @@ export function FeedFilterBar() {
             {subscriptions.map((subscription) => {
                 return (
                     <ListItem
-                        key={subscription.id}
-                        onClick={() => handleToggle("subscription", subscription.id)}
+                        key={subscription._id}
+                        onClick={() => handleToggle("subscriptions", subscription.channelName)}
                     >
                         <ToggleSwitch />
                         <Image src={subscription.insights[0].thumbnail} />
@@ -85,18 +47,18 @@ export function FeedFilterBar() {
         </SubscriptionsContainer>
         <List>
             <Header>Source</Header>
-            <ListItem active={true} onChange={() => handleToggle("source", "YouTube")}>
+            <ListItem active={true} onClick={() => handleToggle("source", "YouTube")}>
                 <ToggleSwitch active={true} />
                 <FaYoutube style={{color:"#FF0000", margin: "5px"}}/>
                 <Label>YouTube</Label>
             </ListItem>
             <ListItem active={true}>
-                <ToggleSwitch active={true} onChange={() => handleToggle("source", "Spotify")}/>
+                <ToggleSwitch active={true} onClick={() => handleToggle("source", "Spotify")}/>
                 <FaSpotify style={{color:"#1DB954", margin: "5px"}}/>
                 <Label>Spotify</Label>
             </ListItem>
             <ListItem active={true}>
-                <ToggleSwitch active={true} onChange={() => handleToggle("source", "Twitter")}/>
+                <ToggleSwitch active={true} onClick={() => handleToggle("source", "Twitter")}/>
                 <FaTwitter style={{color:"#00acee", margin: "5px"}}/>
                 <Label>Twitter</Label>
             </ListItem>
@@ -106,15 +68,15 @@ export function FeedFilterBar() {
         <List>
             <Header>Media Type</Header>
             <ListItem active={true}>
-                <ToggleSwitch active={true} onChange={() => handleToggle("video", "video")}/>
+                <ToggleSwitch active={true} onClick={() => handleToggle("mediaType", "video")}/>
                 <Label>Video</Label>
             </ListItem>
             <ListItem active={false}>
-                <ToggleSwitch active={true} onChange={() => handleToggle("podcast", "podcast")}/>
+                <ToggleSwitch active={true} onClick={() => handleToggle("mediaType", "podcast")}/>
                 <Label>Podcasts</Label>
             </ListItem>
             <ListItem active={false}>
-                <ToggleSwitch active={false} onChange={() => handleToggle("tweet", "tweet")}/>
+                <ToggleSwitch active={false} onClick={() => handleToggle("mediaType", "tweet")}/>
                 <Label>Tweets</Label>
             </ListItem>
             <ListItem>
