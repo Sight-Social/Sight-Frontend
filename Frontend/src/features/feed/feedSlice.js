@@ -28,7 +28,7 @@ const setInitialState = () => {
             queue: [],
             queueIndex: 0,
             subscriptions: [],
-            filters: [],
+            filters: {},
             numCards: 0,
         };
     } 
@@ -46,9 +46,10 @@ const setInitialState = () => {
 
 export const loadMoreCards = createAsyncThunk(
     'feed/loadMoreCards',
-    async ({ queue, subscriptions, numCardsToAdd }) => {
+    async ({ queue, filters, subscriptions, numCardsToAdd }) => {
       console.log('loadMoreCards: ', queue, queue.length, subscriptions, numCardsToAdd)
       const newCards = [...queue];
+      //We need to filter out subscriptions, source, and media type that are in the state.feed.filters array
       let numCardsAdded = 0;
       let subIndex = queue.length % subscriptions.length;
       let insightIndex = queue.length % subscriptions[subIndex].insights.length;
@@ -59,9 +60,28 @@ export const loadMoreCards = createAsyncThunk(
         const subscription = subscriptions[subIndex];
         //Get the insights for the subscription
         const insights = subscription.insights;
-        //Add an insight to the queue
-        newCards.push({insightId: insights[insightIndex]._id, videoId: insights[insightIndex].videoId});
-  
+        //Check filters
+        for (let i = 0; i < filters.subscriptions.length; i++) {
+          for (let j = 0; j < filters.sources.length; j++) {
+            for (let k = 0; k < filters.mediaTypes.length; k++) {
+              if (filters.subscriptions[i].id === subscription._id
+                || filters.sources[j].id === insights[insightIndex].source
+                || filters.mediaTypes[k].id === insights[insightIndex].mediaType) {
+                    
+                    subIndex = (subIndex + 1) % filters.subscriptions.length;
+                    insightIndex = (insightIndex + 1) % insights.length;
+                    continue;
+              }
+            }
+          }
+        }
+        // If none of the conditions match, add the element to newCards            
+        newCards.push({
+          insightId: insights[insightIndex]._id,
+          videoId: insights[insightIndex].videoId,
+          source: insights[insightIndex].source,
+          mediaType: insights[insightIndex].mediaType
+        });
         // Update counters
         subIndex = (subIndex + 1) % subscriptions.length;
         insightIndex = (insightIndex + 1) % insights.length;
@@ -94,7 +114,12 @@ const feedSlice = createSlice({
       .addCase(loadMoreCards.fulfilled, (state, action) => {
         state.loading = false;
         state.queue = action.payload;
-      });
+      })
+      .addCase(loadMoreCards.rejected, (state) => {
+        state.loading = false;
+        console.log('loadMoreCards rejected')
+
+      })
   },
 });
 

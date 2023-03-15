@@ -12,7 +12,7 @@ export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef();
   const dispatch = useDispatch();
-  const { queue, subscriptions, numCards } = useSelector((state) => state.feed);
+  const { queue, subscriptions, filters } = useSelector((state) => state.feed);
   const { isAuthenticated } = useSelector((state) => state.user);
   console.log('Feed queue: ', queue);
 
@@ -33,6 +33,7 @@ export function Feed() {
       dispatch(
         loadMoreCards({
           queue,
+          filters,
           subscriptions,
           numCardsToAdd: 3,
         })

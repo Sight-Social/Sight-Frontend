@@ -8,11 +8,12 @@ const initialState = {
     username: '',
     email: '',
     password: '',
-    googleId: '',
     avatar: '',
-    focalpoints: [],
-    pinned_insights: [],
+    tokens: [],
     subscriptions: [],
+    focalpoints: [],
+    pinnedInsights: [],
+    filters: []
 };
 
 const userSlice = createSlice({
@@ -23,26 +24,26 @@ const userSlice = createSlice({
             console.log('[userSlice.js] setUser action.payload: ', action.payload);
             state.username = action.payload.username;
             state.email = action.payload.email;
-            state.password = action.payload.password;
-            state.googleId = action.payload.googleId;
             state.avatar = action.payload.avatar;
-            state.focalpoints = action.payload.focalpoints;
-            state.pinned_insights = action.payload.pinned_insights;
-            state.subscriptions = action.payload.subscriptions;
+            state.tokens = action.payload.tokens;
             state.isAuthenticated = true;
+            state.subscriptions = action.payload.subscriptions;
+            state.focalpoints = action.payload.focalpoints;
+            state.pinnedInsights = action.payload.pinnedInsights;
+            state.filters = action.payload.filters;
             localStorage.setItem('user', JSON.stringify(action.payload));
         },
         clearUser: (state, action) => {
             console.log('[userSlice.js] clearUser called');
-            state.isAuthenticated = false;
             state.username = '';
             state.email = '';
-            state.password = '';
-            state.googleId = '';
             state.avatar = '';
-            state.focalpoints = [];
-            state.pinned_insights = [];
+            state.tokens = [];
+            state.isAuthenticated = false;
             state.subscriptions = [];
+            state.focalpoints = [];
+            state.pinnedInsights = [];
+            state.filters = [];
             localStorage.clear();
         },
     },
@@ -53,13 +54,14 @@ const userSlice = createSlice({
                 console.log('[userSlice.js] action.payload: ', action.payload);
                 state.username = action.payload.username;
                 state.email = action.payload.email;
-                state.password = action.payload.password;
-                state.googleId = action.payload.googleId;
                 state.avatar = action.payload.avatar;
-                state.focalpoints = action.payload.focalpoints;
-                state.pinned_insights = action.payload.pinned_insights;
-                state.subscriptions = action.payload.subscriptions;
+                state.tokens = action.payload.tokens;
                 state.isAuthenticated = true;
+                state.subscriptions = action.payload.subscriptions;
+                state.focalpoints = action.payload.focalpoints;
+                state.pinnedInsights = action.payload.pinnedInsights;
+                state.filters = action.payload.filters;
+                state.feed.filters = action.payload.filters;
                 localStorage.setItem('user', JSON.stringify(action.payload));
             })
             .addCase(updateUsername.rejected, (state, action) => {

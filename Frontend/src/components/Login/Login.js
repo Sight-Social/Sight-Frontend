@@ -10,6 +10,7 @@ import {
   FormInput,
   Form,
   Icon,
+  Text,
   FormButton,
   SightIcon,
   IconWrapper,
@@ -33,7 +34,7 @@ export function Login() {
       if (action.payload.username) {
         dispatch(setUser(action.payload));
         dispatch(setFeedSubscriptions(action.payload.subscriptions));
-        navigate(`/user/${action.payload.username}`);
+        navigate(`/user/${action.payload.username}/feed`);
       }
       else {
         alert('Login failed. Please try again.');
@@ -73,9 +74,8 @@ export function Login() {
               <FormButton type='submit'>
                 Login {/* {user ? 'Continue' : 'Log in'} */}
               </FormButton>
-              {/* {error && <div>{error}</div>} */}
-              {/* <Text to='/signup'>Sign Up</Text>
-            <Text to='/reset-password'>Forgot password</Text> */}
+              {<Text to='/signup'>Sign Up</Text>}
+              {<Text to='/reset-password'>Forgot password</Text>}
             </Form>
           </FormContent>
         </FormWrap>

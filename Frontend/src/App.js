@@ -9,6 +9,7 @@ import { HomePage } from './Pages/Home.js';
 import { ProfilePage } from './Pages/ProfilePage';
 import { LoginPage } from './Pages/LoginPage';
 import { SignupPage } from './Pages/SignupPage';
+import { RegisterPage } from './Pages/RegisterPage';
 import { FeedPage } from './Pages/FeedPage';
 import { SelFocalPointPage } from './Pages/SelFocalPointPage';
 
@@ -40,6 +41,7 @@ function App() {
         ) : (
           <>
             <Route path='/login' element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/' element={<HomePage />} />
           </>

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { setUser } from '../../user/userSlice';
 import axios from 'axios';
 
 const backendURL = 'http://localhost:3000/login';
@@ -10,15 +11,18 @@ const initialState = {
   username: '',
   email: '',
   password: '',
-  googleId: '',
   avatar: '',
+  tokens: [],
+  isAuthenticated: false,
+  subscriptions: [],
   focalpoints: [],
-  pinned_insights: [],
+  pinnedInsights: [],
+  filters: []
 };
 
 export const login = createAsyncThunk(
   'login/login',
-  async ({ username, email, password }, { rejectWithValue }) => {
+  async ({ username, password }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -27,7 +31,7 @@ export const login = createAsyncThunk(
       }
       const res = await axios.post(
         `${ backendURL }`,
-        { username, email, password },
+        { username, password },
         config
       );
 
@@ -66,7 +70,7 @@ const loginSlice = createSlice({
           console.log('[LoginSlice.js] login.fulfilled payload: ', payload);
           state.loading = false;
           state.success = true;
-          state.isAuthenticated = true;
+          setUser(state, payload);
         }
       })
       .addCase(login.rejected, (state, { payload }) => {
@@ -78,7 +82,7 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logout, signup } = loginSlice.actions;
+export const {  } = loginSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -87,7 +91,12 @@ export const { logout, signup } = loginSlice.actions;
 export const email = (state) => state.user.email;
 export const username = (state) => state.user.username;
 export const password = (state) => state.user.password;
+export const avatar = (state) => state.user.avatar;
+export const tokens = (state) => state.user.tokens;
+export const isAuthenticated = (state) => state.user.isAuthenticated;
+export const subscriptions = (state) => state.user.subscriptions;
 export const focalpoints = (state) => state.user.focalpoints;
-export const pinned_insights = (state) => state.user.pinned_insights;
+export const pinnedInsights = (state) => state.user.pinnedInsights;
+export const filters = (state) => state.user.filters;
 
 export default loginSlice.reducer;
