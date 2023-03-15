@@ -6,7 +6,12 @@ export function ToggleSwitch() {
 
     return (
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked> 
+            <input class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                style={{ backgroundColor: "var(--clr-accent)"}}
+                checked> 
             </input>
         </div>
     )

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { Container, Header, List, ListItem, Image, ChannelName } from './FeedFilterBarElements';
+import { Spacer, Container, Header, List, ListItem, Image, ChannelName, StyledButton } from './FeedFilterBarElements';
 import { ToggleSwitch } from '../PageComponents/ToggleSwitch/ToggleSwitch';
 
 export function FeedFilterBar() {
@@ -16,6 +16,7 @@ export function FeedFilterBar() {
 
   return (
     <Container>
+        <Spacer />
         <List>
         <Header>Subscriptions</Header>
             {subscriptions &&
@@ -33,6 +34,27 @@ export function FeedFilterBar() {
                         </ListItem>
                     );
                 })}
+            <ListItem>
+                <StyledButton>Save</StyledButton>
+            </ListItem>
+        </List>
+        <List>
+            <Header>Source</Header>
+            <ListItem active={true}>
+                <ToggleSwitch active={true} />
+                <ChannelName>YouTube</ChannelName>
+            </ListItem>
+            <ListItem active={true}>
+                <ToggleSwitch active={true} />
+                <ChannelName>Spotify</ChannelName>
+            </ListItem>
+            <ListItem active={true}>
+                <ToggleSwitch active={true} />
+                <ChannelName>Twitter</ChannelName>
+            </ListItem>
+            <ListItem>
+                <StyledButton>Save</StyledButton>
+            </ListItem>
         </List>
         <List>
             <Header>Media Type</Header>
@@ -47,6 +69,9 @@ export function FeedFilterBar() {
             <ListItem active={false}>
                 <ToggleSwitch active={false} />
                 <ChannelName>Tweets</ChannelName>
+            </ListItem>
+            <ListItem>
+                <StyledButton>Save</StyledButton>
             </ListItem>
         </List>
     </Container>

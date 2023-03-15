@@ -17,6 +17,7 @@ const setInitialState = () => {
             queue: [],
             queueIndex: 0,
             subscriptions: [],
+            activeSubscriptions: [],
             numCards: 0,
         };
     }
@@ -28,6 +29,7 @@ const setInitialState = () => {
             queue: [],
             queueIndex: 0,
             subscriptions: [],
+            activeSubscriptions: [],
             numCards: 0,
         };
     } 
@@ -36,6 +38,7 @@ const setInitialState = () => {
             queue: populateInitialQueue(storedUser.subscriptions),
             queueIndex: 0,
             subscriptions: subscriptions,
+            
             numCards: 0,
         };
     }

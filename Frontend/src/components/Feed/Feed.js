@@ -13,7 +13,6 @@ export function Feed() {
   const dispatch = useDispatch();
   const { queue, subscriptions, numCards } = useSelector((state) => state.feed);
   const { isAuthenticated } = useSelector((state) => state.user);
-
   console.log('Feed queue: ', queue);
 
   useEffect(() => {
