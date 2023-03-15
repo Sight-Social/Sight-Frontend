@@ -11,12 +11,8 @@ export function Menu({ insight }) {
   const focalpoints = useSelector((state) => state.user.focalpoints); //list all focalpoints
   const username = useSelector((state) => state.user.username); //for API call in addInsightToFocalPoint userThunk
   const dispatch = useDispatch();
-  console.log('Menu.js insight: ', insight)
-  console.log('Menu.js focalpoints: ', focalpoints);
 
   async function addInsightToFP(focalpointId, insight){
-    console.log('Menu.js addInsightToFP focalpointId: ', focalpointId);
-    console.log('Menu.js addInsightToFP insight: ', insight);
         try {                            
             dispatch(addInsightToFocalPoint({username, focalpointId, insight }));
         } catch (error) {

@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function FeedCard({ insight }) {
-  console.log('FeedCard.js insight: ', insight)
   const [showMenu, setShowMenu] = useState(false);
   const handleShowMenu = (showMenu) => {
     setShowMenu(!showMenu);

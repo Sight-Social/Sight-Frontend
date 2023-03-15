@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { Spacer, Container, Header, List, ListItem, Image, ChannelName, StyledButton } from './FeedFilterBarElements';
+import { Spacer, Container, Header, List, ListItem, Image, Label, StyledButton,
+        SubscriptionsContainer } from './FeedFilterBarElements';
 import { ToggleSwitch } from '../PageComponents/ToggleSwitch/ToggleSwitch';
 
 export function FeedFilterBar() {
@@ -17,6 +18,7 @@ export function FeedFilterBar() {
   return (
     <Container>
         <Spacer />
+        <SubscriptionsContainer>
         <List>
         <Header>Subscriptions</Header>
             {subscriptions &&
@@ -30,7 +32,7 @@ export function FeedFilterBar() {
                         >
                             <ToggleSwitch active={isActive} />
                             <Image src={subscription.insights[0].thumbnail} />
-                            <ChannelName>{subscription.channelName}</ChannelName>
+                            <Label>{subscription.channelName}</Label>
                         </ListItem>
                     );
                 })}
@@ -38,19 +40,20 @@ export function FeedFilterBar() {
                 <StyledButton>Save</StyledButton>
             </ListItem>
         </List>
+        </SubscriptionsContainer>
         <List>
             <Header>Source</Header>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
-                <ChannelName>YouTube</ChannelName>
+                <Label>YouTube</Label>
             </ListItem>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
-                <ChannelName>Spotify</ChannelName>
+                <Label>Spotify</Label>
             </ListItem>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
-                <ChannelName>Twitter</ChannelName>
+                <Label>Twitter</Label>
             </ListItem>
             <ListItem>
                 <StyledButton>Save</StyledButton>
@@ -60,15 +63,15 @@ export function FeedFilterBar() {
             <Header>Media Type</Header>
             <ListItem active={true}>
                 <ToggleSwitch active={true} />
-                <ChannelName>Video</ChannelName>
+                <Label>Video</Label>
             </ListItem>
             <ListItem active={false}>
                 <ToggleSwitch active={true} />
-                <ChannelName>Podcasts</ChannelName>
+                <Label>Podcasts</Label>
             </ListItem>
             <ListItem active={false}>
                 <ToggleSwitch active={false} />
-                <ChannelName>Tweets</ChannelName>
+                <Label>Tweets</Label>
             </ListItem>
             <ListItem>
                 <StyledButton>Save</StyledButton>

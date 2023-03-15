@@ -17,19 +17,18 @@ const setInitialState = () => {
             queue: [],
             queueIndex: 0,
             subscriptions: [],
-            activeSubscriptions: [],
+            filters: [],
             numCards: 0,
         };
     }
-    const subscriptions = storedUser.subscriptions;
     let initialState = {};
-    if (subscriptions === null || subscriptions == ''){
+    if (storedUser.subscriptions === [] || storedUser.subscriptions == ''){
         console.log('no subscriptions found initially')
         initialState = {
             queue: [],
             queueIndex: 0,
             subscriptions: [],
-            activeSubscriptions: [],
+            filters: [],
             numCards: 0,
         };
     } 
@@ -37,8 +36,8 @@ const setInitialState = () => {
         initialState = {
             queue: populateInitialQueue(storedUser.subscriptions),
             queueIndex: 0,
-            subscriptions: subscriptions,
-            
+            subscriptions: storedUser.subscriptions,
+            filters: storedUser.filters,
             numCards: 0,
         };
     }
@@ -83,6 +82,9 @@ const feedSlice = createSlice({
     setFeedSubscriptions: (state, action) => {
         state.subscriptions = action.payload;
     },
+    setFilters: (state, action) => {
+        state.filters = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -96,7 +98,7 @@ const feedSlice = createSlice({
   },
 });
 
-export const { setFeedSubscriptions } = feedSlice.actions;
+export const { setFeedSubscriptions, setFilters } = feedSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 
 export const Spacer = styled.div`
-    height: 80px;
+    height: 36px;
 `;
 
 export const Container = styled.div`
@@ -11,6 +11,62 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     margin-right: 40px;
+    position: sticky;
+    top: 0;
+    height: 110vh;
+    width: 470px;
+    overflow-y: scroll;
+
+    //scrollbar
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+        //background-color: rgba(0, 0, 0, 0.2);
+        background-color: #212529;
+        border-radius: 3px;
+        height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: white;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
+`;
+
+export const SubscriptionsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+    background-color: black;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+        //scrollbar
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+        //background-color: rgba(0, 0, 0, 0.2);
+        background-color: #212529;
+        border-radius: 3px;
+        height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: white;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
 `;
 
 export const Header = styled.h1`
@@ -25,6 +81,7 @@ export const List = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding-left: 30px;
 `;
 
 export const ListItem = styled.div`
@@ -35,16 +92,18 @@ export const ListItem = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
+    margin-top: 10px;
+    padding: 0px;
     background-color: #1E1E1E;
     border: none;
     border-radius: 20px;
     box-shadow: -5px 5px 10px rgba(25, 25, 25, 0.8);
     color: white;
     text-decoration: none;
-    margin: 10px;
-    width: 70px;
-    height: 35px;
-    font-size: 1.0rem;
+    width: 60px;
+    height: 28px;
+    font-size: .845rem;
+    line-height: 1.0rem;
     :hover {
         background-color: var(--clr-accent);
     }
@@ -57,7 +116,7 @@ export const Image = styled.img`
     margin: 10px;
 `;
 
-export const ChannelName = styled.h2`
+export const Label = styled.h2`
     font-size: 1.0rem;
     color: white;
 `;

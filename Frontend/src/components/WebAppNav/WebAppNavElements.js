@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const NavContainer = styled.div`
   padding-top: 27px;
   width: 20vw;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 `;
 
 export const NavSubHeader = styled.h2`

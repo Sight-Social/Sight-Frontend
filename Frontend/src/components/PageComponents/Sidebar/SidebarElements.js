@@ -4,7 +4,7 @@ import { Link as LinkR } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
 export const SidebarContainer = styled.aside`
-  position: fixed;
+  position: sticky;
   z-index: 999;
   width: 100%;
   height: 100%;
