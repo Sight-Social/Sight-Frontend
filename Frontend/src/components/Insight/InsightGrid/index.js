@@ -18,10 +18,6 @@ import {
 
 /* INTERACTIVE COMPONENTS */
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
-/* import SearchBar from '../InsightsSearchBar';
-import Add from '../../../assets/icons/Add.png';
-import Delete from '../../../assets/icons/Delete.png';
-import TrippleDot from '../../../assets/icons/TrippleDot.png'; */
 import {
   CrudButton,
   IconWrapper,
@@ -42,8 +38,15 @@ import { Feed } from '../../Feed/Feed.js';
 /* import AddFocalPoint from '../../FocalPoint/AddFocalPoint'; */
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {
+  editFPDetails,
+  updateFocalPointCard,
+} from '../../../features/focalpoints/focalpointSlice';
 
 export function InsightGrid() {
+  const dispatch = useDispatch();
+
   const focalpoints = useSelector((state) => state.user.focalpoints);
   const username = useSelector((state) => state.user.username);
   const email = useSelector((state) => state.user.email);
@@ -127,14 +130,6 @@ export function InsightGrid() {
     window.location.reload();
   };
 
-  const handleEditFPCard = () => {
-    console.log('Editing FP Card');
-  };
-
-  const editFPState = () => {
-    setIsEditing(!isEditing);
-  };
-
   // const handleEditFPCard = async (index, editedName, editedDescription) => {
   //   const oldId = cardList[index]._id;
   //   const oldInsights = cardList[index].insights;
@@ -182,6 +177,21 @@ export function InsightGrid() {
     setEditedDescription(event.target.value);
   };
 
+  async function handleEditFPCard() {
+    console.log('Editing FP Card');
+    const action = await dispatch(
+      editFPDetails({ editedName, editedDescription, email, focalpointId })
+    );
+    if (action.payload) {
+      console.log('FP PAYLOAD: ' + action.payload);
+      updateFocalPointCard(action.payload);
+    }
+  }
+
+  const editFPState = () => {
+    setIsEditing(!isEditing);
+  };
+
   return (
     <NavAndContentContainer>
       <MainContainer>
@@ -205,7 +215,7 @@ export function InsightGrid() {
             }}
           ></Card.Img>
 
-          <EditCardBody onClick={editFPState}>
+          <EditCardBody /* onClick={editFPState} */>
             {isEditing ? (
               <Card.Body style={{ width: 'auto' }}>
                 <Card.Title
@@ -239,13 +249,13 @@ export function InsightGrid() {
                 <Button
                   variant='secondary'
                   size='md'
-                  /* onClick={handleCancelProfileChange} */
+                  onClick={handleEditFPCard}
                 >
                   Save
                 </Button>
               </Card.Body>
             ) : (
-              <Card.Body>
+              <Card.Body onClick={editFPState}>
                 <Card.Title
                   style={{
                     fontSize: '2rem',

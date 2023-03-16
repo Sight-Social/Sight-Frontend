@@ -138,23 +138,6 @@ export function Profile() {
             Logout
           </Button>
         </UserProfile>
-        {/* <Subheader>Pinned Insights</Subheader> */}
-        {/* <PinnedInsights>
-          {pinned_insights
-            ? pinned_insights.map((insight, index) => (
-                <div key={index}>
-                  <YouTubeVideo
-                    key={index}
-                    className='pinned-insight'
-                    videoId={insight.video_id}
-                    height='250'
-                    width='300'
-                  />
-                  <Spacer />
-                </div>
-              ))
-            : null}
-        </PinnedInsights> */}
         <FocalPoints />
         <Footer />
       </Container>
