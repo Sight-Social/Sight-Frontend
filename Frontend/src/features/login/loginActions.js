@@ -5,7 +5,7 @@ const backendURL = 'http://localhost:3000/login';
 
 export const login = createAsyncThunk(
   'login/login',
-  async ({username, email, password}, { rejectWithValue }) => {
+  async ({ username, email, password }, { rejectWithValue }) => {
     try {
       // Trim whitespace
       username = username.trim();
@@ -16,24 +16,23 @@ export const login = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json',
         },
-      }
+      };
       const res = await axios.post(
         `${backendURL}`,
         { username, password },
         config
       );
 
-      if (res.status === 200){
+      if (res.status === 200) {
         console.log('[LoginActions.js] Login successful');
         console.log('[LoginActions.js] res.data: ', res.data);
-        return res.data.user;
+        return res.data;
       }
-      if (res.status === 400){
+      if (res.status === 400) {
         console.log('[LoginActions.js] Login failed');
         console.log('[LoginActions.js] res.data: ', res.data);
         throw new Error(res.data.message);
       }
-
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }

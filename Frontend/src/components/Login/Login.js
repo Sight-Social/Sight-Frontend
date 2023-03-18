@@ -32,7 +32,7 @@ export function Login() {
     try {
       const action = await dispatch(login({ username, password }));
       /* localStorage.setItem('user', JSON.stringify(action.payload)); */
-      console.log('HERE:' + action.payload);
+      console.log('HERE:' + action.payload.username);
       if (action.payload.username) {
         /* take action.paylod */
         let profile = action.payload;
@@ -50,6 +50,7 @@ export function Login() {
         /* dispatch(setUserProfile(action.payload)); */
 
         navigate(`/user/${action.payload.username}/feed`);
+        window.location.reload();
       } else {
         alert('Login failed. Please try again.');
         window.location.reload();

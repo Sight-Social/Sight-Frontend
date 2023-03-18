@@ -36,16 +36,16 @@ export const login = createAsyncThunk(
 
       if (res.status === 200) {
         console.log('[LoginActions.js] Login successful');
-        console.log('[LoginActions.js] res.data: ', res.data.user);
+        console.log('[LoginActions.js] res.data: ', res.data);
         localStorage.setItem('user', JSON.stringify(res.data.user));
-        let profile = {
+        /* let profile = {
           username: res.data.user.username,
           email: res.data.user.email,
           avatar: res.data.user.avatar,
           isAuthenticated: res.data.user.isAuthenticated,
           tokens: res.data.user.tokens,
-        };
-        return res.data;
+        }; */
+        return res.data.user;
       } else if (res.status === 400) {
         console.log('[LoginActions.js] Login failed');
         console.log('[LoginActions.js] res.data: ', res.data);
