@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { setUser } from '../../user/userSlice';
+import { clearProfile, setProfile } from '../profile/profileSlice';
 import axios from 'axios';
 
 const backendURL = 'http://localhost:3000/login';
@@ -13,11 +13,10 @@ const initialState = {
   password: '',
   avatar: '',
   tokens: [],
-  isAuthenticated: false,
   subscriptions: [],
   focalpoints: [],
   pinnedInsights: [],
-  filters: []
+  filters: [],
 };
 
 export const login = createAsyncThunk(
@@ -28,23 +27,30 @@ export const login = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json',
         },
-      }
+      };
       const res = await axios.post(
-        `${ backendURL }`,
+        `${backendURL}`,
         { username, password },
         config
       );
 
       if (res.status === 200) {
         console.log('[LoginActions.js] Login successful');
-        console.log('[LoginActions.js] res.data: ', res.data);
-        return res.data.user;
+        console.log('[LoginActions.js] res.data: ', res.data.user);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        let profile = {
+          username: res.data.user.username,
+          email: res.data.user.email,
+          avatar: res.data.user.avatar,
+          isAuthenticated: res.data.user.isAuthenticated,
+          tokens: res.data.user.tokens,
+        };
+        return res.data;
       } else if (res.status === 400) {
         console.log('[LoginActions.js] Login failed');
         console.log('[LoginActions.js] res.data: ', res.data);
         throw new Error(res.data.message);
       }
-
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -70,11 +76,11 @@ const loginSlice = createSlice({
           console.log('[LoginSlice.js] login.fulfilled payload: ', payload);
           state.loading = false;
           state.success = true;
-          setUser(state, payload);
+          setProfile(state, payload);
         }
       })
       .addCase(login.rejected, (state, { payload }) => {
-        console.log('[LoginSlice.js] login.rejected payload: ', payload)
+        console.log('[LoginSlice.js] login.rejected payload: ', payload);
         alert('Login failed. Please try again.');
         state.loading = false;
         state.error = payload;
@@ -82,21 +88,17 @@ const loginSlice = createSlice({
   },
 });
 
-export const {  } = loginSlice.actions;
+export const {} = loginSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 /* export const selectCount = (state) => state.counter.value; */
-export const email = (state) => state.user.email;
-export const username = (state) => state.user.username;
-export const password = (state) => state.user.password;
-export const avatar = (state) => state.user.avatar;
-export const tokens = (state) => state.user.tokens;
-export const isAuthenticated = (state) => state.user.isAuthenticated;
-export const subscriptions = (state) => state.user.subscriptions;
-export const focalpoints = (state) => state.user.focalpoints;
-export const pinnedInsights = (state) => state.user.pinnedInsights;
-export const filters = (state) => state.user.filters;
+export const email = (state) => state.profile.email;
+export const username = (state) => state.profile.username;
+export const password = (state) => state.profile.password;
+export const avatar = (state) => state.profile.avatar;
+export const tokens = (state) => state.profile.tokens;
+export const isAuthenticated = (state) => state.profile.isAuthenticated;
 
 export default loginSlice.reducer;

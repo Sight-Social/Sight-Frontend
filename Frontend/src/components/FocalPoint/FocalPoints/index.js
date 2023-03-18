@@ -29,8 +29,11 @@ import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
 import { Spacer } from '../../Profile/ProfileElements';
 
 export function FocalPoints() {
-  const { username, email, focalpoints } = useSelector((state) => state.user);
-  const pinned_insights = useSelector((state) => state.user.pinned_insights);
+  const { username, email } = useSelector((state) => state.profile);
+  const focalpoints = useSelector((state) => state.focalpoint.fp_array);
+  const pinned_insights = useSelector(
+    (state) => state.focalpoint.pinned_insights
+  );
 
   const [cardList, setCardList] = useState(focalpoints);
   const [view, setView] = useState('focalpoints');

@@ -12,7 +12,7 @@ export function SelFocalPointPage() {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-  const user = useSelector((state) => state.user);
+  const focalpoints = useSelector((state) => state.focalpoint.fp_array);
 
   //Get the focalpointId from the url
   let [url, setUrl] = useState(window.location.href); // this?
@@ -24,7 +24,7 @@ export function SelFocalPointPage() {
   let focalpointId = spliturl[spliturl.length - 1];
   console.log('selected focalpointId:' + focalpointId);
   //Get the focalpoint from the user object
-  const selectedFP = user.focalpoints.find(
+  const selectedFP = focalpoints.find(
     (focalpoint) => focalpoint._id === focalpointId
   );
   console.log('selectedFP: ', selectedFP);

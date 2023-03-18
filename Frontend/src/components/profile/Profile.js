@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUsername } from '../../user/userThunk.js';
-import { setUser } from '../../user/userSlice.js';
+import { updateUsername } from '../../features/profile/userThunk.js';
+import { setProfile } from '../../features/profile/profileSlice.js';
 import Nav from 'react-bootstrap/Nav';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
   const { username, email, avatar, pinned_insights } = useSelector(
-    (state) => state.user
+    (state) => state.profile
   );
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(username);

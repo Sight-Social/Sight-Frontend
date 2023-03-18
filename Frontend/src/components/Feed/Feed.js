@@ -6,14 +6,20 @@ import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
 import FeedFilterBar from './FeedFilterBar';
 import RefreshButton from '../PageComponents/RefreshButton/RefreshButton';
-import { MainContainer, RefreshSearchContainer, Container, Header, Text } from './FeedElements';
+import {
+  MainContainer,
+  RefreshSearchContainer,
+  Container,
+  Header,
+  Text,
+} from './FeedElements';
 
 export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef();
   const dispatch = useDispatch();
   const { queue, subscriptions, filters } = useSelector((state) => state.feed);
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.profile);
   console.log('Feed queue: ', queue);
 
   useEffect(() => {
@@ -27,9 +33,9 @@ export function Feed() {
     if (isLoading && observerRef.current) {
       setIsLoading(false);
       observerRef.current = null;
-      console.log('useEffect: loadMoreCards')
-      console.log('queue: ', queue)
-      console.log('queue.length: ', queue.length)
+      console.log('useEffect: loadMoreCards');
+      console.log('queue: ', queue);
+      console.log('queue.length: ', queue.length);
       dispatch(
         loadMoreCards({
           queue,
@@ -79,28 +85,26 @@ export function Feed() {
       </Header>
       <Container>
         {queue.map((card, index) => (
-          <Card key={card.videoId}
-           insight=
-          {{
-            insightId: card.insightId,
-            channelId: card.channelId,
-            videoId: card.videoId,
-            title: card.title,
-            description: card.description,
-            thumbnail: card.thumbnail,
-            source: card.source,
-            mediaType: card.mediaType,
-            tags: card.tags,
-
-          }}
+          <Card
+            key={card.videoId}
+            insight={{
+              insightId: card.insightId,
+              channelId: card.channelId,
+              videoId: card.videoId,
+              title: card.title,
+              description: card.description,
+              thumbnail: card.thumbnail,
+              source: card.source,
+              mediaType: card.mediaType,
+              tags: card.tags,
+            }}
           />
         ))}
-        <div id="sentinel" style={{ height: '1px' }}></div>
+        <div id='sentinel' style={{ height: '1px' }}></div>
       </Container>
     </MainContainer>
   );
 }
-
 
 //add whole insight
 //or just add videoId and insightId
