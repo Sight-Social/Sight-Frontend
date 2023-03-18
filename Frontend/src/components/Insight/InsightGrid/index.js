@@ -47,9 +47,9 @@ import {
 export function InsightGrid() {
   const dispatch = useDispatch();
 
-  const focalpoints = useSelector((state) => state.user.focalpoints);
-  const username = useSelector((state) => state.user.username);
-  const email = useSelector((state) => state.user.email);
+  const focalpoints = useSelector((state) => state.focalpoint.fp_array);
+  const username = useSelector((state) => state.profile.username);
+  const email = useSelector((state) => state.profile.email);
 
   /* USE THE URL TO KNOW WHICH FOCAL POINT IS SELECTED  */
   let url = window.location.href;

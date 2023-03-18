@@ -12,8 +12,8 @@ import { FaSlideshare } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 export function WebAppNav() {
-  const focalpoints = useSelector((state) => state.user.focalpoints);
-  const username = useSelector((state) => state.user.username);
+  const focalpoints = useSelector((state) => state.focalpoint.fp_array);
+  const username = useSelector((state) => state.profile.username);
 
   let feedURL = `/user/${username}/feed`;
   let profileURL = `/user/${username}`;
@@ -44,12 +44,13 @@ export function WebAppNav() {
           onMouseEnter={(e) => (e.target.style.color = 'white')}
           onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
         >
-          <IoMdPerson 
+          <IoMdPerson
             style={{
               color: 'white',
               marginRight: '10px',
-              marginBottom: '3.5px'
-            }}/>
+              marginBottom: '3.5px',
+            }}
+          />
           Profile
         </Nav.Link>
         <Nav.Link
@@ -58,11 +59,11 @@ export function WebAppNav() {
           onMouseEnter={(e) => (e.target.style.color = 'white')}
           onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
         >
-          <RiDashboardLine 
+          <RiDashboardLine
             style={{
               color: 'white',
               marginRight: '10px',
-              marginBottom: '3.5px'
+              marginBottom: '3.5px',
             }}
           />
           Feed
@@ -76,11 +77,13 @@ export function WebAppNav() {
         }}
       />
       <NavSubHeader>
-        <MdTableRows style={{
-          color: 'white',
-          marginRight: '10px',
-          marginBottom: '2.75px'
-        }} />
+        <MdTableRows
+          style={{
+            color: 'white',
+            marginRight: '10px',
+            marginBottom: '2.75px',
+          }}
+        />
         Focal Points
       </NavSubHeader>
       <Nav
@@ -95,6 +98,7 @@ export function WebAppNav() {
         {focalpoints
           ? focalpoints.map((focalpoint, index) => (
               <Nav.Link
+                key={index}
                 href={`/user/${username}/focalpoints/${focalpoint._id}`}
                 style={{
                   color: '#AEAEAE',
@@ -110,11 +114,13 @@ export function WebAppNav() {
           : null}
       </Nav>
       <NavSubHeader>
-        <FaSlideshare style={{
-          color: 'white',
-          marginRight: '10px',
-          marginBottom: '2.75px'
-        }} />
+        <FaSlideshare
+          style={{
+            color: 'white',
+            marginRight: '10px',
+            marginBottom: '2.75px',
+          }}
+        />
         Shared Focal Points
       </NavSubHeader>
       <Nav
@@ -125,6 +131,7 @@ export function WebAppNav() {
         {focalpoints
           ? focalpoints.map((focalpoint, index) => (
               <Nav.Link
+                key={index}
                 href={`/user/${username}/focalpoints/${focalpoint._id}`}
                 style={{
                   color: '#AEAEAE',

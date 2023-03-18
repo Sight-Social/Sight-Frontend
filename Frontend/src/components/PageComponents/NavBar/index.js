@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import clearUser from '../../../features/login/loginSlice';
+import { clearProfile } from '../../../features/profile/profileSlice';
 import { useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
@@ -26,7 +26,7 @@ export function Navbar() {
   const [toggle, setToggle] = useState(false);
 
   const navigate = useNavigate();
-  const { isAuthenticated, username } = useSelector((state) => state.user);
+  const { isAuthenticated, username } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   const profilePath = '/user/' + username;
@@ -34,7 +34,7 @@ export function Navbar() {
   const handleLogout = () => {
     console.log('[NavBar/index.js] Logout btn clicked');
     localStorage.removeItem('user');
-    dispatch(clearUser());
+    dispatch(clearProfile());
     navigate('/');
     window.location.reload();
   };

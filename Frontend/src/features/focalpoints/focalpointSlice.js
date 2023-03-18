@@ -13,8 +13,10 @@ const setInitialState = () => {
           title: '',
           description: '',
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
+          filters: [{}],
         },
       ],
+      pinned_insights: [{}],
     };
   }
   let initialState = {};
@@ -24,16 +26,19 @@ const setInitialState = () => {
       fp_array: [
         {
           _id: '',
-          title: 'Example Focal Point',
+          title: 'Example Focalpoint',
           description:
-            'Your account doesnt have any focal points created yet. Check this one out!',
+            'You have not created a focal point yet, use this one as a template!',
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
+          filters: [{}],
         },
       ],
+      pinned_insights: [{}],
     };
   } else {
     initialState = {
       fp_array: storedUser.focalpoints,
+      pinned_insights: storedUser.pinned_insights,
     };
   }
   return initialState;

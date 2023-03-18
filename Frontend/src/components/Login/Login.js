@@ -18,7 +18,7 @@ import {
 import SightWhiteIcon from '../../assets/icons/Sight-White-32.svg';
 
 import { login } from '../../features/login/loginSlice';
-import { setUser } from '../../user/userSlice';
+import { setProfile } from '../../features/profile/profileSlice';
 import { setFeedSubscriptions } from '../../features/feed/feedSlice';
 
 export function Login() {
@@ -31,16 +31,29 @@ export function Login() {
     e.preventDefault();
     try {
       const action = await dispatch(login({ username, password }));
+      /* localStorage.setItem('user', JSON.stringify(action.payload)); */
+      console.log('HERE:' + action.payload);
       if (action.payload.username) {
-        dispatch(setUser(action.payload));
+        /* take action.paylod */
+        let profile = action.payload;
+
+        dispatch(setProfile(profile)); /* NEED: action.payload.profile */
+
+        /* FEED SLICE */
         dispatch(setFeedSubscriptions(action.payload.subscriptions));
+        /* dispatch(setFeedFilters(action.payload.filters)); */
+
+        /* FOCAL POINT SLICE */
+        /* dispatch(setFocalpoints(action.payload.focalpoints)); */
+
+        /* USER SLICE */
+        /* dispatch(setUserProfile(action.payload)); */
+
         navigate(`/user/${action.payload.username}/feed`);
-      }
-      else {
+      } else {
         alert('Login failed. Please try again.');
         window.location.reload();
       }
-    
     } catch (err) {
       console.log('Login.js: handleLogin() error:', err);
     }
