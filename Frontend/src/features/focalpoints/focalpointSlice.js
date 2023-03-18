@@ -100,12 +100,14 @@ export const focalpointSlice = createSlice({
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Edit fp details failed';
-          state.isAuthenticated = false;
         } else {
           console.log('[EDIT-FP] editFPDetails.fulfilled payload: ', payload);
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          storedUser.focalpoints = payload;
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array = payload;
           state.loading = false;
           state.success = true;
-          state.isAuthenticated = true;
         }
       })
       .addCase(editFPDetails.rejected, (state, { payload }) => {
