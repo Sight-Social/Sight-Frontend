@@ -82,11 +82,59 @@ export const editFPDetails = createAsyncThunk(
   }
 );
 
+export const addInsight = createAsyncThunk(
+  'focalpoint/addInsight',
+  async (
+    { username, email, tags, focalpointId, videoId, videoFormat },
+    { rejectWithValue }
+  ) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.post(
+        `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
+        {
+          insight: {
+            videoId: videoId,
+            videoFormat: videoFormat,
+            tags: tags,
+          },
+          email: email,
+          focalpointId: focalpointId,
+          username: username,
+        },
+        config
+      );
+      if (res.status === 200) {
+        console.log('[200] Add Insight Successful');
+        console.log(
+          '[Add-Insight] res.data: ',
+          res.data
+        ); /* this is the insight */
+        return res.data;
+      } else if (res.status === 400) {
+        console.log('[400] Add Insight Point Failure');
+        console.log('[Add-Insight] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const focalpointSlice = createSlice({
   name: 'focalpoint',
   initialState: setInitialState(),
   reducers: {
     updateFocalPointCard: (state, action) => {
+      state.fp_array = action.payload;
+    },
+    updateInsightList: (state, action) => {
       state.fp_array = action.payload;
     },
   },
@@ -115,10 +163,35 @@ export const focalpointSlice = createSlice({
         alert('Edit failed. Please try again.');
         state.loading = false;
         state.error = payload;
+      })
+      .addCase(addInsight.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addInsight.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.loading = false;
+          state.error = 'Add insight details failed';
+        } else {
+          console.log('[Add-Insight] addInsight.fulfilled payload: ', payload);
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          storedUser.focalpoints.insights = payload;
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array = payload;
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(addInsight.rejected, (state, { payload }) => {
+        console.log('[Add-Insight] addInsight.rejected payload: ', payload);
+        alert('Add Insight failed. Please try again.');
+        state.loading = false;
+        state.error = payload;
       });
   },
 });
 
-export const { updateFocalPointCard } = focalpointSlice.actions;
+export const { updateFocalPointCard, updateInsightList } =
+  focalpointSlice.actions;
 
 export default focalpointSlice.reducer;

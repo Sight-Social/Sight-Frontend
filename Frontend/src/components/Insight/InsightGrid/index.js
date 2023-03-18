@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-
+import {
+  Container,
+  FormContent,
+  FormLabel,
+  FormWrap,
+  FormH1,
+  FormInput,
+  FormContianer,
+  FormButton,
+} from '../InsightAdd/InsightAddElements';
 /* MAIN STYLING */
 import { MainContainer } from './InsightGridElements';
 import {
@@ -42,6 +51,8 @@ import { useDispatch } from 'react-redux';
 import {
   editFPDetails,
   updateFocalPointCard,
+  addInsight,
+  updateInsightList,
 } from '../../../features/focalpoints/focalpointSlice';
 
 export function InsightGrid() {
@@ -50,7 +61,8 @@ export function InsightGrid() {
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const username = useSelector((state) => state.profile.username);
   const email = useSelector((state) => state.profile.email);
-
+  const [formUrl, setUrl] = useState('');
+  const [tags, setTags] = useState('');
   /* USE THE URL TO KNOW WHICH FOCAL POINT IS SELECTED  */
   let url = window.location.href;
   let spliturl = url.split('/');
@@ -76,45 +88,45 @@ export function InsightGrid() {
     hikingLogo,
   ];
 
-  const handleAddInsight = async (url, tags, fpId) => {
-    console.log('URL: ' + url);
-    console.log('TAGS: ' + tags);
-    var tagArr = tags.split(',');
+  // const handleAddInsight = async (url, tags, fpId) => {
+  //   console.log('URL: ' + url);
+  //   console.log('TAGS: ' + tags);
+  //   var tagArr = tags.split(',');
 
-    // https://www.youtube.com/watch?v=_shA5Xwe8_4 -> Normal
-    // https://www.youtube.com/shorts/ynQCpKevJ9A -> Shorts
+  //   // https://www.youtube.com/watch?v=_shA5Xwe8_4 -> Normal
+  //   // https://www.youtube.com/shorts/ynQCpKevJ9A -> Shorts
 
-    let videoId;
-    let videoFormat;
-    if (url.includes('shorts')) {
-      videoId = url.split('shorts/')[1];
-      videoFormat = 'portrait';
-    } else {
-      videoId = url.split('?v=')[1];
-      videoFormat = 'landscape';
-    }
+  //   let videoId;
+  //   let videoFormat;
+  //   if (url.includes('shorts')) {
+  //     videoId = url.split('shorts/')[1];
+  //     videoFormat = 'portrait';
+  //   } else {
+  //     videoId = url.split('?v=')[1];
+  //     videoFormat = 'landscape';
+  //   }
 
-    console.log('VideoSpecs: Id=' + videoId + ', Type=' + videoFormat);
-    let source = 'YouTube';
-    setInsightArray([...insightArray, { videoId, videoFormat, tags, source }]);
+  //   console.log('VideoSpecs: Id=' + videoId + ', Type=' + videoFormat);
+  //   let source = 'YouTube';
+  //   setInsightArray([...insightArray, { videoId, videoFormat, tags, source }]);
 
-    try {
-      await axios.post(
-        `http://localhost:3000/user/${username}/focalpoints/${focalpoint._id}`,
-        {
-          videoId: videoId,
-          videoFormat: videoFormat,
-          tags: tagArr,
-          email: email,
-          fpId: focalpoint._id,
-        }
-      );
+  //   try {
+  //     await axios.post(
+  //       `http://localhost:3000/user/${username}/focalpoints/${focalpoint._id}`,
+  //       {
+  //         videoId: videoId,
+  //         videoFormat: videoFormat,
+  //         tags: tagArr,
+  //         email: email,
+  //         fpId: focalpoint._id,
+  //       }
+  //     );
 
-      /* handleUserUpdate(user); */
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     /* handleUserUpdate(user); */
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const [view, setView] = useState('insights');
 
@@ -185,6 +197,37 @@ export function InsightGrid() {
     if (action.payload) {
       console.log('FP PAYLOAD: ' + action.payload);
       updateFocalPointCard(action.payload);
+    }
+  }
+
+  async function handleAddInsight(url, tags, focalpointId) {
+    console.log('Adding insight to FP');
+    console.log('URL: ' + url);
+    console.log('TAGS: ' + tags);
+    var tagArr = tags.split(',');
+
+    // https://www.youtube.com/watch?v=_shA5Xwe8_4 -> Normal
+    // https://www.youtube.com/shorts/ynQCpKevJ9A -> Shorts
+
+    let videoId;
+    let videoFormat;
+    if (url.includes('shorts')) {
+      videoId = url.split('shorts/')[1];
+      videoFormat = 'portrait';
+    } else {
+      videoId = url.split('?v=')[1];
+      videoFormat = 'landscape';
+    }
+
+    console.log('VideoSpecs: Id=' + videoId + ', Type=' + videoFormat);
+    let source = 'YouTube';
+
+    const action = await dispatch(
+      addInsight({ username, email, focalpointId, tags, videoId, videoFormat })
+    );
+    if (action.payload) {
+      console.log('FP PAYLOAD: ' + action.payload);
+      updateInsightList(action.payload);
     }
   }
 
@@ -296,8 +339,37 @@ export function InsightGrid() {
           <InsightBackgrund>
             <HeaderContainer>
               <ButtonGrouping>
+                {/* ADD INSIGHT BUTTON */}
                 <DropdownButton id='dropdown-basic-button' title='Add'>
-                  <InsightAdd /* addInsight={handleAddInsight} */ />
+                  {/* <InsightAdd addInsight={handleAddInsight} /> */}
+                  <Container>
+                    <FormWrap>
+                      <FormContent>
+                        <FormContianer
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            handleAddInsight(formUrl, tags, focalpointId);
+                            /* addInsight(formUrl, tags); */
+                          }}
+                        >
+                          <FormH1>New Insight</FormH1>
+                          <FormLabel htmlFor='for'>URL</FormLabel>
+                          <FormInput
+                            type='url'
+                            required
+                            onChange={(e) => setUrl(e.target.value)}
+                          />
+                          <FormLabel htmlFor='for'>Tags</FormLabel>
+                          <FormInput
+                            type='tags'
+                            required
+                            onChange={(e) => setTags(e.target.value)}
+                          />
+                          <FormButton type='submit'>Add</FormButton>
+                        </FormContianer>
+                      </FormContent>
+                    </FormWrap>
+                  </Container>
                 </DropdownButton>
               </ButtonGrouping>
               <Form>
