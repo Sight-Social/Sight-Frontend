@@ -2,7 +2,13 @@ import React from 'react';
 import { MainContainer } from './RegisterGoogleElements';
 
 
-const Register = ({ onGoogleLogin }) => {
+export default function RegisterGoogle(){
+
+  const onGoogleLogin = () => {
+    console.log('Google login clicked');
+    window.location.href = 'http://localhost:3000/auth/google';
+  };
+
   console.log('RegisterPage popped')
   return (
     <MainContainer>
@@ -13,4 +19,3 @@ const Register = ({ onGoogleLogin }) => {
   )
 }
 
-export default Register

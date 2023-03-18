@@ -17,7 +17,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem('user.tokens.token');
     },
-});
+}});
 
 export const { setToken, clearToken } = authSlice.actions;
 

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { setProfile } from '../../features/profile/profileSlice';
 import axios from 'axios';
 import {
   Container,
@@ -19,6 +21,7 @@ export function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,6 +36,8 @@ export function Signup() {
         alert('Signup successful');
         console.log(res.data);
         //DISPATCH TO REDUX
+        setProfile(res.data);
+        navigate('/register/google');
       } else {
         console.log('Signup failed');
         alert('Signup failed');
