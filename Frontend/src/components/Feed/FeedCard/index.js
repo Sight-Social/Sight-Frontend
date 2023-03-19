@@ -1,4 +1,5 @@
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
+import { Spotify } from 'react-spotify-embed';
 import Menu from './Menu';
 import { Container, Body, Footer } from './FeedCardElements';
 import { useState } from 'react';
@@ -12,16 +13,25 @@ function FeedCard({ insight }) {
   if (!insight) {
     return null;
   }
-  return (
-    <Container>
-      <Body>
-        <YouTubeVideo videoId={insight.videoId} />
-      </Body>
-      <Footer>
-        <Menu insight={insight} />
-      </Footer>
-    </Container>
-  );
+  console.log('FeedCard source: ' + insight.source)
+  if (insight.source === 'YouTube') {
+    return (
+      <Container>
+        <Body>
+          <YouTubeVideo videoId={insight.videoId} />
+        </Body>
+        <Footer>
+          <Menu insight={insight} />
+        </Footer>
+      </Container>
+    );
+  }
+  if (insight.source === 'Spotify') {
+    const link = `https://open.spotify.com/episode/${insight.videoId}`;
+    return (
+      <Spotify link={link} />
+    );
+  }
 }
 
 export default FeedCard;

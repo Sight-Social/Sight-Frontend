@@ -49,13 +49,6 @@ const populateInitialQueue = (subscriptions) => {
 export const loadMoreCards = createAsyncThunk(
   'feed/loadMoreCards',
   async ({ queue, filters, subscriptions, numCardsToAdd }) => {
-    console.log(
-      'loadMoreCards: ',
-      queue,
-      queue.length,
-      subscriptions,
-      numCardsToAdd
-    );
     const newCards = [...queue];
     //We need to filter out subscriptions, source, and media type that are in the state.feed.filters array
     let numCardsAdded = 0;
@@ -65,12 +58,15 @@ export const loadMoreCards = createAsyncThunk(
     //Add cards to the queue until we have added numCardsToAdd cards
     while (numCardsAdded < numCardsToAdd) {
       //Get the next subscription
-      const subscription = subscriptions[subIndex];
+      let randomSubIndex = Math.floor(Math.random() * subscriptions.length);
+      let randomInsightIndex = Math.floor(Math.random() * subscriptions[randomSubIndex].insights.length);
+      
+      const subscription = subscriptions[randomSubIndex];
       const channelId = subscription.channelId;
       //Get the insights for the subscription
       const insights = subscription.insights;
       //Check filters
-      for (let i = 0; i < filters.subscriptions.length; i++) {
+      /*for (let i = 0; i < filters.subscriptions.length; i++) {
         for (let j = 0; j < filters.sources.length; j++) {
           for (let k = 0; k < filters.mediaType.length; k++) {
             if (
@@ -88,26 +84,25 @@ export const loadMoreCards = createAsyncThunk(
             }
           }
         }
-      }
+      }*/
       // If none of the conditions match, add the element to newCards
-      console.log('adding video: ', insights[insightIndex]._id);
       newCards.push({
-        insightId: insights[insightIndex]._id,
-        channelId: channelId,
-        videoId: insights[insightIndex].videoId,
-        title: insights[insightIndex].title,
-        description: insights[insightIndex].description,
-        thumbnail: insights[insightIndex].thumbnail,
-        source: insights[insightIndex].source,
-        mediaType: insights[insightIndex].mediaType,
-        tags: insights[insightIndex].tags,
+        videoId: insights[randomInsightIndex]._id,
+        channelId: insights[randomInsightIndex].channelId,
+        videoId: insights[randomInsightIndex].videoId,
+        title: insights[randomInsightIndex].title,
+        description: insights[randomInsightIndex].description,
+        thumbnail: insights[randomInsightIndex].thumbnail,
+        source: insights[randomInsightIndex].source,
+        mediaType: insights[randomInsightIndex].mediaType,
+        tags: insights[randomInsightIndex].tags,
       });
       // Update counters
       subIndex = (subIndex + 1) % subscriptions.length;
       insightIndex = (insightIndex + 1) % insights.length;
       numCardsAdded++;
     }
-
+    console.log('newCards: ', newCards)
     return newCards;
   }
 );
@@ -154,6 +149,7 @@ const feedSlice = createSlice({
     },
     setQueue: (state, action) => {
       console.log('setQueue action.payload: ', action.payload);
+      state.queue = action.payload;
     },
     extraReducers: (builder) => {
       builder

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadMoreCards } from '../../features/feed/feedSlice';
+import { loadMoreCards, setQueue } from '../../features/feed/feedSlice';
 import Card from './FeedCard/index';
 import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
@@ -22,6 +22,21 @@ export function Feed() {
   const { isAuthenticated } = useSelector((state) => state.profile);
   console.log('Feed queue: ', queue);
 
+  async function handleRefresh() {
+    console.log('handleRefresh');
+    const action = await dispatch(
+      loadMoreCards({
+        queue,
+        filters,
+        subscriptions,
+        numCardsToAdd: 3,
+      })
+    );
+    const newQueue = action.payload;
+    dispatch(
+      setQueue(newQueue)
+    )
+  }
   useEffect(() => {
     if (!isAuthenticated) {
       console.log('Not authenticated');
@@ -33,17 +48,7 @@ export function Feed() {
     if (isLoading && observerRef.current) {
       setIsLoading(false);
       observerRef.current = null;
-      console.log('useEffect: loadMoreCards');
-      console.log('queue: ', queue);
-      console.log('queue.length: ', queue.length);
-      dispatch(
-        loadMoreCards({
-          queue,
-          filters,
-          subscriptions,
-          numCardsToAdd: 3,
-        })
-      );
+      handleRefresh();
     }
   }, [isLoading]);
 
