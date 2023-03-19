@@ -28,7 +28,7 @@ export const FormContent = styled.div`
   }
 `;
 
-export const Form = styled.form`
+export const FormContianer = styled.form`
   background: var(--clr-black);
   padding: 20px 30px 30px 30px;
   max-width: 400px;
