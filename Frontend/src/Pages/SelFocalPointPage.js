@@ -24,6 +24,7 @@ export function SelFocalPointPage() {
   let focalpointId = spliturl[spliturl.length - 1];
   console.log('selected focalpointId:' + focalpointId);
   //Get the focalpoint from the user object
+  console.log('Here: ', focalpoints);
   const selectedFP = focalpoints.find(
     (focalpoint) => focalpoint._id === focalpointId
   );
@@ -47,4 +48,4 @@ export function SelFocalPointPage() {
   );
 }
 
-export default SelFocalPointPage;
+/* export default SelFocalPointPage; */
