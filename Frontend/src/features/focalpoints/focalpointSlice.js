@@ -85,7 +85,16 @@ export const editFPDetails = createAsyncThunk(
 export const addInsight = createAsyncThunk(
   'focalpoint/addInsight',
   async (
-    { username, email, tags, focalpointId, videoId, videoFormat },
+    {
+      username,
+      email,
+      tagArr,
+      focalpointId,
+      videoId,
+      videoFormat,
+      source,
+      focalpointIndex,
+    },
     { rejectWithValue }
   ) => {
     try {
@@ -101,7 +110,8 @@ export const addInsight = createAsyncThunk(
           insight: {
             videoId: videoId,
             videoFormat: videoFormat,
-            tags: tags,
+            tags: tagArr,
+            source: source,
           },
           email: email,
           focalpointId: focalpointId,
@@ -115,7 +125,7 @@ export const addInsight = createAsyncThunk(
           '[Add-Insight] res.data: ',
           res.data
         ); /* this is the insight */
-        return res.data;
+        return { data: res.data, index: focalpointIndex };
       } else if (res.status === 400) {
         console.log('[400] Add Insight Point Failure');
         console.log('[Add-Insight] res.data: ', res.data);
@@ -134,9 +144,10 @@ export const focalpointSlice = createSlice({
     updateFocalPointCard: (state, action) => {
       state.fp_array = action.payload;
     },
-    updateInsightList: (state, action) => {
-      state.fp_array = action.payload;
-    },
+    /* updateInsightList: (state, action) => {
+      console.log('[UPDATE-INSIGHT] action.payload: ', action.payload);
+      state.fp_array[action.payload.index].insights.push(action.payload.data);
+    }, */
   },
   extraReducers: (builder) => {
     builder
@@ -175,9 +186,9 @@ export const focalpointSlice = createSlice({
         } else {
           console.log('[Add-Insight] addInsight.fulfilled payload: ', payload);
           const storedUser = JSON.parse(localStorage.getItem('user'));
-          storedUser.focalpoints.insights = payload;
+          storedUser.focalpoints[payload.index].insights.push(payload.data);
           localStorage.setItem('user', JSON.stringify(storedUser));
-          state.fp_array = payload;
+          state.fp_array[payload.index].insights.push(payload.data);
           state.loading = false;
           state.success = true;
         }

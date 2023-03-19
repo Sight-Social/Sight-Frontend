@@ -11,6 +11,14 @@ import {
   FormContianer,
   FormButton,
 } from '../InsightAdd/InsightAddElements';
+
+/* ASSETS */
+import hikingLogo from '../../../assets/backgrounds/hikingBackground.png';
+import financeLogo from '../../../assets/backgrounds/financeBackground.png';
+import fitnessLogo from '../../../assets/backgrounds/fitnessBackground.png';
+import biohackingLogo from '../../../assets/biohacking-logo.avif';
+import musicLogo from '../../../assets/backgrounds/musicBackground.png';
+
 /* MAIN STYLING */
 import { MainContainer } from './InsightGridElements';
 import {
@@ -27,19 +35,9 @@ import {
 
 /* INTERACTIVE COMPONENTS */
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
-import {
-  CrudButton,
-  IconWrapper,
-  ButtonGrouping,
-} from '../../RequestButtonElements';
+import { ButtonGrouping } from '../../RequestButtonElements';
 import InsightAdd from '../InsightAdd/index.js';
 import Card from 'react-bootstrap/Card';
-
-import hikingLogo from '../../../assets/backgrounds/hikingBackground.png';
-import financeLogo from '../../../assets/backgrounds/financeBackground.png';
-import fitnessLogo from '../../../assets/backgrounds/fitnessBackground.png';
-import biohackingLogo from '../../../assets/biohacking-logo.avif';
-import musicLogo from '../../../assets/backgrounds/musicBackground.png';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +50,6 @@ import {
   editFPDetails,
   updateFocalPointCard,
   addInsight,
-  updateInsightList,
 } from '../../../features/focalpoints/focalpointSlice';
 
 export function InsightGrid() {
@@ -63,6 +60,7 @@ export function InsightGrid() {
   const email = useSelector((state) => state.profile.email);
   const [formUrl, setUrl] = useState('');
   const [tags, setTags] = useState('');
+
   /* USE THE URL TO KNOW WHICH FOCAL POINT IS SELECTED  */
   let url = window.location.href;
   let spliturl = url.split('/');
@@ -88,46 +86,6 @@ export function InsightGrid() {
     hikingLogo,
   ];
 
-  // const handleAddInsight = async (url, tags, fpId) => {
-  //   console.log('URL: ' + url);
-  //   console.log('TAGS: ' + tags);
-  //   var tagArr = tags.split(',');
-
-  //   // https://www.youtube.com/watch?v=_shA5Xwe8_4 -> Normal
-  //   // https://www.youtube.com/shorts/ynQCpKevJ9A -> Shorts
-
-  //   let videoId;
-  //   let videoFormat;
-  //   if (url.includes('shorts')) {
-  //     videoId = url.split('shorts/')[1];
-  //     videoFormat = 'portrait';
-  //   } else {
-  //     videoId = url.split('?v=')[1];
-  //     videoFormat = 'landscape';
-  //   }
-
-  //   console.log('VideoSpecs: Id=' + videoId + ', Type=' + videoFormat);
-  //   let source = 'YouTube';
-  //   setInsightArray([...insightArray, { videoId, videoFormat, tags, source }]);
-
-  //   try {
-  //     await axios.post(
-  //       `http://localhost:3000/user/${username}/focalpoints/${focalpoint._id}`,
-  //       {
-  //         videoId: videoId,
-  //         videoFormat: videoFormat,
-  //         tags: tagArr,
-  //         email: email,
-  //         fpId: focalpoint._id,
-  //       }
-  //     );
-
-  //     /* handleUserUpdate(user); */
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const [view, setView] = useState('insights');
 
   const changeView = (value) => {
@@ -136,46 +94,10 @@ export function InsightGrid() {
 
   const navigate = useNavigate();
   const handleLogout = () => {
-    console.log('[NavBar/index.js] Logout btn clicked');
     sessionStorage.removeItem('user');
     navigate('/');
     window.location.reload();
   };
-
-  // const handleEditFPCard = async (index, editedName, editedDescription) => {
-  //   const oldId = cardList[index]._id;
-  //   const oldInsights = cardList[index].insights;
-
-  //   const updatedCardList = [
-  //     ...cardList.slice(0, index), // Copy elements before the updated index
-  //     {
-  //       _id: oldId,
-  //       title: editedName,
-  //       insights: oldInsights,
-  //       description: editedDescription,
-  //     },
-  //     ...cardList.slice(index + 1), // Copy elements after the updated index
-  //   ];
-
-  //   const updatedId = updatedCardList[index]._id;
-  //   setCardList(updatedCardList);
-
-  //   try {
-  //     /* DELETE the ids of the FP's you want to delete   */
-  //     await axios.patch(
-  //       `http://localhost:3000/user/${user.username}/focalpoints`,
-  //       {
-  //         email: user.email,
-  //         focalpointToEdit: updatedId,
-  //         editedName: editedName,
-  //         editedDescription: editedDescription,
-  //       }
-  //     );
-  //     handleUserUpdate(user);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const [editedName, setEditedName] = useState(focalpoint.title);
   const handleNameChange = (event) => {
@@ -190,27 +112,21 @@ export function InsightGrid() {
   };
 
   async function handleEditFPCard() {
-    console.log('Editing FP Card');
     const action = await dispatch(
       editFPDetails({ editedName, editedDescription, email, focalpointId })
     );
     if (action.payload) {
-      console.log('FP PAYLOAD: ' + action.payload);
       updateFocalPointCard(action.payload);
     }
   }
 
   async function handleAddInsight(url, tags, focalpointId) {
-    console.log('Adding insight to FP');
-    console.log('URL: ' + url);
-    console.log('TAGS: ' + tags);
-    var tagArr = tags.split(',');
-
     // https://www.youtube.com/watch?v=_shA5Xwe8_4 -> Normal
     // https://www.youtube.com/shorts/ynQCpKevJ9A -> Shorts
-
+    var tagArr = tags.split(',');
     let videoId;
     let videoFormat;
+    let source = 'YouTube';
     if (url.includes('shorts')) {
       videoId = url.split('shorts/')[1];
       videoFormat = 'portrait';
@@ -219,16 +135,25 @@ export function InsightGrid() {
       videoFormat = 'landscape';
     }
 
-    console.log('VideoSpecs: Id=' + videoId + ', Type=' + videoFormat);
-    let source = 'YouTube';
+    const focalpointIndex = focalpoints.findIndex(
+      (focalpoint) => focalpoint._id.toString() === focalpointId.toString()
+    );
 
     const action = await dispatch(
-      addInsight({ username, email, focalpointId, tags, videoId, videoFormat })
+      addInsight({
+        username,
+        email,
+        focalpointId,
+        tagArr,
+        videoId,
+        videoFormat,
+        source,
+        focalpointIndex,
+      })
     );
-    if (action.payload) {
-      console.log('FP PAYLOAD: ' + action.payload);
+    /* if (action.payload) {
       updateInsightList(action.payload);
-    }
+    } */
   }
 
   const editFPState = () => {
@@ -258,7 +183,7 @@ export function InsightGrid() {
             }}
           ></Card.Img>
 
-          <EditCardBody /* onClick={editFPState} */>
+          <EditCardBody>
             {isEditing ? (
               <Card.Body style={{ width: 'auto' }}>
                 <Card.Title
@@ -339,9 +264,7 @@ export function InsightGrid() {
           <InsightBackgrund>
             <HeaderContainer>
               <ButtonGrouping>
-                {/* ADD INSIGHT BUTTON */}
                 <DropdownButton id='dropdown-basic-button' title='Add'>
-                  {/* <InsightAdd addInsight={handleAddInsight} /> */}
                   <Container>
                     <FormWrap>
                       <FormContent>
@@ -349,7 +272,6 @@ export function InsightGrid() {
                           onSubmit={(e) => {
                             e.preventDefault();
                             handleAddInsight(formUrl, tags, focalpointId);
-                            /* addInsight(formUrl, tags); */
                           }}
                         >
                           <FormH1>New Insight</FormH1>
@@ -389,13 +311,13 @@ export function InsightGrid() {
                 {insightArray
                   ? insightArray.map((insight, index) => (
                       <YouTubeVideo
-                        key={insight.video_id}
+                        key={index}
                         className='pinned-insight'
-                        videoId={insight.video_id}
+                        videoId={insight.videoId}
                         tags={insight.tags}
                         source={insight.source}
-                        height={600} /* insight.height */
-                        width={300} /* insight.width */
+                        height={600}
+                        width={300}
                       />
                     ))
                   : null}
