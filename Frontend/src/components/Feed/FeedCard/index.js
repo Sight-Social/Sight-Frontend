@@ -29,7 +29,14 @@ function FeedCard({ insight }) {
   if (insight.source === 'Spotify') {
     const link = `https://open.spotify.com/episode/${insight.videoId}`;
     return (
-      <Spotify link={link} />
+      <Container>
+        <Body>  
+          <Spotify link={link} />
+        </Body>
+        <Footer>
+          <Menu insight={insight} />
+        </Footer>
+      </Container>
     );
   }
 }
