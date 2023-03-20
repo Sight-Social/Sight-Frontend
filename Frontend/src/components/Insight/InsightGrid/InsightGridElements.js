@@ -11,8 +11,10 @@ export const NavAndContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  background-color: black;
-  /* width: 80vw; */
+  width: 80vw;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const EditableFpName = styled.input`
@@ -51,11 +53,10 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   width: 100%;
-  /* height: 90vh; */
   min-height: 85vh;
   background-color: var(--clr-black);
-  /* padding: 0px 100px; */
 `;
 
 export const CardDim = styled.div`
@@ -68,20 +69,19 @@ export const NavContainer = styled.div`
 
 export const HeaderContainer = styled.div`
   margin-top: 20px;
+  padding: 0px 0px 10px 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 30px 0px 10px 10px;
-
-  @media screen and (min-width: 950px) {
+  /* @media screen and (min-width: 950px) {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0px 10px 10px;
-  }
+  } */
 `;
 
 export const Header = styled.h1`
@@ -114,11 +114,7 @@ export const InsightBackgrund = styled.div`
   background-color: black;
   border-radius: 15px;
   width: 100%;
-  padding: 0 50px;
   height: 100%;
-
-  /* display: flex;
-  flex-direction: column; */
 `;
 
 export const InsightWrapper = styled.div`
@@ -141,73 +137,5 @@ export const InsightsGrid = styled.div`
   justify-content: center;
   border-radius: 10px;
   width: 100%;
-
-  /* border: solid red 3px; */
-  background-color: black;
-
-  /* width: 80%;
-  height: 100%;
-
-  border-radius: 15px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 75px;
-
-  padding: 0px 50px 50px 50px; // top right bottom left (NESW)
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  grid-row-gap: 40px;
-  justify-content: center; */
-
-  /* @media screen and (min-width: 430px) {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 40px;
-  }
-  @media screen and (min-width: 950px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 50px;
-  }
-  @media screen and (min-width: 1350px) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 50px;
-  } */
+  min-height: 60vh;
 `;
-
-/* height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  grid-row-gap: 40px;
-
-  @media screen and (min-width: 430px) {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 40px;
-  }
-  @media screen and (min-width: 700px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 50px;
-  }
-  @media screen and (min-width: 1250px) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 50px;
-  } */

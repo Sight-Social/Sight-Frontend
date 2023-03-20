@@ -9,7 +9,11 @@ export const CrudButton = styled.button`
   z-index: 999;
 `;
 
-export const ButtonGrouping = styled.div``;
+export const ButtonGrouping = styled.div`
+  /* display: flex;
+  flex-direction: row;
+  align-items: center */
+`;
 
 export const IconWrapper = styled.img`
   height: 30px;

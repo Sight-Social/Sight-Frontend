@@ -21,7 +21,7 @@ export const HeaderAndButtons = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 15px;
 `;
 
@@ -82,10 +82,10 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /*   height: 100%; */
-  /* width: auto; */
+
   width: 100%;
   height: 100%;
-  margin-top: 50px;
-  background-color: var(--clr-black);
+  min-height: 80vh;
+  margin-top: 25px;
+  background-color: black;
 `;
