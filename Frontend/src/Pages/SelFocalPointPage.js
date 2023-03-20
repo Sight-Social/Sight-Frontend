@@ -16,19 +16,16 @@ export function SelFocalPointPage() {
 
   //Get the focalpointId from the url
   let [url, setUrl] = useState(window.location.href); // this?
-  console.log('url: ' + url);
+  
   useEffect(() => {
     setUrl(window.location.href); // update here
   }, []);
   let spliturl = url.split('/');
   let focalpointId = spliturl[spliturl.length - 1];
-  console.log('selected focalpointId:' + focalpointId);
   //Get the focalpoint from the user object
-  console.log('Here: ', focalpoints);
   const selectedFP = focalpoints.find(
     (focalpoint) => focalpoint._id === focalpointId
   );
-  console.log('selectedFP: ', selectedFP);
 
   const Wrapper = styled.div`
     display: flex;

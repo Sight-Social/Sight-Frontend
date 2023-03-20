@@ -35,6 +35,7 @@ import {
 
 /* INTERACTIVE COMPONENTS */
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
+import { SpotifyEmbed } from '../../SpotifyEmbed/SpotifyEmbed';
 import { ButtonGrouping } from '../../RequestButtonElements';
 import InsightAdd from '../InsightAdd/index.js';
 import Card from 'react-bootstrap/Card';
@@ -314,6 +315,7 @@ export function InsightGrid() {
               <InsightsGrid>
                 {insightArray
                   ? insightArray.map((insight, index) => (
+                    insight.source === 'YouTube'? (
                       <YouTubeVideo
                         key={index}
                         className='pinned-insight'
@@ -323,8 +325,13 @@ export function InsightGrid() {
                         height={600}
                         width={300}
                       />
-                    ))
-                  : null}
+                    )
+                    : insight.source === 'Spotify' ? (
+                      <SpotifyEmbed key={insight.videoId} link = {`https://open.spotify.com/episode/${insight.videoId}`} />
+                    ) : null
+                  ))
+                  : null
+                }
               </InsightsGrid>
             </GridWrapper>
           </InsightBackgrund>
