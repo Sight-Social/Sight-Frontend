@@ -6,17 +6,31 @@ import { StyledDropdown, StyledItem, StyledBsPlus } from './FeedCardElements';
 
 import { setProfile } from '../../../features/profile/profileSlice';
 import { addInsightToFocalPoint } from '../../../features/profile/userThunk'; /* focalpointSlice */
+import { addInsight } from '../../../features/focalpoints/focalpointSlice';
 
 export function Menu({ insight }) {
   const cardInsight = insight;
   const focalpoints = useSelector((state) => state.focalpoint.fp_array); //list all focalpoints
   const username = useSelector((state) => state.profile.username); //for API call in addInsightToFocalPoint userThunk
   const dispatch = useDispatch();
+  const sightToken = useSelector((state) => state.profile.tokens.sightToken);
 
   async function addInsightToFP(focalpointId, insight) {
+    const focalpointIndex = focalpoints.findIndex(
+      (focalpoint) => focalpoint._id.toString() === focalpointId.toString()
+    );
+
     console.log('addInsightToFP insight: ', insight);
     try {
-      dispatch(addInsightToFocalPoint({ username, focalpointId, insight }));
+      dispatch(
+        addInsight({
+          username,
+          focalpointId,
+          insight,
+          focalpointIndex,
+          sightToken,
+        })
+      );
     } catch (error) {
       console.log(error);
     }

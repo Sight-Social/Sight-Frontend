@@ -47,7 +47,7 @@ const setInitialState = () => {
 export const editFPDetails = createAsyncThunk(
   'focalpoint/editFPDetails',
   async (
-    { editedName, editedDescription, email, focalpointId },
+    { editedName, editedDescription, sightToken, focalpointId },
     { rejectWithValue }
   ) => {
     try {
@@ -61,7 +61,7 @@ export const editFPDetails = createAsyncThunk(
         {
           editedName: editedName,
           editedDescription: editedDescription,
-          email: email,
+          token: sightToken,
           focalpointToEdit: focalpointId,
         },
         config
@@ -85,16 +85,7 @@ export const editFPDetails = createAsyncThunk(
 export const addInsight = createAsyncThunk(
   'focalpoint/addInsight',
   async (
-    {
-      username,
-      email,
-      tagArr,
-      focalpointId,
-      videoId,
-      videoFormat,
-      source,
-      focalpointIndex,
-    },
+    { username, focalpointId, insight, focalpointIndex, sightToken },
     { rejectWithValue }
   ) => {
     try {
@@ -107,19 +98,14 @@ export const addInsight = createAsyncThunk(
       const res = await axios.post(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
-          insight: {
-            videoId: videoId,
-            videoFormat: videoFormat,
-            tags: tagArr,
-            source: source,
-          },
-          email: email,
+          insight: insight,
+          token: sightToken,
           focalpointId: focalpointId,
-          username: username,
         },
         config
       );
-      if (res.status === 200) {
+      console.log('HEY: ', res);
+      if (res.status === 201) {
         console.log('[200] Add Insight Successful');
         console.log(
           '[Add-Insight] res.data: ',
@@ -141,9 +127,9 @@ export const focalpointSlice = createSlice({
   name: 'focalpoint',
   initialState: setInitialState(),
   reducers: {
-    updateFocalPointCard: (state, action) => {
+    /* updateFocalPointCard: (state, action) => {
       state.fp_array = action.payload;
-    },
+    }, */
     /* updateInsightList: (state, action) => {
       console.log('[UPDATE-INSIGHT] action.payload: ', action.payload);
       state.fp_array[action.payload.index].insights.push(action.payload.data);
@@ -202,7 +188,8 @@ export const focalpointSlice = createSlice({
   },
 });
 
-export const { updateFocalPointCard, updateInsightList } =
-  focalpointSlice.actions;
+export const {
+  /* updateFocalPointCard, updateInsightList */
+} = focalpointSlice.actions;
 
 export default focalpointSlice.reducer;

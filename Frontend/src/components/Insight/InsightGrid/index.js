@@ -48,13 +48,12 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
   editFPDetails,
-  updateFocalPointCard,
   addInsight,
 } from '../../../features/focalpoints/focalpointSlice';
 
 export function InsightGrid() {
   const dispatch = useDispatch();
-
+  const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const username = useSelector((state) => state.profile.username);
   const email = useSelector((state) => state.profile.email);
@@ -113,11 +112,11 @@ export function InsightGrid() {
 
   async function handleEditFPCard() {
     const action = await dispatch(
-      editFPDetails({ editedName, editedDescription, email, focalpointId })
+      editFPDetails({ sightToken, editedName, editedDescription, focalpointId })
     );
-    if (action.payload) {
+    /* if (action.payload) {
       updateFocalPointCard(action.payload);
-    }
+    } */
   }
 
   async function handleAddInsight(url, tags, focalpointId) {
@@ -139,16 +138,21 @@ export function InsightGrid() {
       (focalpoint) => focalpoint._id.toString() === focalpointId.toString()
     );
 
+    const insight = {
+      videoId: videoId,
+      videoFormat: videoFormat,
+      tags: tagArr,
+      source: source,
+      mediaType: 'video',
+    };
+
     const action = await dispatch(
       addInsight({
         username,
-        email,
+        insight,
         focalpointId,
-        tagArr,
-        videoId,
-        videoFormat,
-        source,
         focalpointIndex,
+        sightToken,
       })
     );
     /* if (action.payload) {
