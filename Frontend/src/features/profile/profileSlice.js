@@ -68,22 +68,24 @@ const profileSlice = createSlice({
       .addCase(addInsightToFocalPoint.fulfilled, (state, action) => {
         console.log('[userSlice.js] addInsightToFocalPoint.fulfilled called');
         console.log('[userSlice.js] action.payload: ', action.payload);
-        /* dispatch(addInsightToFocalPoint(insight)) -> within the focalpointSlice*/ // CALLLED WITHIN FEED SLICE
-        /* for (let i = 0; i < state.focalpoints.length; i++) {
-          if (state.focalpoints[i]._id === action.payload.focalpointId) {
-            console.log('found the focalpoint in state');
-            state.focalpoints[i].insights.push(action.payload.insight);
 
-            // Update localStorage
-            let user = JSON.parse(localStorage.getItem('user'));
-            user.focalpoints[i].insights.push(action.payload.insight);
-            localStorage.setItem('user', JSON.stringify(user));
-          }
-        } */
+        /* UPDATE LOCAL STORAGE */
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        storedUser.focalpoints[action.payload.index].insights.push(
+          action.payload.insight
+        );
+        localStorage.setItem('user', JSON.stringify(storedUser));
+
+        /* UPDATE REDUX STATE */
+        state.fp_array[action.payload.index].insights.push(
+          action.payload.insight
+        );
+        state.loading = false;
+        state.success = true;
       })
       .addCase(addInsightToFocalPoint.rejected, (state, action) => {
         console.log('[userSlice.js] addInsightToFocalPoint.rejected called');
-        /* state.error = action.payload; */
+        state.error = action.payload;
       });
   },
 });

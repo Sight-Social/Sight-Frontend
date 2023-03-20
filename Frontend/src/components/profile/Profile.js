@@ -59,7 +59,7 @@ export function Profile() {
 
   const handleLogout = () => {
     console.log('[NavBar/index.js] Logout btn clicked');
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
     navigate('/');
     window.location.reload();
   };
