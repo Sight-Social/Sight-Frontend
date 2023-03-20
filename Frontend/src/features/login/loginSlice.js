@@ -37,6 +37,9 @@ export const login = createAsyncThunk(
       if (res.status === 200) {
         console.log('[LoginActions.js] Login successful');
         console.log('[LoginActions.js] res.data: ', res.data);
+        res.data.user.focalpoints.forEach((fp) => {
+          fp.queue = [];
+        });
         localStorage.setItem('user', JSON.stringify(res.data.user));
         /* let profile = {
           username: res.data.user.username,

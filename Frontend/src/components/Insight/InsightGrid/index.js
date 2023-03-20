@@ -34,6 +34,7 @@ import {
 } from './InsightGridElements';
 
 /* INTERACTIVE COMPONENTS */
+import { SelFocalPointFeed } from '../../SelFocalPoint/SelFocalPointFeed';
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
 import { SpotifyEmbed } from '../../SpotifyEmbed/SpotifyEmbed';
 import { ButtonGrouping } from '../../RequestButtonElements';
@@ -336,7 +337,7 @@ export function InsightGrid() {
             </GridWrapper>
           </InsightBackgrund>
         ) : (
-          <Feed />
+          <SelFocalPointFeed />
         )}
       </MainContainer>
     </NavAndContentContainer>

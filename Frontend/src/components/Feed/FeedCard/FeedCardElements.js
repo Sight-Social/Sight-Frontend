@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { BsPlus } from 'react-icons/bs';
+import { TbBinaryTree2 } from 'react-icons/tb';
 
 export const Container = styled(Card)`
   background-color: #1E1E1E;
@@ -33,6 +34,17 @@ export const Footer = styled(Card.Footer)`
   align-items: center;
   justify-content: flex-end;
 
+`;
+
+export const StyledTbBinaryTree2 = styled(TbBinaryTree2)`
+  padding: 0px;
+  margin-right: 8px;
+  color: white;
+  font-size: 21.5px;
+
+  :hover {
+    color: var(--clr-accent);
+  }
 `;
 
 export const StyledBsPlus = styled(BsPlus)`

@@ -1,6 +1,7 @@
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
 import { Spotify } from 'react-spotify-embed';
-import Menu from './Menu';
+import AddMenu from './AddMenu';
+import { RelatedVideos } from './RelatedVideos';
 import { Container, Body, Footer } from './FeedCardElements';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -21,7 +22,8 @@ function FeedCard({ insight }) {
           <YouTubeVideo videoId={insight.videoId} />
         </Body>
         <Footer>
-          <Menu insight={insight} />
+          <RelatedVideos insight={insight} />
+          <AddMenu insight={insight} />
         </Footer>
       </Container>
     );
@@ -34,7 +36,8 @@ function FeedCard({ insight }) {
           <Spotify link={link} />
         </Body>
         <Footer>
-          <Menu insight={insight} />
+          <RelatedVideos insight={insight} />
+          <AddMenu insight={insight} />
         </Footer>
       </Container>
     );

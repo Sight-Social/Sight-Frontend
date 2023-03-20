@@ -8,7 +8,7 @@ import { setProfile } from '../../../features/profile/profileSlice';
 import { addInsightToFocalPoint } from '../../../features/profile/userThunk'; /* focalpointSlice */
 import { addInsight } from '../../../features/focalpoints/focalpointSlice';
 
-export function Menu({ insight }) {
+export function AddMenu({ insight }) {
   const cardInsight = insight;
   const focalpoints = useSelector((state) => state.focalpoint.fp_array); //list all focalpoints
   const username = useSelector((state) => state.profile.username); //for API call in addInsightToFocalPoint userThunk
@@ -58,4 +58,4 @@ export function Menu({ insight }) {
   );
 }
 
-export default Menu;
+export default AddMenu;

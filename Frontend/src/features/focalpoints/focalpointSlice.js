@@ -14,6 +14,7 @@ const setInitialState = () => {
           description: '',
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
           filters: [{}],
+          queue: [{}],
         },
       ],
       pinned_insights: [{}],
@@ -31,13 +32,18 @@ const setInitialState = () => {
             'You have not created a focal point yet, use this one as a template!',
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
           filters: [{}],
+          queue: [{}],
         },
       ],
       pinned_insights: [{}],
     };
   } else {
+    let newFpArray = storedUser.focalpoints.map((fp) => {
+      fp.queue = [...fp.insights];
+      return fp;
+    });
     initialState = {
-      fp_array: storedUser.focalpoints,
+      fp_array: newFpArray,
       pinned_insights: storedUser.pinned_insights,
     };
   }
@@ -134,6 +140,10 @@ export const focalpointSlice = createSlice({
       console.log('[UPDATE-INSIGHT] action.payload: ', action.payload);
       state.fp_array[action.payload.index].insights.push(action.payload.data);
     }, */
+    setQueue: (state, action) => {
+      console.log('[SET-QUEUE] action.payload: ', action.payload);
+      state.fp_array[action.payload.focalpointIndex].queue = [...action.payload.queue];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -189,7 +199,7 @@ export const focalpointSlice = createSlice({
 });
 
 export const {
-  /* updateFocalPointCard, updateInsightList */
+  setQueue
 } = focalpointSlice.actions;
 
 export default focalpointSlice.reducer;
