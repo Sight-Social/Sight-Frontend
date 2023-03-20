@@ -165,13 +165,13 @@ export function InsightGrid() {
     <NavAndContentContainer>
       <MainContainer>
         <Card
-          bg='dark'
+          bg='transparent'
           text='light'
           style={{
             display: 'flex',
             flexDirection: 'row',
             width: '100%',
-            margin: '20px 0px 50px 0px',
+            margin: '40px 0px 40px 60px',
             alignItems: 'center',
           }}
         >
@@ -265,7 +265,11 @@ export function InsightGrid() {
           <InsightBackgrund>
             <HeaderContainer>
               <ButtonGrouping>
-                <DropdownButton id='dropdown-basic-button' title='Add'>
+                <DropdownButton
+                  id='dropdown-basic-button'
+                  title='Add'
+                  style={{ marginLeft: '25px' }}
+                >
                   <Container>
                     <FormWrap>
                       <FormContent>
@@ -295,12 +299,17 @@ export function InsightGrid() {
                   </Container>
                 </DropdownButton>
               </ButtonGrouping>
-              <Form>
+              <Form
+                style={{
+                  marginRight: '25px',
+                }}
+              >
                 <Form.Group
                   className='mb-3'
                   controlId='formBasicEmail'
                   style={{
                     width: '300px',
+                    margin: '1rem',
                   }}
                 >
                   <Form.Control type='email' placeholder='Search' />

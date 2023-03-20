@@ -13,8 +13,8 @@ export function ProfilePage() {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    background-color: black;
-    width: 100%;
+    background-color: var(--clr-black);
+    justify-content: center;
   `;
 
   return (

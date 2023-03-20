@@ -3,9 +3,11 @@ import styled from 'styled-components';
 export const NavContainer = styled.div`
   padding-top: 27px;
   width: 20vw;
+
   position: sticky;
   top: 0;
   height: 100vh;
+  border-right: solid dimgray 1px;
 
   @media screen and (max-width: 768px) {
     display: none;

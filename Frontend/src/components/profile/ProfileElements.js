@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
+  width: 100%;
   background: hsla(0, 0%, 7%, 1);
 
   background: linear-gradient(
@@ -25,11 +26,6 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  width: 80vw;
-
-  /* @media screen and (max-width: 768px) {
-    width: 100%;
-  } */
 `;
 
 export const NavContainer = styled.div`
@@ -62,11 +58,10 @@ export const NavHeader = styled.h1`
 `;
 
 export const Container = styled.div`
-  /* padding: 50px 100px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* width: 80vw; */
+  width: 100%;
 `;
 
 export const UserProfile = styled.div`
@@ -77,12 +72,12 @@ export const UserProfile = styled.div`
   font-size: 1.75rem;
   font-weight: 600;
   color: white;
-  padding-bottom: 10px;
+  padding: 50px;
 
   width: 100%;
   height: 100%;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
   }
@@ -144,9 +139,9 @@ export const BtnsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
   }
 `;
@@ -157,7 +152,7 @@ export const BtnWrap = styled.div`
 
 export const Username = styled.div`
   font-size: 2rem;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     margin-top: 10px;
   }
 `;
@@ -184,7 +179,7 @@ export const ProfilePath = styled.div`
 
 export const ProfileDetailsWrapper = styled.div`
   width: 100%;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -214,7 +209,7 @@ export const ProfileWrapper = styled.div`
 
 export const ProfilePictureWrapper = styled.div`
   margin-right: 30px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     margin-right: 0px;
   }
 `;
@@ -223,7 +218,7 @@ export const CenterMobile = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -25,8 +25,8 @@ export function SelFocalPointPage() {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    background-color: black;
-    width: 100%;
+    justify-content: center;
+    background-color: var(--clr-black); /* nav and base */
   `;
 
   return (

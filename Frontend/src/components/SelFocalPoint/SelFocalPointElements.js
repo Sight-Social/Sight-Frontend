@@ -5,8 +5,6 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: auto; */
-  /* background-color: white; */
 `;
 
 export const Container = styled.div`
@@ -14,7 +12,9 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100%;
   width: 80%;
+  border: solid red 1px;
   background-color: var(--clr-black);
+
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 `;
