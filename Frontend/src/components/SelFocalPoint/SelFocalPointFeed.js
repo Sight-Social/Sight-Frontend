@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadMoreCards, setQueue } from '../../features/feed/feedSlice';
+import { loadMoreCards, setQueue } from '../../features/focalpoints/focalpointSlice';
 import Card from '../Feed/FeedCard/index';
 import Menu from '../Feed/FeedCard/index';
 import SearchBar from '../Feed/FeedSearchBar';
@@ -35,10 +35,9 @@ export function SelFocalPointFeed() {
     (focalpoint) => focalpoint._id === focalpointId
     ).insights
   )
+  const catalog = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].catalog);
   const queue = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].queue);
   const filters = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].filters);
-  const subscriptions = useSelector((state) => state.feed);
-
 
   async function handleRefresh() {
     console.log('handleRefresh');
@@ -46,11 +45,11 @@ export function SelFocalPointFeed() {
       loadMoreCards({
         queue,
         filters,
-        subscriptions,
+        catalog,
         numCardsToAdd: 3,
       })
     );
-    const newQueue = action.payload;
+    const newQueue = {focalpointIndex: focalpointIndex, queue: action.payload};
     dispatch(
       setQueue(newQueue)
     )

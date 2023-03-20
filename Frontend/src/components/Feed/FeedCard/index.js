@@ -8,7 +8,6 @@ function FeedCard({ insight }) {
   if (!insight) {
     return null;
   }
-  console.log('FeedCard source: ' + insight.source);
   if (insight.source === 'YouTube') {
     return (
       <Container>

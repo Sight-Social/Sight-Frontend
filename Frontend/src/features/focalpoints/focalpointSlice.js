@@ -15,6 +15,7 @@ const setInitialState = () => {
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
           filters: [{}],
           queue: [{}],
+          catalog: [{}],
         },
       ],
       pinned_insights: [{}],
@@ -33,6 +34,7 @@ const setInitialState = () => {
           insights: [{ video_id: '', video_format: '', source: '', tags: {} }],
           filters: [{}],
           queue: [{}],
+          catalog: [{}],
         },
       ],
       pinned_insights: [{}],
@@ -50,6 +52,40 @@ const setInitialState = () => {
   return initialState;
 };
 
+export const loadMoreCards = createAsyncThunk(
+  'focalpoint/loadMoreCards',
+  async ({ queue, filters, catalog, numCardsToAdd }, { rejectWithValue }) => {
+    const newCards = [...queue];
+    //We need to filter out subscriptions, source, and media type that are in the state.feed.filters array
+    let numCardsAdded = 0;
+
+    //Add cards to the queue until we have added numCardsToAdd cards
+    while (numCardsAdded < numCardsToAdd) {
+      //Get the next subscription
+      let randomCatalogIndex = Math.floor(Math.random() * catalog.length);
+      const newVideo = catalog[randomCatalogIndex];
+      //Check if the video is already in the queue
+      let videoAlreadyInQueue = false;
+      for (let i = 0; i < newCards.length; i++) {
+        if (newCards[i].videoId === newVideo.videoId) {
+          videoAlreadyInQueue = true;
+          break;
+        }
+      }
+      //If the video is already in the queue, we don't want to add it again
+      if (videoAlreadyInQueue) {
+        continue;
+      }
+      //If the video is not in the queue, we want to add it
+      newCards.push(newVideo);
+      numCardsAdded++;
+    }
+    console.log('newCards: ', newCards);
+    return newCards;
+  }
+);
+
+    
 export const editFPDetails = createAsyncThunk(
   'focalpoint/editFPDetails',
   async (
@@ -87,7 +123,6 @@ export const editFPDetails = createAsyncThunk(
     }
   }
 );
-
 export const addInsight = createAsyncThunk(
   'focalpoint/addInsight',
   async (
@@ -129,6 +164,10 @@ export const addInsight = createAsyncThunk(
   }
 );
 
+
+
+
+//****SLICE*************************************** */
 export const focalpointSlice = createSlice({
   name: 'focalpoint',
   initialState: setInitialState(),
@@ -140,8 +179,14 @@ export const focalpointSlice = createSlice({
       console.log('[UPDATE-INSIGHT] action.payload: ', action.payload);
       state.fp_array[action.payload.index].insights.push(action.payload.data);
     }, */
+    setCatalog: (state, action) => {
+      console.log('[SET-CATALOG] action.payload: ', action.payload);
+      state.fp_array[action.payload.focalpointIndex].catalog = [...action.payload.catalog];
+    },
     setQueue: (state, action) => {
       console.log('[SET-QUEUE] action.payload: ', action.payload);
+      console.log('[SET-QUEUE] action.payload.focalpointIndex: ', action.payload.focalpointIndex)
+      console.log('[SET-QUEUE] action.payload.queue: ', action.payload.queue)
       state.fp_array[action.payload.focalpointIndex].queue = [...action.payload.queue];
     },
   },
@@ -199,7 +244,8 @@ export const focalpointSlice = createSlice({
 });
 
 export const {
-  setQueue
+  setQueue,
+  setCatalog,
 } = focalpointSlice.actions;
 
 export default focalpointSlice.reducer;

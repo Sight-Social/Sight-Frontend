@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setQueue } from "../../../features/focalpoints/focalpointSlice";
+import { setQueue, setCatalog } from "../../../features/focalpoints/focalpointSlice";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { StyledTbBinaryTree2 } from "./FeedCardElements";
@@ -21,8 +21,9 @@ export function RelatedVideos({insight}){
             sightToken: sightToken,
             videoId: insight.videoId,
         })
-        console.log("response.data: ", response.data)
-        const newQueue = {focalpointIndex: focalpointIndex, queue: response.data}
+        dispatch(setCatalog({focalpointIndex: focalpointIndex, catalog: response.data}));
+        const videos = [response.data[0], response.data[1], response.data[2]]
+        const newQueue = {focalpointIndex: focalpointIndex, queue: videos};
         dispatch(setQueue(newQueue));
     }
 
