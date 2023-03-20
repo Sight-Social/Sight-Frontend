@@ -85,7 +85,6 @@ export const loadMoreCards = createAsyncThunk(
   }
 );
 
-    
 export const editFPDetails = createAsyncThunk(
   'focalpoint/editFPDetails',
   async (
@@ -163,9 +162,47 @@ export const addInsight = createAsyncThunk(
     }
   }
 );
+export const deleteInsight = createAsyncThunk(
+  'focalpoint/deleteInsight',
+  async (
+    { username, focalpointId, insight, focalpointIndex, sightToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
 
-
-
+      const res = await axios.delete(
+        `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
+        {
+          headers: {
+            insight: insight,
+            token: sightToken,
+            focalpointId: focalpointId,
+          },
+        },
+        config
+      );
+      if (res.status === 201) {
+        console.log('[200] Delete Insight Successful');
+        console.log(
+          '[Delete-Insight] res.data: ',
+          res.data
+        ); /* this is the insight */
+        return { data: res.data, index: focalpointIndex };
+      } else if (res.status === 400) {
+        console.log('[400] Delete Insight Failure');
+        console.log('[Delete-Insight] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 //****SLICE*************************************** */
 export const focalpointSlice = createSlice({
@@ -181,13 +218,20 @@ export const focalpointSlice = createSlice({
     }, */
     setCatalog: (state, action) => {
       console.log('[SET-CATALOG] action.payload: ', action.payload);
-      state.fp_array[action.payload.focalpointIndex].catalog = [...action.payload.catalog];
+      state.fp_array[action.payload.focalpointIndex].catalog = [
+        ...action.payload.catalog,
+      ];
     },
     setQueue: (state, action) => {
       console.log('[SET-QUEUE] action.payload: ', action.payload);
-      console.log('[SET-QUEUE] action.payload.focalpointIndex: ', action.payload.focalpointIndex)
-      console.log('[SET-QUEUE] action.payload.queue: ', action.payload.queue)
-      state.fp_array[action.payload.focalpointIndex].queue = [...action.payload.queue];
+      console.log(
+        '[SET-QUEUE] action.payload.focalpointIndex: ',
+        action.payload.focalpointIndex
+      );
+      console.log('[SET-QUEUE] action.payload.queue: ', action.payload.queue);
+      state.fp_array[action.payload.focalpointIndex].queue = [
+        ...action.payload.queue,
+      ];
     },
   },
   extraReducers: (builder) => {
@@ -243,9 +287,6 @@ export const focalpointSlice = createSlice({
   },
 });
 
-export const {
-  setQueue,
-  setCatalog,
-} = focalpointSlice.actions;
+export const { setQueue, setCatalog } = focalpointSlice.actions;
 
 export default focalpointSlice.reducer;

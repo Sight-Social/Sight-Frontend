@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadMoreCards, setQueue } from '../../features/focalpoints/focalpointSlice';
+import {
+  loadMoreCards,
+  setQueue,
+} from '../../features/focalpoints/focalpointSlice';
 import Card from '../Feed/FeedCard/index';
 import Menu from '../Feed/FeedCard/index';
 import SearchBar from '../Feed/FeedSearchBar';
@@ -19,8 +22,6 @@ import axios from 'axios';
 //The feed should be fed from the backend and the state.feed.queue should be removed
 //The feed for selFocalPoint should be fed directly from the backend
 
-
-
 export function SelFocalPointFeed() {
   const url = window.location.href;
   let focalpointId = url.split('/')[url.split('/').length - 1];
@@ -28,16 +29,26 @@ export function SelFocalPointFeed() {
   const observerRef = useRef();
   const dispatch = useDispatch();
   const username = useSelector((state) => state.profile);
-  let focalpointIndex = useSelector((state) => state.focalpoint.fp_array.findIndex(
-    (focalpoint) => focalpoint._id === focalpointId
-  ));
-  const insights = useSelector((state) => state.focalpoint.fp_array.find(
-    (focalpoint) => focalpoint._id === focalpointId
-    ).insights
-  )
-  const catalog = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].catalog);
-  const queue = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].queue);
-  const filters = useSelector((state) => state.focalpoint.fp_array[focalpointIndex].filters);
+  let focalpointIndex = useSelector((state) =>
+    state.focalpoint.fp_array.findIndex(
+      (focalpoint) => focalpoint._id === focalpointId
+    )
+  );
+  const insights = useSelector(
+    (state) =>
+      state.focalpoint.fp_array.find(
+        (focalpoint) => focalpoint._id === focalpointId
+      ).insights
+  );
+  const catalog = useSelector(
+    (state) => state.focalpoint.fp_array[focalpointIndex].catalog
+  );
+  const queue = useSelector(
+    (state) => state.focalpoint.fp_array[focalpointIndex].queue
+  );
+  const filters = useSelector(
+    (state) => state.focalpoint.fp_array[focalpointIndex].filters
+  );
 
   async function handleRefresh() {
     console.log('handleRefresh');
@@ -49,10 +60,11 @@ export function SelFocalPointFeed() {
         numCardsToAdd: 3,
       })
     );
-    const newQueue = {focalpointIndex: focalpointIndex, queue: action.payload};
-    dispatch(
-      setQueue(newQueue)
-    )
+    const newQueue = {
+      focalpointIndex: focalpointIndex,
+      queue: action.payload,
+    };
+    dispatch(setQueue(newQueue));
   }
   //Intersection observer
   //Creates an observer that loads more cards when the sentinel is in view

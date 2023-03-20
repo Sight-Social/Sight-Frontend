@@ -31,7 +31,10 @@ import {
   EditableFpName,
   EditableDescription,
   InsightWrapper,
+  ButtonRow,
 } from './InsightGridElements';
+
+import { DeleteInsight } from '../InsightDelete/DeleteInsight';
 
 /* INTERACTIVE COMPONENTS */
 import { SelFocalPointFeed } from '../../SelFocalPoint/SelFocalPointFeed';
@@ -110,9 +113,6 @@ export function InsightGrid() {
     await dispatch(
       editFPDetails({ sightToken, editedName, editedDescription, focalpointId })
     );
-    /* if (action.payload) {
-      updateFocalPointCard(action.payload);
-    } */
   }
 
   async function handleAddInsight(url, tags, focalpointId) {
@@ -151,9 +151,6 @@ export function InsightGrid() {
         sightToken,
       })
     );
-    /* if (action.payload) {
-      updateInsightList(action.payload);
-    } */
   }
 
   const editFPState = () => {
@@ -321,23 +318,30 @@ export function InsightGrid() {
                 {insightArray
                   ? insightArray.map((insight, index) =>
                       insight.source === 'YouTube' ? (
-                        <YouTubeVideo
-                          key={index}
-                          className='pinned-insight'
-                          videoId={insight.videoId}
-                          tags={insight.tags}
-                          source={insight.source}
-                          height={600}
-                          width={300}
-                          style={{
-                            margin: '10px',
-                          }}
-                        />
+                        <InsightWrapper>
+                          <YouTubeVideo
+                            key={index}
+                            className='pinned-insight'
+                            videoId={insight.videoId}
+                            tags={insight.tags}
+                            source={insight.source}
+                            height={600}
+                            width={300}
+                            style={{
+                              margin: '10px',
+                            }}
+                          />
+                          <ButtonRow>
+                            <DeleteInsight insight={insight} />
+                          </ButtonRow>
+                        </InsightWrapper>
                       ) : insight.source === 'Spotify' ? (
-                        <SpotifyEmbed
-                          key={insight.videoId}
-                          link={`https://open.spotify.com/episode/${insight.videoId}`}
-                        />
+                        <InsightWrapper>
+                          <SpotifyEmbed
+                            key={insight.videoId}
+                            link={`https://open.spotify.com/episode/${insight.videoId}`}
+                          />
+                        </InsightWrapper>
                       ) : (
                         console.log('no source1')
                       )

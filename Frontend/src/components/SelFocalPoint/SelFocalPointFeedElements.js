@@ -17,10 +17,12 @@ export const Container = styled.div`
 `;
 
 export const RefreshSearchContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;    
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
 `;
 
 export const Header = styled.h1`

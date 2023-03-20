@@ -1,6 +1,28 @@
 import styled from 'styled-components';
 import '../../../App.css';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
+export const StyledRiDeleteBinLine = styled(RiDeleteBinLine)`
+  padding: 0px;
+  margin-right: 8px;
+  color: white;
+  font-size: 21.5px;
+
+  :hover {
+    color: red;
+  }
+`;
+export const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 5px;
+`;
+/* INSIGHT GRID */
 export const EditCardBody = styled.a`
   cursor: pointer;
   color: white;
@@ -12,6 +34,7 @@ export const NavAndContentContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   width: 80vw;
+
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -115,10 +138,14 @@ export const InsightBackgrund = styled.div`
   border-radius: 15px;
   width: 100%;
   height: 100%;
+  padding-bottom: 75px;
 `;
 
 export const InsightWrapper = styled.div`
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
   margin: 10px;
   background-color: var(--clr-gray);
   border-radius: 10px;
