@@ -31,6 +31,7 @@ import {
   EditCardBody,
   EditableFpName,
   EditableDescription,
+  InsightWrapper,
 } from './InsightGridElements';
 
 /* INTERACTIVE COMPONENTS */
@@ -316,19 +317,24 @@ export function InsightGrid() {
                 {insightArray
                   ? insightArray.map((insight, index) => (
                     insight.source === 'YouTube'? (
-                      <YouTubeVideo
-                        key={index}
-                        className='pinned-insight'
-                        videoId={insight.videoId}
-                        tags={insight.tags}
-                        source={insight.source}
-                        height={600}
-                        width={300}
-                      />
+                      <InsightWrapper>
+                        <YouTubeVideo
+                          key={index}
+                          className='pinned-insight'
+                          videoId={insight.videoId}
+                          tags={insight.tags}
+                          source={insight.source}
+                          height={600}
+                          width={300}
+                          style={{
+                            margin: '10px',
+                          }}
+                        />
                     )
                     : insight.source === 'Spotify' ? (
                       <SpotifyEmbed key={insight.videoId} link = {`https://open.spotify.com/episode/${insight.videoId}`} />
                     ) : null
+                      </InsightWrapper>
                   ))
                   : null
                 }

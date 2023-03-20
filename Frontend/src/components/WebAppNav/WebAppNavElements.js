@@ -6,6 +6,10 @@ export const NavContainer = styled.div`
   position: sticky;
   top: 0;
   height: 100vh;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const NavSubHeader = styled.h2`

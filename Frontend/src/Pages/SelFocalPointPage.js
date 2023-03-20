@@ -3,15 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Navbar from '../components/PageComponents/NavBar';
 import { SelFocalPoint } from '../components/SelFocalPoint/SelFocalPoint';
 import Footer from '../components/PageComponents/Footer/Footer';
-import Sidebar from '../components/PageComponents/Sidebar';
+import { Sidebar } from '../components/PageComponents/Sidebar';
 import WebAppNav from '../components/WebAppNav';
 import styled from 'styled-components';
 
 export function SelFocalPointPage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
 
   //Get the focalpointId from the url
@@ -44,5 +40,3 @@ export function SelFocalPointPage() {
     </>
   );
 }
-
-/* export default SelFocalPointPage; */
