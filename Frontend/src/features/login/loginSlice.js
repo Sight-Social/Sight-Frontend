@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { clearProfile, setProfile } from '../profile/profileSlice';
+import { setProfile } from '../profile/profileSlice';
 import axios from 'axios';
 
 const backendURL = 'http://localhost:3000/login';
@@ -91,7 +91,7 @@ const loginSlice = createSlice({
   },
 });
 
-export const {} = loginSlice.actions;
+// export const {} = loginSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

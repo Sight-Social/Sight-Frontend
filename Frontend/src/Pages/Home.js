@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import Navbar from '../components/PageComponents/NavBar';
 import Footer from '../components/PageComponents/Footer/Footer';
 import IntroSection from '../components/LandingPage/IntroSection';
@@ -9,37 +8,22 @@ import {
   Feed,
   Discover,
   ContentCurationTool,
-  Aggregate,
   Algorithm,
   SaveSortShare,
 } from '../components/LandingPage/InfoSection/Data';
-import Sidebar from '../components/PageComponents/Sidebar';
+/* import Sidebar from '../components/PageComponents/Sidebar'; */
 // import { useGoogleLogin } from '@react-oauth/google';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import HeroSection from '../components/LandingPage/Option2/HeroSection';
 import Showcase from '../components/LandingPage/Option2/Showcase';
 
 export function HomePage() {
-  const [isOpen, setIsOpen] = useState(false);
+  /* const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
-  };
-  const [radioValue, setRadioValue] = useState('1');
+  }; */
 
-  const radios = [
-    { name: '1', value: '1' },
-    { name: '2', value: '2' },
-  ];
-
-  const ButtonGroupWrapper = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
-    margin: 1rem 25px;
-  `;
   const [view, setView] = useState('option1');
   const changeView = (view) => {
     switch (view) {
@@ -58,8 +42,6 @@ export function HomePage() {
     width: 100%;
     height: 100%;
   `;
-  /* const isAuthenticated = user ? user.isAuthenticated : false;
-  const username = user ? user.username : ''; */
 
   /* const onGoogleLogin = useGoogleLogin({
     flow: 'auth-code',
@@ -93,26 +75,6 @@ export function HomePage() {
     <>
       {/* <Sidebar isOpen={isOpen} toggle={toggle} /> */}
       <Navbar />
-      {/* <ButtonGroupWrapper>
-        <ButtonGroup>
-          {radios.map((radio, idx) => (
-            <ToggleButton
-              key={idx}
-              id={`radio-${idx}`}
-              type='radio'
-              variant={idx % 2 ? 'outline-success' : 'outline-success'}
-              name='radio'
-              value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
-              stylee={{}}
-            >
-              {radio.name}
-            </ToggleButton>
-          ))}
-        </ButtonGroup>
-      </ButtonGroupWrapper> */}
-      {/* <h1>{userTest}</h1> */}
       <NavContainer>
         <Nav
           justify
@@ -168,7 +130,6 @@ export function HomePage() {
           <HeroSection />
           <Showcase />
           <InfoSection {...ContentCurationTool} />
-          {/* <InfoSection {...Aggregate} /> */}
           <InfoSection {...Algorithm} />
           <InfoSection {...SaveSortShare} />
         </>

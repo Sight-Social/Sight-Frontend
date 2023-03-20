@@ -16,14 +16,11 @@ import {
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import styled from 'styled-components';
 
 export function Navbar() {
   const [scrollNav, setScrollNav] = useState(false);
-  const [isProfile, setIsProfile] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [isProfile] = useState(false);
+  const [toggle] = useState(false);
 
   const navigate = useNavigate();
   const { isAuthenticated, username } = useSelector((state) => state.profile);
@@ -54,21 +51,6 @@ export function Navbar() {
   const toggleHome = () => {
     scroll.scrollToTop();
   };
-
-  const [radioValue, setRadioValue] = useState('1');
-
-  const radios = [
-    { name: '1', value: '1' },
-    { name: '2', value: '2' },
-  ];
-  const ButtonGroupWrapper = styled.div`
-    /* height: 50px; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 20px;
-  `;
 
   return (
     <>
@@ -156,22 +138,5 @@ export function Navbar() {
     </>
   );
 }
-
-/* <BtnWrap>
-                      <Button
-                        variant="primary"
-                        size="md"
-                        onClick={handleCancelProfileChange}>
-                        Cancel
-                      </Button>{' '}
-                    </BtnWrap>
-                    <BtnWrap>
-                      <Button
-                        variant="primary"
-                        size="md"
-                        onClick={handleSaveProfile}>
-                        Save Profile
-                      </Button>{' '}
-                    </BtnWrap> */
 
 export default Navbar;

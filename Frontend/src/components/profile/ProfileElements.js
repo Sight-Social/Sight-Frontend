@@ -26,6 +26,10 @@ export const MainContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   width: 80vw;
+
+  /* @media screen and (max-width: 768px) {
+    width: 100%;
+  } */
 `;
 
 export const NavContainer = styled.div`
@@ -58,7 +62,7 @@ export const NavHeader = styled.h1`
 `;
 
 export const Container = styled.div`
-  padding: 50px 100px;
+  /* padding: 50px 100px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;

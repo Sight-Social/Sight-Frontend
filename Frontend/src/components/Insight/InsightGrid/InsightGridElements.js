@@ -12,7 +12,7 @@ export const NavAndContentContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   background-color: black;
-  width: 80vw;
+  /* width: 80vw; */
 `;
 
 export const EditableFpName = styled.input`
@@ -55,7 +55,7 @@ export const MainContainer = styled.div`
   /* height: 90vh; */
   min-height: 85vh;
   background-color: var(--clr-black);
-  padding: 0px 100px;
+  /* padding: 0px 100px; */
 `;
 
 export const CardDim = styled.div`
@@ -121,6 +121,13 @@ export const InsightBackgrund = styled.div`
   flex-direction: column; */
 `;
 
+export const InsightWrapper = styled.div`
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--clr-gray);
+  border-radius: 10px;
+`;
+
 export const GridWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -128,10 +135,17 @@ export const GridWrapper = styled.div`
 `;
 
 export const InsightsGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 10px;
+  width: 100%;
+
   /* border: solid red 3px; */
   background-color: black;
 
-  width: 80%;
+  /* width: 80%;
   height: 100%;
 
   border-radius: 15px;
@@ -145,10 +159,9 @@ export const InsightsGrid = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr);
   grid-row-gap: 40px;
-  /* align-items: center; */
-  justify-content: center;
+  justify-content: center; */
 
-  @media screen and (min-width: 430px) {
+  /* @media screen and (min-width: 430px) {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -168,7 +181,7 @@ export const InsightsGrid = styled.div`
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 30px;
     grid-row-gap: 50px;
-  }
+  } */
 `;
 
 /* height: 100%;

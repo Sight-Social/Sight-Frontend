@@ -2,41 +2,43 @@ import React from 'react';
 import {
   SidebarContainer,
   Icon,
-  CloseIcon,
+  /* CloseIcon,
   SidebarWrapper,
   SidebarMenu,
   SidebarLink,
   SideBtnWrap,
-  SidebarRoute,
+  SidebarRoute, */
 } from './SidebarElements';
+import TrippleDot from '../../../assets/icons/TrippleDot.png';
 
-const Sidebar = ({ isOpen, toggle }) => {
+export function Sidebar({ isOpen, toggle }) {
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
-        <CloseIcon />
+        {/* <CloseIcon /> */}
+        <TrippleDot />
       </Icon>
-      <SidebarWrapper>
+      {/* <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="focalpoints" onClick={toggle}>
+          <SidebarLink to='focalpoints' onClick={toggle}>
             Focal Points
           </SidebarLink>
-          <SidebarLink to="feed" onClick={toggle}>
+          <SidebarLink to='feed' onClick={toggle}>
             Feed
           </SidebarLink>
-          <SidebarLink to="discover" onClick={toggle}>
+          <SidebarLink to='discover' onClick={toggle}>
             Discover
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/focal-points">My Focal Points</SidebarRoute>
+          <SidebarRoute to='/focal-points'>My Focal Points</SidebarRoute>
         </SideBtnWrap>
         <SideBtnWrap>
-          <SidebarRoute to="/login">Login</SidebarRoute>
+          <SidebarRoute to='/login'>Login</SidebarRoute>
         </SideBtnWrap>
-      </SidebarWrapper>
+      </SidebarWrapper> */}
     </SidebarContainer>
   );
-};
+}
 
-export default Sidebar;
+/* export default Sidebar; */

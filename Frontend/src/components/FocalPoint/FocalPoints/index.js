@@ -30,7 +30,7 @@ import { Spacer } from '../../Profile/ProfileElements';
 
 export function FocalPoints() {
   const { username, email } = useSelector((state) => state.profile);
-  const focalpoints = useSelector((state) => state.focalpoint.fp_array);
+  let focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const pinned_insights = useSelector(
     (state) => state.focalpoint.pinned_insights
   );
@@ -53,9 +53,6 @@ export function FocalPoints() {
         break;
     }
   };
-  /* const changeView = (value) => {
-    setView(value);
-  }; */
 
   let imageSet = [
     financeLogo,
@@ -82,55 +79,24 @@ export function FocalPoints() {
     }
   };
 
-  const handleDeleteFP = async (selectedToDelete) => {
-    try {
-      await axios.delete(
-        `http://localhost:3000/user/${username}/focalpoints/`,
-        {
-          params: {
-            email: email,
-            selected_id: selectedToDelete,
-          },
-        }
-      );
-      setCardList(
-        cardList.filter((card) => !selectedToDelete.includes(card._id))
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleEditFP = async (index, editedName, editedDescription) => {
-    const oldId = cardList[index]._id;
-    const oldInsights = cardList[index].insights;
-
-    const updatedCardList = [
-      ...cardList.slice(0, index), // Copy elements before the updated index
-      {
-        _id: oldId,
-        title: editedName,
-        insights: oldInsights,
-        description: editedDescription,
-      },
-      ...cardList.slice(index + 1), // Copy elements after the updated index
-    ];
-
-    const updatedId = updatedCardList[index]._id;
-    setCardList(updatedCardList);
-
-    try {
-      /* DELETE the ids of the FP's you want to delete   */
-      await axios.patch(`http://localhost:3000/user/${username}/focalpoints`, {
-        email: email,
-        focalpointToEdit: updatedId,
-        editedName: editedName,
-        editedDescription: editedDescription,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleDeleteFP = async (selectedToDelete) => {
+  //   try {
+  //     await axios.delete(
+  //       `http://localhost:3000/user/${username}/focalpoints/`,
+  //       {
+  //         params: {
+  //           email: email,
+  //           selected_id: selectedToDelete,
+  //         },
+  //       }
+  //     );
+  //     setCardList(
+  //       cardList.filter((card) => !selectedToDelete.includes(card._id))
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const toggleHome = () => {
     scroll.scrollToTop();

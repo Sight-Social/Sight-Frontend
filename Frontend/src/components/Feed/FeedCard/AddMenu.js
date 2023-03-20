@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import { Dropdown } from 'react-bootstrap';
 import { StyledDropdown, StyledItem, StyledBsPlus } from './FeedCardElements';
 
-import { setProfile } from '../../../features/profile/profileSlice';
-import { addInsightToFocalPoint } from '../../../features/profile/userThunk'; /* focalpointSlice */
 import { addInsight } from '../../../features/focalpoints/focalpointSlice';
 
 export function AddMenu({ insight }) {

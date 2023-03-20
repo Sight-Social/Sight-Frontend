@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import Card from '../../components/Feed/FeedCard';
 
 //Initial State
 const setInitialState = () => {
@@ -15,7 +14,7 @@ const setInitialState = () => {
     };
   }
   let initialState = {};
-  if (storedUser.subscriptions === [] || storedUser.subscriptions == '') {
+  if (storedUser.subscriptions === [] || storedUser.subscriptions === '') {
     console.log('no subscriptions found initially');
     initialState = {
       queue: [],
@@ -59,10 +58,12 @@ export const loadMoreCards = createAsyncThunk(
     while (numCardsAdded < numCardsToAdd) {
       //Get the next subscription
       let randomSubIndex = Math.floor(Math.random() * subscriptions.length);
-      let randomInsightIndex = Math.floor(Math.random() * subscriptions[randomSubIndex].insights.length);
-      
+      let randomInsightIndex = Math.floor(
+        Math.random() * subscriptions[randomSubIndex].insights.length
+      );
+
       const subscription = subscriptions[randomSubIndex];
-      const channelId = subscription.channelId;
+      /* const channelId = subscription.channelId; */
       //Get the insights for the subscription
       const insights = subscription.insights;
       //Check filters
@@ -89,7 +90,6 @@ export const loadMoreCards = createAsyncThunk(
       newCards.push({
         videoId: insights[randomInsightIndex]._id,
         channelId: insights[randomInsightIndex].channelId,
-        videoId: insights[randomInsightIndex].videoId,
         title: insights[randomInsightIndex].title,
         description: insights[randomInsightIndex].description,
         thumbnail: insights[randomInsightIndex].thumbnail,
@@ -102,7 +102,7 @@ export const loadMoreCards = createAsyncThunk(
       insightIndex = (insightIndex + 1) % insights.length;
       numCardsAdded++;
     }
-    console.log('newCards: ', newCards)
+    console.log('newCards: ', newCards);
     return newCards;
   }
 );

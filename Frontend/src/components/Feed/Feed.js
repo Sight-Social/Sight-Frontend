@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadMoreCards, setQueue } from '../../features/feed/feedSlice';
 import Card from './FeedCard/index';
-import Menu from './FeedCard/index';
 import SearchBar from './FeedSearchBar';
-import FeedFilterBar from './FeedFilterBar';
 import RefreshButton from '../PageComponents/RefreshButton/RefreshButton';
 import {
   MainContainer,
@@ -33,9 +31,7 @@ export function Feed() {
       })
     );
     const newQueue = action.payload;
-    dispatch(
-      setQueue(newQueue)
-    )
+    dispatch(setQueue(newQueue));
   }
   useEffect(() => {
     if (!isAuthenticated) {

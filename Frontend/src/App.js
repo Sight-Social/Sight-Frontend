@@ -9,17 +9,17 @@ import { HomePage } from './Pages/Home.js';
 import { ProfilePage } from './Pages/ProfilePage';
 import { LoginPage } from './Pages/LoginPage';
 import { SignupPage } from './Pages/SignupPage';
-import  RegisterGoogle from './components/RegisterGoogle/RegisterGoogle';
+import RegisterGoogle from './components/RegisterGoogle/RegisterGoogle';
 import RegisterSpotify from './components/RegisterSpotify/RegisterSpotify';
 import { RegisterPage } from './Pages/RegisterPage';
 import { FeedPage } from './Pages/FeedPage';
 import { SelFocalPointPage } from './Pages/SelFocalPointPage';
 
-import { clearProfile, setProfile } from './features/profile/profileSlice';
+import { setProfile } from './features/profile/profileSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated, username } = useSelector((state) => state.profile);
+  const { isAuthenticated } = useSelector((state) => state.profile);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
