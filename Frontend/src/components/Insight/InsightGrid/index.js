@@ -315,29 +315,30 @@ export function InsightGrid() {
             <GridWrapper>
               <InsightsGrid>
                 {insightArray
-                  ? insightArray.map((insight, index) => (
-                    insight.source === 'YouTube'? (
-                      <InsightWrapper>
-                        <YouTubeVideo
-                          key={index}
-                          className='pinned-insight'
-                          videoId={insight.videoId}
-                          tags={insight.tags}
-                          source={insight.source}
-                          height={600}
-                          width={300}
-                          style={{
-                            margin: '10px',
-                          }}
+                  ? insightArray.map((insight, index) =>
+                      insight.source === 'YouTube' ? (
+                        <InsightWrapper>
+                          <YouTubeVideo
+                            key={index}
+                            className='pinned-insight'
+                            videoId={insight.videoId}
+                            tags={insight.tags}
+                            source={insight.source}
+                            height={600}
+                            width={300}
+                            style={{
+                              margin: '10px',
+                            }}
+                          />
+                        </InsightWrapper>
+                      ) : insight.source === 'Spotify' ? (
+                        <SpotifyEmbed
+                          key={insight.videoId}
+                          link={`https://open.spotify.com/episode/${insight.videoId}`}
                         />
+                      ) : null
                     )
-                    : insight.source === 'Spotify' ? (
-                      <SpotifyEmbed key={insight.videoId} link = {`https://open.spotify.com/episode/${insight.videoId}`} />
-                    ) : null
-                      </InsightWrapper>
-                  ))
-                  : null
-                }
+                  : null}
               </InsightsGrid>
             </GridWrapper>
           </InsightBackgrund>
