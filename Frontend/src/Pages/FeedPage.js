@@ -1,19 +1,17 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 
-import Navbar from '../components/PageComponents/NavBar';
 import { Feed } from '../components/Feed/Feed';
 import Footer from '../components/PageComponents/Footer/Footer';
-import Sidebar from '../components/PageComponents/Sidebar';
+/* import Sidebar from '../components/PageComponents/Sidebar'; */
 import WebAppNav from '../components/WebAppNav';
 import { FeedFilterBar } from '../components/Feed/FeedFilterBar';
 
-export function FeedPage(){
-  const [isOpen, setIsOpen] = useState(false);
+export function FeedPage() {
+  /* const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
-  };
-
+  }; */
 
   const Wrapper = styled.div`
     display: flex;
@@ -34,11 +32,11 @@ export function FeedPage(){
       <Wrapper>
         <WebAppNav />
         <FeedWrapper>
-            <Feed />
+          <Feed />
         </FeedWrapper>
         <FeedFilterBar />
       </Wrapper>
       <Footer />
     </>
   );
-};
+}

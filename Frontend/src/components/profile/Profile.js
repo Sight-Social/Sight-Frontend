@@ -1,17 +1,12 @@
 import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUsername } from '../../features/profile/userThunk.js';
-import { setProfile } from '../../features/profile/profileSlice.js';
-import Nav from 'react-bootstrap/Nav';
-import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Footer from '../PageComponents/Footer/Footer';
 import {
   MainContainer,
   Container,
   UserProfile,
-  Subheader,
-  PinnedInsights,
   Username,
   ProfilePath,
   BtnWrap,
@@ -20,16 +15,12 @@ import {
   ProfilePicture,
   ProfilePictureWrapper,
   EditableUsername,
-  Spacer,
 } from './ProfileElements.js';
 import FocalPoints from '../FocalPoint/FocalPoints';
-import YouTubeVideo from '../YouTubeVideo/YouTubeVideo';
 import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
-  const { username, email, avatar, pinned_insights } = useSelector(
-    (state) => state.profile
-  );
+  const { username, email, avatar } = useSelector((state) => state.profile);
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(username);
   const dispatch = useDispatch();
@@ -44,7 +35,6 @@ export function Profile() {
   async function handleSaveProfile() {
     setIsEditing(false);
     try {
-      console.log('[Profile.js] editName ', editedName);
       dispatch(
         updateUsername({ oldUsername: username, newUsername: editedName })
       );
@@ -58,14 +48,10 @@ export function Profile() {
   };
 
   const handleLogout = () => {
-    console.log('[NavBar/index.js] Logout btn clicked');
     localStorage.removeItem('user');
     navigate('/');
     window.location.reload();
   };
-
-  let feedURL = `${username}/feed`;
-  let profileURL = `${username}`;
 
   return (
     <MainContainer>

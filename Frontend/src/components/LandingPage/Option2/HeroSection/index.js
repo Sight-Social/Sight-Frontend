@@ -3,19 +3,10 @@ import {
   IntroContainer,
   IntroH1,
   IntroSubHeading,
-  IntroP,
   IntroContent,
-  IntroImage,
-  IntroRoundedDiv,
-  Blurs,
   ImageContainer,
-  ImageLeft,
-  ImageRight,
   ImageMiddle,
 } from './HeroSectionElements';
-import LandingImage from '../../../../assets/LandingPage/DiscoverSection.png';
-import Blur from '../../../../assets/LandingPage/Blurs.png';
-import Button from 'react-bootstrap/Button';
 import Insta from '../../../../assets/IconTransistion/Insta.png';
 import TikTok from '../../../../assets/IconTransistion/TikTok.png';
 import Sight from '../../../../assets/IconTransistion/Sight.png';

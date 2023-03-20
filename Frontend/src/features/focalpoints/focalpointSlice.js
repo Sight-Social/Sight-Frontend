@@ -188,8 +188,7 @@ export const focalpointSlice = createSlice({
   },
 });
 
-export const {
-  /* updateFocalPointCard, updateInsightList */
-} = focalpointSlice.actions;
+/* export const {
+} = focalpointSlice.actions; */
 
 export default focalpointSlice.reducer;

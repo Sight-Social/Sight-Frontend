@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import {
   Container,
   FormContent,
@@ -10,11 +9,10 @@ import {
   FormContianer,
   FormButton,
 } from './InsightAddElements';
-import { useSelector } from 'react-redux';
+
 const InsightAdd = ({ addInsight }) => {
   const [url, setUrl] = useState('');
   const [tags, setTags] = useState('');
-  const username = useSelector((state) => state.profile.username);
 
   return (
     <>

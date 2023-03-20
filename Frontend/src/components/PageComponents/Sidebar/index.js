@@ -2,12 +2,12 @@ import React from 'react';
 import {
   SidebarContainer,
   Icon,
-  CloseIcon,
+  /* CloseIcon,
   SidebarWrapper,
   SidebarMenu,
   SidebarLink,
   SideBtnWrap,
-  SidebarRoute,
+  SidebarRoute, */
 } from './SidebarElements';
 import TrippleDot from '../../../assets/icons/TrippleDot.png';
 

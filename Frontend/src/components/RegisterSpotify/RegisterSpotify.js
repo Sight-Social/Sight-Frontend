@@ -1,21 +1,42 @@
 import React from 'react';
-import { MainContainer } from './RegisterSpotifyElements';
+import {
+  MainContainer,
+  Button,
+  Header,
+  IconsWrapper,
+  Icon,
+} from './RegisterSpotifyElements';
+import { useSelector } from 'react-redux';
+import YouTube from '../../assets/IconTransistion/YouTube.png';
+import Spotify from '../../assets/IconTransistion/Spotify.png';
 
+export default function RegisterSpotify() {
+  const { tokens } = useSelector((state) => state.profile.tokens);
+  const onSpotifyLogin = () => {
+    console.log('Spotify login clicked');
+    window.location.href = 'http://localhost:3000/auth/spotify';
+  };
 
-export default function RegisterSpotify(){
-
-    const onSpotifyLogin = () => {
-        console.log('Spotify login clicked');
-        window.location.href = 'http://localhost:3000/auth/spotify';
-    };
-
-  console.log('RegisterPage popped')
+  console.log('RegisterPage popped');
   return (
     <MainContainer>
-        <h1>Please sign in using Spotify to link your account</h1>
-        <button onClick={() => onSpotifyLogin() }> Sign in with Spotify </button>
+      <IconsWrapper>
+        <Icon
+          src={YouTube}
+          alt='YouTube'
+          /* style={{ opacity: tokens != null ? '100%' : '50%' }} */
+        />
+        <Icon
+          src={Spotify}
+          alt='YouTube'
+          style={{
+            marginLeft: '30px',
+            opacity: tokens != null ? '100%' : '50%',
+          }}
+        />
+      </IconsWrapper>
+      <Header>Sign in to Spotify to link your account</Header>
+      <Button onClick={() => onSpotifyLogin()}> Sign in with Spotify </Button>
     </MainContainer>
-
-  )
+  );
 }
-

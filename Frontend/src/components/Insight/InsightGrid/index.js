@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import {
   Container,
@@ -38,16 +37,14 @@ import {
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
 import { SpotifyEmbed } from '../../SpotifyEmbed/SpotifyEmbed';
 import { ButtonGrouping } from '../../RequestButtonElements';
-import InsightAdd from '../InsightAdd/index.js';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
 import { Feed } from '../../Feed/Feed.js';
-/* import AddFocalPoint from '../../FocalPoint/AddFocalPoint'; */
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+/* import { useNavigate } from 'react-router-dom'; */
 import {
   editFPDetails,
   addInsight,
@@ -58,7 +55,6 @@ export function InsightGrid() {
   const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const username = useSelector((state) => state.profile.username);
-  const email = useSelector((state) => state.profile.email);
   const [formUrl, setUrl] = useState('');
   const [tags, setTags] = useState('');
 
@@ -70,12 +66,9 @@ export function InsightGrid() {
     (focalpoint) => focalpoint._id === focalpointId
   );
 
-  const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  function toggleMenu() {
-    setIsOpen(!isOpen);
-  }
-  const [insightArray, setInsightArray] = useState(
+
+  const [insightArray] = useState(
     focalpoint.insights ? focalpoint.insights : []
   );
 
@@ -93,12 +86,12 @@ export function InsightGrid() {
     setView(value);
   };
 
-  const navigate = useNavigate();
+  /* const navigate = useNavigate();
   const handleLogout = () => {
     sessionStorage.removeItem('user');
     navigate('/');
     window.location.reload();
-  };
+  }; */
 
   const [editedName, setEditedName] = useState(focalpoint.title);
   const handleNameChange = (event) => {
@@ -113,7 +106,7 @@ export function InsightGrid() {
   };
 
   async function handleEditFPCard() {
-    const action = await dispatch(
+    await dispatch(
       editFPDetails({ sightToken, editedName, editedDescription, focalpointId })
     );
     /* if (action.payload) {
@@ -148,7 +141,7 @@ export function InsightGrid() {
       mediaType: 'video',
     };
 
-    const action = await dispatch(
+    await dispatch(
       addInsight({
         username,
         insight,

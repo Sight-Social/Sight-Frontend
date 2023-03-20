@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { DropDownContainer } from './DropDownButtonElements';
 import AddFocalPoint from '../AddFocalPoint';
 import { IconWrapper, CrudButton } from '../../RequestButtonElements.js';
-import Plus from '../../../assets/icons/Plus.png';
 import Add from '../../../assets/icons/Add.png';
 function AddButton({ username, addFp }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,7 @@ function AddButton({ username, addFp }) {
   } */
 
   return (
-    <DropDownContainer className="dropdown">
+    <DropDownContainer className='dropdown'>
       <CrudButton onClick={toggleMenu}>
         <IconWrapper src={Add} />
       </CrudButton>
