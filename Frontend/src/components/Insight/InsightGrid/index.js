@@ -158,6 +158,7 @@ export function InsightGrid() {
   const editFPState = () => {
     setIsEditing(!isEditing);
   };
+  console.log('insights:', insightArray);
 
   return (
     <NavAndContentContainer>
@@ -310,28 +311,28 @@ export function InsightGrid() {
                 {insightArray
                   ? insightArray.map((insight, index) =>
                       insight.source === 'YouTube' ? (
-                        <InsightWrapper>
-                          <YouTubeVideo
-                            key={index}
-                            className='pinned-insight'
-                            videoId={insight.videoId}
-                            tags={insight.tags}
-                            source={insight.source}
-                            height={600}
-                            width={300}
-                            style={{
-                              margin: '10px',
-                            }}
-                          />
-                        </InsightWrapper>
+                        <YouTubeVideo
+                          key={index}
+                          className='pinned-insight'
+                          videoId={insight.videoId}
+                          tags={insight.tags}
+                          source={insight.source}
+                          height={600}
+                          width={300}
+                          style={{
+                            margin: '10px',
+                          }}
+                        />
                       ) : insight.source === 'Spotify' ? (
                         <SpotifyEmbed
                           key={insight.videoId}
                           link={`https://open.spotify.com/episode/${insight.videoId}`}
                         />
-                      ) : null
+                      ) : (
+                        console.log('no source1')
+                      )
                     )
-                  : null}
+                  : console.log('no source2')}
               </InsightsGrid>
             </GridWrapper>
           </InsightBackgrund>

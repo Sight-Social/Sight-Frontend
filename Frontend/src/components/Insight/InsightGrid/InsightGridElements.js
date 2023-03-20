@@ -12,7 +12,7 @@ export const NavAndContentContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   background-color: black;
-  width: 80vw;
+  /* width: 80vw; */
 `;
 
 export const EditableFpName = styled.input`
@@ -55,7 +55,7 @@ export const MainContainer = styled.div`
   /* height: 90vh; */
   min-height: 85vh;
   background-color: var(--clr-black);
-  padding: 0px 100px;
+  /* padding: 0px 100px; */
 `;
 
 export const CardDim = styled.div`
