@@ -17,10 +17,18 @@ export function RelatedVideos({insight}){
         console.log("insight: ", insight)
         console.log("focalpointId: ", focalpointId)
 
-        const response = await axios.post(`http://localhost:3000/youtube/related`, {
-            sightToken: sightToken,
-            videoId: insight.videoId,
-        })
+        const config = {
+            headers: {
+                'authorization': `Bearer ${sightToken}`,
+                'content-Type': 'application/json',
+            }
+        };
+        const response = await axios.post(`http://localhost:3000/youtube/related`,
+            {
+                videoId: insight.videoId,
+            },
+            config
+        )
         dispatch(setCatalog({focalpointIndex: focalpointIndex, catalog: response.data}));
         const videos = [response.data[0], response.data[1], response.data[2]]
         const newQueue = {focalpointIndex: focalpointIndex, queue: videos};

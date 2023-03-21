@@ -132,7 +132,7 @@ export const addInsight = createAsyncThunk(
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'authoriation': 'Bearer ' + sightToken,
+          'authorization': 'Bearer ' + sightToken,
         },
       };
 
@@ -168,20 +168,13 @@ export const deleteInsight = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE4OWZjYjU2Y2RkNDgzODBiN2I2MjQiLCJpYXQiOjE2Nzk0MzE3NjV9.4ITd-dum9q--hR5u2vY6wS4MaJxHbIvPQwV-XaRw2XU
-      console.log('st: ', sightToken)
       const config = {
         headers: {
           'authorization': `Bearer ${sightToken}`,
           'content-type': 'application/json',
         },
       };
-      console.log('HEADERS:', config)
-
-      console.log('delInsightSliceIN: ', insight);
-      console.log('delInsightSliceFP: ', focalpointId);
-      //http://localhost:3000/user/noble/focalpoints/64189fcb56cdd48380b7b625
-      
+    
       const res = await axios.delete(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
@@ -194,18 +187,12 @@ export const deleteInsight = createAsyncThunk(
             focalpointId: focalpointId
           }  
         },
-        // {
-          // data:{
-          //   insight: insight,
-          //   focalpointId: focalpointId
-          // }
-        // },
       );
 
       if (res.status === 201) {
         console.log('[200] Delete Insight Successful');
         console.log('[Delete-Insight] res.data: ', res.data);
-        return { insight: res.data, index: focalpointIndex };
+        return { insight: res.data.insight, focalpointId: res.data.focalpointId };
       } else if (res.status === 400) {
         console.log('[400] Delete Insight Failure');
         console.log('[Delete-Insight] res.data: ', res.data);
@@ -298,18 +285,15 @@ export const focalpointSlice = createSlice({
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Delete insight details failed';
-        } else {
-          console.log(
-            '[Delete-Insight] deleteInsight.fulfilled paylod:',
-            payload
-          );
+        } 
+        else {
+          console.log('[Delete-Insight] deleteInsight.fulfilled payload:', payload);
+          //Change Redux State
+          state.fp_array.find((fp) => fp._id === payload.focalpointId).insights = state.fp_array.find((fp) => fp._id === payload.focalpointId).insights.filter((insight) => insight._id !== payload.insight._id);
+          //Change localStorage
           const storedUser = JSON.parse(localStorage.getItem('user'));
-          storedUser.focalpoints[payload.index].insights.splice(
-            payload.insight,
-            1
-          );
+          storedUser.focalpoints.find((fp) => fp._id === payload.focalpointId).insights = storedUser.focalpoints.find((fp) => fp._id === payload.focalpointId).insights.filter((insight) => insight._id !== payload.insight._id);
           localStorage.setItem('user', JSON.stringify(storedUser));
-          state.fp_array[payload.index].insights.splice(payload.insight, 1);
           state.loading = false;
           state.success = true;
         }

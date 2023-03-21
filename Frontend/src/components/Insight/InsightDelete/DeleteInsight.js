@@ -26,8 +26,7 @@ export function DeleteInsight({ insight }) {
         focalpointIndex,
         sightToken,
       })
-    ); /* Can we do this in a different way? */
-    /* window.location.reload(); */
+    ); 
   }
 
   return <StyledRiDeleteBinLine onClick={handleInsightDeletion} />;
