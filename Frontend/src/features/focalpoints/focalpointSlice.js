@@ -179,20 +179,18 @@ export const deleteInsight = createAsyncThunk(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
           headers: {
-            insight: insight,
+            insight: insight._id,
             token: sightToken,
             focalpointId: focalpointId,
           },
         },
         config
       );
+
       if (res.status === 201) {
         console.log('[200] Delete Insight Successful');
-        console.log(
-          '[Delete-Insight] res.data: ',
-          res.data
-        ); /* this is the insight */
-        return { data: res.data, index: focalpointIndex };
+        console.log('[Delete-Insight] res.data: ', res.status);
+        return { insight: insight, index: focalpointIndex };
       } else if (res.status === 400) {
         console.log('[400] Delete Insight Failure');
         console.log('[Delete-Insight] res.data: ', res.data);
@@ -209,13 +207,6 @@ export const focalpointSlice = createSlice({
   name: 'focalpoint',
   initialState: setInitialState(),
   reducers: {
-    /* updateFocalPointCard: (state, action) => {
-      state.fp_array = action.payload;
-    }, */
-    /* updateInsightList: (state, action) => {
-      console.log('[UPDATE-INSIGHT] action.payload: ', action.payload);
-      state.fp_array[action.payload.index].insights.push(action.payload.data);
-    }, */
     setCatalog: (state, action) => {
       console.log('[SET-CATALOG] action.payload: ', action.payload);
       state.fp_array[action.payload.focalpointIndex].catalog = [
@@ -281,6 +272,39 @@ export const focalpointSlice = createSlice({
       .addCase(addInsight.rejected, (state, { payload }) => {
         console.log('[Add-Insight] addInsight.rejected payload: ', payload);
         alert('Add Insight failed. Please try again.');
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(deleteInsight.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteInsight.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.loading = false;
+          state.error = 'Delete insight details failed';
+        } else {
+          console.log(
+            '[Delete-Insight] deleteInsight.fulfilled paylod:',
+            payload
+          );
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          storedUser.focalpoints[payload.index].insights.splice(
+            payload.insight,
+            1
+          );
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array[payload.index].insights.splice(payload.insight, 1);
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(deleteInsight.rejected, (state, { payload }) => {
+        console.log(
+          '[Delete-Insight] deleteInsight.rejected payload: ',
+          payload
+        );
+        alert('Delete Insight failed. Please try again.');
         state.loading = false;
         state.error = payload;
       });

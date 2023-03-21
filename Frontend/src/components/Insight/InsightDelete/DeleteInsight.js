@@ -24,9 +24,8 @@ export function DeleteInsight({ insight }) {
         focalpointIndex,
         sightToken,
       })
-    );
-    /* const newQueue = {focalpointIndex: focalpointIndex, queue: response.data} */
-    /* dispatch(setQueue(newQueue)); */
+    ); /* Can we do this in a different way? */
+    /* window.location.reload(); */
   }
 
   return <StyledRiDeleteBinLine onClick={handleInsightDeletion} />;
