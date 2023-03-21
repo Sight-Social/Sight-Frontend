@@ -8,6 +8,7 @@ export function DeleteInsight({ insight }) {
   const dispatch = useDispatch();
   const pathname = useLocation().pathname.split('/');
   const sightToken = useSelector((state) => state.profile.tokens.sightToken);
+  const username = useSelector((state) => state.profile.username);
   const focalpointId = pathname[pathname.length - 1];
   let focalpointIndex = useSelector((state) =>
     state.focalpoint.fp_array.findIndex(
@@ -20,6 +21,7 @@ export function DeleteInsight({ insight }) {
     await dispatch(
       deleteInsight({
         insight,
+        username,
         focalpointId,
         focalpointIndex,
         sightToken,

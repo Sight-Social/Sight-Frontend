@@ -144,7 +144,6 @@ export const addInsight = createAsyncThunk(
         },
         config
       );
-      console.log('HEY: ', res);
       if (res.status === 201) {
         console.log('[200] Add Insight Successful');
         console.log(
@@ -169,28 +168,44 @@ export const deleteInsight = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
+      // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE4OWZjYjU2Y2RkNDgzODBiN2I2MjQiLCJpYXQiOjE2Nzk0MzE3NjV9.4ITd-dum9q--hR5u2vY6wS4MaJxHbIvPQwV-XaRw2XU
+      console.log('st: ', sightToken)
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
         },
       };
+      console.log('HEADERS:', config)
 
+      console.log('delInsightSliceIN: ', insight);
+      console.log('delInsightSliceFP: ', focalpointId);
+      //http://localhost:3000/user/noble/focalpoints/64189fcb56cdd48380b7b625
+      
       const res = await axios.delete(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
           headers: {
-            insight: insight._id,
-            token: sightToken,
-            focalpointId: focalpointId,
+            'authorization': `Bearer ${sightToken}`,
+            'content-type': 'application/json',
           },
+          data:{
+            insight: insight,
+            focalpointId: focalpointId
+          }  
         },
-        config
+        // {
+          // data:{
+          //   insight: insight,
+          //   focalpointId: focalpointId
+          // }
+        // },
       );
 
       if (res.status === 201) {
         console.log('[200] Delete Insight Successful');
-        console.log('[Delete-Insight] res.data: ', res.status);
-        return { insight: insight, index: focalpointIndex };
+        console.log('[Delete-Insight] res.data: ', res.data);
+        return { insight: res.data, index: focalpointIndex };
       } else if (res.status === 400) {
         console.log('[400] Delete Insight Failure');
         console.log('[Delete-Insight] res.data: ', res.data);
