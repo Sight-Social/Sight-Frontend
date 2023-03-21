@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import {
   Container,
@@ -72,9 +72,13 @@ export function InsightGrid() {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const [insightArray] = useState(
+  const [insightArray, setInsightArray] = useState(
     focalpoint.insights ? focalpoint.insights : []
   );
+
+  useEffect(() => {
+    setInsightArray(focalpoint.insights ? focalpoint.insights : []);
+  }, [focalpoints]);
 
   let imageSet = [
     financeLogo,

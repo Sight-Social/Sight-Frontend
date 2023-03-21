@@ -88,7 +88,8 @@ export const loadMoreCards = createAsyncThunk(
       }*/
       // If none of the conditions match, add the element to newCards
       newCards.push({
-        videoId: insights[randomInsightIndex]._id,
+        videoId: insights[randomInsightIndex].videoId,
+        _id: insights[randomInsightIndex]._id,
         channelId: insights[randomInsightIndex].channelId,
         title: insights[randomInsightIndex].title,
         description: insights[randomInsightIndex].description,

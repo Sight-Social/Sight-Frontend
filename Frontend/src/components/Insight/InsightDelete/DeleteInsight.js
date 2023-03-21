@@ -8,6 +8,7 @@ export function DeleteInsight({ insight }) {
   const dispatch = useDispatch();
   const pathname = useLocation().pathname.split('/');
   const sightToken = useSelector((state) => state.profile.tokens.sightToken);
+  const username = useSelector((state) => state.profile.username);
   const focalpointId = pathname[pathname.length - 1];
   let focalpointIndex = useSelector((state) =>
     state.focalpoint.fp_array.findIndex(
@@ -20,13 +21,13 @@ export function DeleteInsight({ insight }) {
     await dispatch(
       deleteInsight({
         insight,
+        username,
         focalpointId,
         focalpointIndex,
         sightToken,
       })
-    );
-    /* const newQueue = {focalpointIndex: focalpointIndex, queue: response.data} */
-    /* dispatch(setQueue(newQueue)); */
+    ); /* Can we do this in a different way? */
+    /* window.location.reload(); */
   }
 
   return <StyledRiDeleteBinLine onClick={handleInsightDeletion} />;
