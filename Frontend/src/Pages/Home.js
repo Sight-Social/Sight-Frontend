@@ -11,18 +11,12 @@ import {
   Algorithm,
   SaveSortShare,
 } from '../components/LandingPage/InfoSection/Data';
-/* import Sidebar from '../components/PageComponents/Sidebar'; */
-// import { useGoogleLogin } from '@react-oauth/google';
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import HeroSection from '../components/LandingPage/Option2/HeroSection';
 import Showcase from '../components/LandingPage/Option2/Showcase';
 
 export function HomePage() {
-  /* const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  }; */
 
   const [view, setView] = useState('option1');
   const changeView = (view) => {
@@ -43,37 +37,8 @@ export function HomePage() {
     height: 100%;
   `;
 
-  /* const onGoogleLogin = useGoogleLogin({
-    flow: 'auth-code',
-    onSuccess: async (codeResponse) => {
-      console.log(codeResponse);
-      const tokens = await axios.post('http://localhost:3000/auth/google', {
-        code: codeResponse.code,
-      });
-
-      console.log(tokens);
-    },
-    onError: (errorResponse) => console.log(errorResponse),
-  }); */
-  /* <div className="g_id_signin"
-     data-type="standard"
-     data-shape="pill"
-     data-theme="outline"
-     data-text="signin_with"
-     data-size="large"
-     data-logo_alignment="left">
-    </div>
-    <div id="g_id_onload"
-     data-client_id="500185968473-dvleghqpei71aqdvo664v97657dr0koq.apps.googleusercontent.com"
-     data-context="signin"
-     data-ux_mode="popup"
-     data-login_uri="http://localhost:3000/auth/google/callback"
-     data-auto_prompt="false">
-    </div>
-*/
   return (
     <>
-      {/* <Sidebar isOpen={isOpen} toggle={toggle} /> */}
       <Navbar />
       <NavContainer>
         <Nav

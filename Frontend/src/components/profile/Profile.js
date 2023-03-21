@@ -23,6 +23,7 @@ export function Profile() {
   const { username, email, avatar } = useSelector((state) => state.profile);
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(username);
+  const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ export function Profile() {
     setIsEditing(false);
     try {
       dispatch(
-        updateUsername({ oldUsername: username, newUsername: editedName })
+        updateUsername({ sightToken: sightToken, oldUsername: username, newUsername: editedName })
       );
       navigate(`/user/${editedName}`);
     } catch (error) {

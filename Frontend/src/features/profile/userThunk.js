@@ -10,7 +10,8 @@ export const addInsightToFocalPoint = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
         },
       };
       console.log('[userThunk.js] addInsightToFocalPoint called');
@@ -26,7 +27,6 @@ export const addInsightToFocalPoint = createAsyncThunk(
           username: username,
           focalpointId: focalpointId,
           insight: insight,
-          token: sightToken,
         },
         config
       );
@@ -55,17 +55,14 @@ export const addInsightToFocalPoint = createAsyncThunk(
 
 export const updateUsername = createAsyncThunk(
   'user/updateUsername',
-  async ({ oldUsername, newUsername }, { rejectWithValue }) => {
+  async ({ sightToken, oldUsername, newUsername }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
         },
       };
-      console.log('[userThunk.js] updateUsername called');
-      console.log('[userThunk.js] username: ', oldUsername);
-      console.log('[userThunk.js] newUsername: ', newUsername);
-
       const backendURL = `http://localhost:3000/user/${oldUsername}/update`;
 
       const res = await axios.put(

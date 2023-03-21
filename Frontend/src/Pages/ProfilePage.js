@@ -4,10 +4,6 @@ import { Profile } from '../components/Profile/Profile';
 import styled from 'styled-components';
 
 export function ProfilePage() {
-  //const [isOpen, setIsOpen] = useState(false);
-  /*const toggle = () => {
-    setIsOpen(!isOpen);
-  };*/
 
   const Wrapper = styled.div`
     display: flex;
@@ -19,7 +15,6 @@ export function ProfilePage() {
 
   return (
     <>
-      {/* <Sidebar isOpen={isOpen} toggle={toggle} /> */}
       <Wrapper>
         <WebAppNav />
         <Profile />

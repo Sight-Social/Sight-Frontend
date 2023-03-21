@@ -95,6 +95,7 @@ export const editFPDetails = createAsyncThunk(
       const config = {
         headers: {
           'Content-Type': 'application/json',
+          'authoriation': 'Bearer ' + sightToken,
         },
       };
       const res = await axios.patch(
@@ -102,7 +103,6 @@ export const editFPDetails = createAsyncThunk(
         {
           editedName: editedName,
           editedDescription: editedDescription,
-          token: sightToken,
           focalpointToEdit: focalpointId,
         },
         config
@@ -132,6 +132,7 @@ export const addInsight = createAsyncThunk(
       const config = {
         headers: {
           'Content-Type': 'application/json',
+          'authoriation': 'Bearer ' + sightToken,
         },
       };
 
@@ -139,12 +140,10 @@ export const addInsight = createAsyncThunk(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
           insight: insight,
-          token: sightToken,
           focalpointId: focalpointId,
         },
         config
       );
-      console.log('HEY: ', res);
       if (res.status === 201) {
         console.log('[200] Add Insight Successful');
         console.log(
@@ -178,7 +177,7 @@ export const deleteInsight = createAsyncThunk(
       const res = await axios.delete(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
-          headers: {
+          body: {
             insight: insight,
             token: sightToken,
             focalpointId: focalpointId,

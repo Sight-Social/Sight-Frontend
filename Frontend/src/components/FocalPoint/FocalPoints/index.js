@@ -31,6 +31,7 @@ import { Spacer } from '../../Profile/ProfileElements';
 export function FocalPoints() {
   const { username, email } = useSelector((state) => state.profile);
   let focalpoints = useSelector((state) => state.focalpoint.fp_array);
+  const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const pinned_insights = useSelector(
     (state) => state.focalpoint.pinned_insights
   );
@@ -67,11 +68,16 @@ export function FocalPoints() {
     setCardList([...cardList, { title: title, description }]);
 
     try {
-      await axios.post(`http://localhost:3000/user/${username}/focalpoints`, {
-        title: title,
-        description: description,
-        email: email,
-      });
+      const config = {
+        headers: {
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
+        },
+      };
+      const res = await axios.post(`http://localhost:3000/user/${username}/focalpoints`,
+        { title: title, description: description, email: email },
+        config
+      );
 
       focalpoints = cardList;
     } catch (error) {
