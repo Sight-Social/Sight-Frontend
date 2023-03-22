@@ -2,6 +2,7 @@
 import { WebAppNav } from '../components/WebAppNav';
 import { Profile } from '../components/Profile/Profile';
 import styled from 'styled-components';
+import { OffCanvasNav } from '../components/NavOffcanvas';
 
 export function ProfilePage() {
 
@@ -16,6 +17,7 @@ export function ProfilePage() {
   return (
     <>
       <Wrapper>
+        <OffCanvasNav />
         <WebAppNav />
         <Profile />
       </Wrapper>
