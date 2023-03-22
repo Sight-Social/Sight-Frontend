@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import { DropDownContainer } from './DropDownButtonElements';
-import AddFocalPoint from '../AddFocalPoint';
-import { IconWrapper, CrudButton } from '../../RequestButtonElements.js';
-import Add from '../../../assets/icons/Add.png';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-
-import {
+import { DropDownContainer,
   Container,
   FormContent,
   FormLabel,
@@ -14,8 +7,13 @@ import {
   FormH1,
   FormInput,
   Form,
-  FormButton,
-} from '../AddFocalPoint/AddFocalPointElements';
+  FormButton, } from './DropDownButtonElements';
+import { IconWrapper, CrudButton } from '../../RequestButtonElements.js';
+import Add from '../../../assets/icons/Add.png';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
+
 import { addFocalPoint } from '../../../features/focalpoints/focalpointSlice';
 
 export function AddButton() {
