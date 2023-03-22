@@ -85,6 +85,45 @@ export const loadMoreCards = createAsyncThunk(
   }
 );
 
+/* FOCALPOINTS */
+export const addFocalPoint = createAsyncThunk(
+  'focalpoint/addFocalPoint',
+  async (
+    { title, description, sightToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      console.log('check:',sightToken)
+      const config = {
+        headers: {
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
+        },
+      };
+      const res = await axios.post(`http://localhost:3000/user/${storedUser.username}/focalpoints`,
+        { title: title, description: description },
+        config
+      );
+
+      if (res.status === 201) {
+        console.log('[200] Add Focal Point Successful');
+        console.log(
+          '[Add-FocalPoint] res.data: ',
+          res.data
+        ); 
+        return res.data;
+      } else if (res.status === 400) {
+        console.log('[400] Add Focal Point Failure');
+        console.log('[Add-FocalPoint] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+)
+
+/* INSIGHTS */
 export const editFPDetails = createAsyncThunk(
   'focalpoint/editFPDetails',
   async (
@@ -304,6 +343,30 @@ export const focalpointSlice = createSlice({
           payload
         );
         alert('Delete Insight failed. Please try again.');
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(addFocalPoint.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addFocalPoint.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.loading = false;
+          state.error = 'Add focal point details failed';
+        } else {
+          console.log('[Add-FocalPoint] addFocalPoint.fulfilled payload: ', payload);
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          storedUser.focalpoints.push(payload);
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array.push(payload);
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(addFocalPoint.rejected, (state, { payload }) => {
+        console.log('[Add-FocalPoint] addFocalPoint.rejected payload: ', payload);
+        alert('Add Focal Point failed. Please try again.');
         state.loading = false;
         state.error = payload;
       });
