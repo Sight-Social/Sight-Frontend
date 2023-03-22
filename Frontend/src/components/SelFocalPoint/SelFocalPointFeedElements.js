@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: black;
+  width:100%;
 `;
 
 export const Container = styled.div`
@@ -22,6 +23,7 @@ export const RefreshSearchContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  align-content: center;
   width: 100%;
 `;
 
