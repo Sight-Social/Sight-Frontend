@@ -16,7 +16,7 @@ import {
   Text,
 } from './SelFocalPointFeedElements';
 import axios from 'axios';
-
+import Form from 'react-bootstrap/Form';
 //The feed is currently getting fed from the state.feed.queue
 //This is a temporary solution until we can get the feed from the backend
 //The feed should be fed from the backend and the state.feed.queue should be removed
@@ -103,10 +103,27 @@ export function SelFocalPointFeed() {
   return (
     <MainContainer>
       <Header>
-        <Text>Feed</Text>
+        {/* <Text>Feed</Text> */}
         <RefreshSearchContainer>
           <RefreshButton />
-          <SearchBar />
+          <Form
+                style={{
+                  marginRight: '10px',
+                  marginLeft: '20px',
+                  marginTop: '1rem',
+                }}
+              >
+                <Form.Group
+                  className='mb-3'
+                  controlId='formBasicEmail'
+                  style={{
+                    width: '300px',
+                  }}
+                >
+                  <Form.Control type='email' placeholder='Search' />
+                </Form.Group>
+              </Form>
+          {/* <SearchBar /> */}
         </RefreshSearchContainer>
       </Header>
       <Container>

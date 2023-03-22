@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import {
   NavContainer,
 } from './FocalPointsElements';
 import SearchBar from '../FocalPointsSearchBar';
-import AddButton from '../AddFpButton';
+import {AddButton} from '../AddFpButton';
 
 import Nav from 'react-bootstrap/Nav';
 import Card from 'react-bootstrap/Card';
@@ -29,14 +29,21 @@ import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
 import { Spacer } from '../../Profile/ProfileElements';
 
 export function FocalPoints() {
-  const { username, email } = useSelector((state) => state.profile);
+  const { username } = useSelector((state) => state.profile);
   let focalpoints = useSelector((state) => state.focalpoint.fp_array);
-  const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const pinned_insights = useSelector(
     (state) => state.focalpoint.pinned_insights
   );
 
-  const [cardList, setCardList] = useState(focalpoints);
+
+  const [cardList, setCardList] = useState(
+    focalpoints ? focalpoints : []
+  );
+
+  useEffect(() => {
+    setCardList(focalpoints ? focalpoints : []);
+  }, [focalpoints]);
+
   const [view, setView] = useState('focalpoints');
   const changeView = (view) => {
     switch (view) {
@@ -64,7 +71,9 @@ export function FocalPoints() {
     biohackingLogo,
   ];
 
-  const handleAddFP = async (title, description) => {
+  
+
+  /* const handleAddFP = async (title, description) => {
     setCardList([...cardList, { title: title, description }]);
 
     try {
@@ -83,7 +92,7 @@ export function FocalPoints() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
   // const handleDeleteFP = async (selectedToDelete) => {
   //   try {
@@ -169,7 +178,7 @@ export function FocalPoints() {
         <Container>
           <HeaderAndButtons>
             <Title>Focal Points</Title>
-            <AddButton username={username} addFp={handleAddFP} />
+            <AddButton /* username={username} addFp={handleAddFP} */ />
             <SearchBar />
           </HeaderAndButtons>
 
@@ -223,7 +232,7 @@ export function FocalPoints() {
         <Container>
           <HeaderAndButtons>
             <Title>Shared Focal Points</Title>
-            <AddButton username={username} addFp={handleAddFP} />
+            <AddButton />
             <SearchBar />
           </HeaderAndButtons>
 
@@ -277,7 +286,7 @@ export function FocalPoints() {
         <Container>
           <HeaderAndButtons>
             <Title>Pinned Insights</Title>
-            <AddButton username={username} addFp={handleAddFP} />
+            <AddButton />
             <SearchBar />
           </HeaderAndButtons>
 
@@ -303,7 +312,7 @@ export function FocalPoints() {
         <Container>
           <HeaderAndButtons>
             <Title>Focal Points</Title>
-            <AddButton username={username} addFp={handleAddFP} />
+            <AddButton />
             <SearchBar />
           </HeaderAndButtons>
 
