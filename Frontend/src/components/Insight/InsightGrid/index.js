@@ -36,6 +36,12 @@ import {
 
 import { DeleteInsight } from '../InsightDelete/DeleteInsight';
 
+//*********************8 */
+import { InsightCard } from './InsightCard/InsightCard';
+import { Dropdown, InputGroup, InputIcon } from 'react-bootstrap';
+
+//************************ */
+
 /* INTERACTIVE COMPONENTS */
 import { SelFocalPointFeed } from '../../SelFocalPoint/SelFocalPointFeed';
 import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
@@ -44,8 +50,8 @@ import { ButtonGrouping } from '../../RequestButtonElements';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { Feed } from '../../Feed/Feed.js';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Feed } from '../../Feed/Feed.js';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 /* import { useNavigate } from 'react-router-dom'; */
@@ -75,6 +81,7 @@ export function InsightGrid() {
   const [insightArray, setInsightArray] = useState(
     focalpoint.insights ? focalpoint.insights : []
   );
+
 
   useEffect(() => {
     setInsightArray(focalpoint.insights ? focalpoint.insights : []);
@@ -321,36 +328,11 @@ export function InsightGrid() {
               <InsightsGrid>
                 {insightArray
                   ? insightArray.map((insight, index) =>
-                      insight.source === 'YouTube' ? (
-                        <InsightWrapper>
-                          <YouTubeVideo
-                            key={index}
-                            className='pinned-insight'
-                            videoId={insight.videoId}
-                            tags={insight.tags}
-                            source={insight.source}
-                            height={600}
-                            width={300}
-                            style={{
-                              margin: '10px',
-                            }}
-                          />
-                          <ButtonRow>
-                            <DeleteInsight insight={insight} />
-                          </ButtonRow>
-                        </InsightWrapper>
-                      ) : insight.source === 'Spotify' ? (
-                        <InsightWrapper>
-                          <SpotifyEmbed
-                            key={insight.videoId}
-                            link={`https://open.spotify.com/episode/${insight.videoId}`}
-                          />
-                        </InsightWrapper>
+                        <InsightCard insight = {insight} />
                       ) : (
-                        console.log('no source1')
-                      )
-                    )
-                  : console.log('no source2')}
+                        <div>loading</div>
+                      )                
+                }
               </InsightsGrid>
             </GridWrapper>
           </InsightBackgrund>

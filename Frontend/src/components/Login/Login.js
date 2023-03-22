@@ -31,23 +31,9 @@ export function Login() {
     e.preventDefault();
     try {
       const action = await dispatch(login({ username, password }));
-      /* localStorage.setItem('user', JSON.stringify(action.payload)); */
-      console.log('HERE:' + action.payload.username);
       if (action.payload.username) {
-        /* take action.paylod */
-        let profile = action.payload;
-
-        dispatch(setProfile(profile)); /* NEED: action.payload.profile */
-
-        /* FEED SLICE */
+        dispatch(setProfile(action.payload));
         dispatch(setFeedSubscriptions(action.payload.subscriptions));
-        /* dispatch(setFeedFilters(action.payload.filters)); */
-
-        /* FOCAL POINT SLICE */
-        /* dispatch(setFocalpoints(action.payload.focalpoints)); */
-
-        /* USER SLICE */
-        /* dispatch(setUserProfile(action.payload)); */
 
         navigate(`/user/${action.payload.username}/feed`);
         window.location.reload();
