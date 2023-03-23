@@ -71,24 +71,6 @@ export function FocalPoints() {
     biohackingLogo,
   ];
 
-  // const handleDeleteFP = async (selectedToDelete) => {
-  //   try {
-  //     await axios.delete(
-  //       `http://localhost:3000/user/${username}/focalpoints/`,
-  //       {
-  //         params: {
-  //           email: email,
-  //           selected_id: selectedToDelete,
-  //         },
-  //       }
-  //     );
-  //     setCardList(
-  //       cardList.filter((card) => !selectedToDelete.includes(card._id))
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const toggleHome = () => {
     scroll.scrollToTop();
@@ -155,7 +137,7 @@ export function FocalPoints() {
         <Container>
           <HeaderAndButtons>
             <Title>Focal Points</Title>
-            <AddButton /* username={username} addFp={handleAddFP} */ />
+            <AddButton />
             <SearchBar />
           </HeaderAndButtons>
 

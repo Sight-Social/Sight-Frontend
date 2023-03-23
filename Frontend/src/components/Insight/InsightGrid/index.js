@@ -54,14 +54,16 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Feed } from '../../Feed/Feed.js';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-/* import { useNavigate } from 'react-router-dom'; */
+import { useNavigate } from 'react-router-dom';
 import {
   editFPDetails,
   addInsight,
+  deleteFocalPoint
 } from '../../../features/focalpoints/focalpointSlice';
 
 export function InsightGrid() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sightToken = useSelector((state) => state.profile.tokens.sightToken);
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const username = useSelector((state) => state.profile.username);
@@ -81,7 +83,6 @@ export function InsightGrid() {
   const [insightArray, setInsightArray] = useState(
     focalpoint.insights ? focalpoint.insights : []
   );
-
 
   useEffect(() => {
     setInsightArray(focalpoint.insights ? focalpoint.insights : []);
@@ -164,6 +165,17 @@ export function InsightGrid() {
     );
   }
 
+  const handleDeleteFP = async () => {
+    console.log('deleting...')
+    try {
+      await dispatch(deleteFocalPoint({focalpoint, sightToken}));
+      navigate(`/user/${username}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const editFPState = () => {
     setIsEditing(!isEditing);
   };
@@ -224,11 +236,19 @@ export function InsightGrid() {
                   Cancel
                 </Button>
                 <Button
-                  variant='secondary'
+                  variant='success'
                   size='md'
                   onClick={handleEditFPCard}
                 >
                   Save
+                </Button>
+                <Button
+                  variant='danger'
+                  size='md'
+                  style={{ marginLeft: '20px' }}
+                  onClick={handleDeleteFP}
+                >
+                  Delete
                 </Button>
               </Card.Body>
             ) : (

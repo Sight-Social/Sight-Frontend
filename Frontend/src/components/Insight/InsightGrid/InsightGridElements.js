@@ -60,7 +60,7 @@ export const EditableDescription = styled.input`
   border: none;
   padding: 5px;
   text-decoration: none;
-  width: 100%;
+  width: 60%;
   resize: none;
 `;
 
