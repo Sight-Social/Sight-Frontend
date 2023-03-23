@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilters, modifyQueue } from '../../features/feed/feedSlice';
+import { setFilters, modifyQueue, setQueue } from '../../features/feed/feedSlice';
 import {
   Spacer,
   Container,
@@ -20,7 +20,7 @@ export function FeedFilterBar() {
   const { filters } = useSelector((state) => state.feed);
   const { queue } = useSelector((state) => state.feed);
 
-  const handleToggle = (type, value) => {
+ async function handleToggle(type, value){
     //Add or remove filter from filters object in store
     // Create a new object with the updated properties
     const updatedFilters = {
@@ -30,7 +30,8 @@ export function FeedFilterBar() {
         : [...filters[type], value],
     };
     dispatch(setFilters(updatedFilters));
-    dispatch(modifyQueue({ queue: queue, filters: updatedFilters }));
+    const newQueue = await dispatch(modifyQueue({ queue: queue, filters: updatedFilters }));
+    await dispatch(setQueue(newQueue.payload));
   };
 
   return (
@@ -44,11 +45,11 @@ export function FeedFilterBar() {
               <ListItem
                 key={subscription._id}
                 onClick={() =>
-                  handleToggle('subscriptions', subscription.channelName)
+                  handleToggle('subscriptions', subscription.channelId)
                 }
               >
                 <ToggleSwitch />
-                <Image src={subscription.insights[0].thumbnail} />
+                <Image src={subscription.channelAvatar} />
                 <Label>{subscription.channelName}</Label>
               </ListItem>
             );

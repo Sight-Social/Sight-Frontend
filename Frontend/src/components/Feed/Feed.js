@@ -16,17 +16,17 @@ export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef();
   const dispatch = useDispatch();
-  const { queue, subscriptions, filters } = useSelector((state) => state.feed);
+  const { catalog, queue, subscriptions, filters } = useSelector((state) => state.feed);
   const { isAuthenticated } = useSelector((state) => state.profile);
   console.log('Feed queue: ', queue);
 
   async function handleRefresh() {
-    console.log('handleRefresh');
+    console.log('[Feed.js]: handleRefresh() called, dispatching loadMoreCards action..');
     const action = await dispatch(
       loadMoreCards({
+        catalog,
         queue,
         filters,
-        subscriptions,
         numCardsToAdd: 3,
       })
     );

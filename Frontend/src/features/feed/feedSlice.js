@@ -6,6 +6,7 @@ const setInitialState = () => {
   /* console.log('FeedSlice: ' + storedUser.subscriptions); */
   if (storedUser === null) {
     return {
+      catalog: [],
       queue: [],
       queueIndex: 0,
       subscriptions: [],
@@ -17,6 +18,7 @@ const setInitialState = () => {
   if (storedUser.subscriptions === [] || storedUser.subscriptions === '') {
     console.log('no subscriptions found initially');
     initialState = {
+      catalog: [],
       queue: [],
       queueIndex: 0,
       subscriptions: [],
@@ -26,6 +28,7 @@ const setInitialState = () => {
   } else {
     console.log('FeedSlice: ' + storedUser.subscriptions);
     initialState = {
+      catalog: populateInitialCatalog(storedUser.subscriptions),
       queue: populateInitialQueue(storedUser.subscriptions),
       queueIndex: 0,
       subscriptions: storedUser.subscriptions,
@@ -37,6 +40,15 @@ const setInitialState = () => {
 };
 
 //Extra Reducers
+const populateInitialCatalog = (subscriptions) => {
+  let catalog = [];
+  for (let i = 0; i < subscriptions.length; i++) {
+    const insights = subscriptions[i].insights;
+    catalog.push(...insights);
+  }
+  return catalog;
+};
+
 const populateInitialQueue = (subscriptions) => {
   let queue = [];
   for (let i = 0; i < 3; i++) {
@@ -47,61 +59,41 @@ const populateInitialQueue = (subscriptions) => {
 };
 export const loadMoreCards = createAsyncThunk(
   'feed/loadMoreCards',
-  async ({ queue, filters, subscriptions, numCardsToAdd }) => {
+  async ({ catalog, queue, filters, numCardsToAdd }) => {
     const newCards = [...queue];
     //We need to filter out subscriptions, source, and media type that are in the state.feed.filters array
     let numCardsAdded = 0;
-    let subIndex = queue.length % subscriptions.length;
-    let insightIndex = queue.length % subscriptions[subIndex].insights.length;
 
     //Add cards to the queue until we have added numCardsToAdd cards
     while (numCardsAdded < numCardsToAdd) {
-      //Get the next subscription
-      let randomSubIndex = Math.floor(Math.random() * subscriptions.length);
-      let randomInsightIndex = Math.floor(
-        Math.random() * subscriptions[randomSubIndex].insights.length
-      );
+      //Get the next insight from the catalog
+      let randomCatalogIndex = Math.floor(Math.random() * catalog.length);
+      const insight = catalog[randomCatalogIndex];
 
-      const subscription = subscriptions[randomSubIndex];
-      /* const channelId = subscription.channelId; */
-      //Get the insights for the subscription
-      const insights = subscription.insights;
       //Check filters
-      /*for (let i = 0; i < filters.subscriptions.length; i++) {
-        for (let j = 0; j < filters.sources.length; j++) {
-          for (let k = 0; k < filters.mediaType.length; k++) {
-            if (
-              filters.subscriptions[i].id === subscription._id ||
-              filters.sources[j].id === insights[insightIndex].source ||
-              filters.mediaType[k].id === insights[insightIndex].mediaType
-            ) {
-              console.log(
-                'skipping video due to filter: ',
-                insights[insightIndex]._id
-              );
-              subIndex = (subIndex + 1) % filters.subscriptions.length;
-              insightIndex = (insightIndex + 1) % insights.length;
-              continue;
-            }
-          }
-        }
-      }*/
-      // If none of the conditions match, add the element to newCards
-      newCards.push({
-        videoId: insights[randomInsightIndex].videoId,
-        _id: insights[randomInsightIndex]._id,
-        channelId: insights[randomInsightIndex].channelId,
-        title: insights[randomInsightIndex].title,
-        description: insights[randomInsightIndex].description,
-        thumbnail: insights[randomInsightIndex].thumbnail,
-        source: insights[randomInsightIndex].source,
-        mediaType: insights[randomInsightIndex].mediaType,
-        tags: insights[randomInsightIndex].tags,
-      });
-      // Update counters
-      subIndex = (subIndex + 1) % subscriptions.length;
-      insightIndex = (insightIndex + 1) % insights.length;
-      numCardsAdded++;
+      const isSubscriptionFiltered = filters.subscriptions.length > 0 && filters.subscriptions.some(subscription => subscription === insight.channelId);
+      const isSourceFiltered = filters.source.length > 0 && filters.source.some(source => source === insight.source);
+      const isMediaTypeFiltered = filters.mediaType.length > 0 && filters.mediaType.some(mediaType => mediaType === insight.mediaType);
+
+      //If any of the filters match, skip this card
+      if (isSubscriptionFiltered || isSourceFiltered || isMediaTypeFiltered) {
+        continue;
+      }
+      else {
+        // If none of the conditions match, add the element to newCards
+        newCards.push({
+          videoId: insight.videoId,
+          _id: insight._id,
+          channelId: insight.channelId,
+          title: insight.title,
+          description: insight.description,
+          thumbnail: insight.thumbnail,
+          source: insight.source,
+          mediaType: insight.mediaType,
+          tags: insight.tags,
+        });
+        numCardsAdded++;
+    }
     }
     console.log('newCards: ', newCards);
     return newCards;
@@ -111,29 +103,39 @@ export const loadMoreCards = createAsyncThunk(
 export const modifyQueue = createAsyncThunk(
   'feed/modifyQueue',
   async ({ queue, filters }) => {
-    console.log('modifyQueue queue:', queue);
-    console.log('modifyQueue filters:', filters);
-    const oldQueue = [...queue];
-    //We need to filter out subscriptions, source, and media type (state.feed.filters / filters) that are in state.feed.queue
+    console.log('modifyQueue initial queue:', queue);
+    console.log('modifyQueue filters passed in:', filters);
+
     let newQueue = [];
-    newQueue = oldQueue.filter((card) => {
-      for (let i = 0; i < filters.subscriptions.length; i++) {
-        for (let j = 0; j < filters.sources.length; j++) {
-          for (let k = 0; k < filters.mediaType.length; k++) {
-            if (
-              filters.subscriptions[i].id === card.subscriptionId ||
-              filters.sources[j].id === card.source ||
-              filters.mediaType[k].id === card.mediaType
-            ) {
-              console.log('skipping video due to filter');
-            }
-          }
-        }
+    try {
+      newQueue = queue.filter((card) => {
+      console.log('modifyQueue card: ', card)
+
+      const isSubscriptionFiltered = 
+        filters.subscriptions.length > 0 && filters.subscriptions.some(subscription => subscription === card.channelId);
+      const isSourceFiltered = 
+        filters.source.length > 0 && filters.sources.some(source => source === card.source);
+      const isMediaTypeFiltered = 
+        filters.mediaType.length > 0 && filters.mediaType.some(mediaType => mediaType === card.mediaType);
+
+      if (isSubscriptionFiltered || isSourceFiltered || isMediaTypeFiltered) {
+        console.log('skipping video due to filter');
+        return false;
+      } else {
+        return true;
       }
     });
+  } catch (error) {
+    console.log('modifyQueue error: ', error);
+  }
+
+    console.log('modifyQueue newQueue: ', newQueue)
     return newQueue;
   }
 );
+
+
+
 
 /*********************************/
 //Slice
