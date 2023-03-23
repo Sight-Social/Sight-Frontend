@@ -60,6 +60,8 @@ import {
   addInsight,
   deleteFocalPoint
 } from '../../../features/focalpoints/focalpointSlice';
+import {UploadImage} from '../../AwsImageUpload';
+
 
 export function InsightGrid() {
   const dispatch = useDispatch();
@@ -184,6 +186,7 @@ export function InsightGrid() {
   return (
     <NavAndContentContainer>
       <MainContainer>
+      < UploadImage />
         <Card
           bg='transparent'
           text='light'
