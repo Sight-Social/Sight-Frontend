@@ -62,7 +62,7 @@ export function Navbar() {
             </NavLogo>
             <MobileIcon onClick={toggle}>
               <FaBars />
-            </MobileIcon>{' '}
+            </MobileIcon>
             {isProfile ? (
               <>
                 {/* <NavBtn>

@@ -4,7 +4,7 @@ import { Feed } from '../components/Feed/Feed';
 import Footer from '../components/PageComponents/Footer/Footer';
 import WebAppNav from '../components/WebAppNav';
 import { FeedFilterBar } from '../components/Feed/FeedFilterBar';
-
+import { OffCanvasNav } from '../components/NavOffcanvas';
 export function FeedPage() {
 
   const Wrapper = styled.div`
@@ -24,6 +24,7 @@ export function FeedPage() {
   return (
     <>
       <Wrapper>
+      <OffCanvasNav />
         <WebAppNav />
         <FeedWrapper>
           <Feed />

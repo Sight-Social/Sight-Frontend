@@ -123,6 +123,45 @@ export const addFocalPoint = createAsyncThunk(
   }
 )
 
+export const deleteFocalPoint = createAsyncThunk(
+  'focalpoint/deleteFocalPoint',
+  async (
+    { focalpoint, sightToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/user/${storedUser.username}/focalpoints`,
+        {
+          headers: {
+            'authorization': `Bearer ${sightToken}`,
+            'content-type': 'application/json',
+          },
+          data:{
+            focalpoint: focalpoint
+          }  
+        },
+      );
+
+      if (res.status === 201) {
+        console.log('[200] Delete Focal Point Successful');
+        console.log(
+          '[Delete-FocalPoint] res.data: ',
+          res.data
+        ); 
+        return res.data;
+      } else if (res.status === 400) {
+        console.log('[400] Delete Focal Point Failure');
+        console.log('[Delete-FocalPoint] res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+)
+
+
 /* INSIGHTS */
 export const editFPDetails = createAsyncThunk(
   'focalpoint/editFPDetails',
@@ -231,7 +270,7 @@ export const deleteInsight = createAsyncThunk(
       if (res.status === 201) {
         console.log('[200] Delete Insight Successful');
         console.log('[Delete-Insight] res.data: ', res.data);
-        return { insight: res.data.insight, focalpointId: res.data.focalpointId };
+        return res.data;
       } else if (res.status === 400) {
         console.log('[400] Delete Insight Failure');
         console.log('[Delete-Insight] res.data: ', res.data);
@@ -367,6 +406,38 @@ export const focalpointSlice = createSlice({
       .addCase(addFocalPoint.rejected, (state, { payload }) => {
         console.log('[Add-FocalPoint] addFocalPoint.rejected payload: ', payload);
         alert('Add Focal Point failed. Please try again.');
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(deleteFocalPoint.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteFocalPoint.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.loading = false;
+          state.error = 'Delete focal point details failed';
+        } else {
+          console.log('[Delete-FocalPoint] deleteFocalPoint.fulfilled payload: ', payload);
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          const indexToDelete = storedUser.focalpoints.findIndex(fp => fp._id.toString() === payload._id.toString()); // find the index of the fpDelete item in the array
+
+          if (indexToDelete !== -1) { // check if the item was found
+            storedUser.focalpoints.splice(indexToDelete, 1); // remove the item using the splice method
+            console.log('Successfully removed', payload)
+          } else {
+            console.log('Not found in fp_array: ', payload);
+          }
+
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array.splice(indexToDelete, 1);
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(deleteFocalPoint.rejected, (state, { payload }) => {
+        console.log('[Delete-FocalPoint] deleteFocalPoint.rejected payload: ', payload);
+        alert('Delete Focal Point failed. Please try again.');
         state.loading = false;
         state.error = payload;
       });

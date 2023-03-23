@@ -103,7 +103,6 @@ export function SelFocalPointFeed() {
   return (
     <MainContainer>
       <Header>
-        {/* <Text>Feed</Text> */}
         <RefreshSearchContainer>
           <RefreshButton />
           <Form
