@@ -35,9 +35,8 @@ export function OffCanvasNav() {
         <MobileIcon onClick={toggleShow}>
             <FaBars />
         </MobileIcon>
-        <Offcanvas show={show} onHide={handleClose} placement="end" style={{backgroundColor: 'black'}}> 
-          <Offcanvas.Header closeButton >
-            {/* <Offcanvas.Title style={{color: 'white'}}>Sight</Offcanvas.Title> */}
+        <Offcanvas show={show} onHide={handleClose} placement="end" style={{backgroundColor: 'black', width:'70vw'}}> 
+          <Offcanvas.Header closeButton style={{marginBottom:'-1rem'}}>
             <SightBanner>
             <SightLogo style={{marginRight:'15px'}}/>
             <Nav.Link
@@ -53,12 +52,12 @@ export function OffCanvasNav() {
             </Nav.Link>
             </SightBanner>
           </Offcanvas.Header>
-          <Offcanvas.Body>
+          <Offcanvas.Body >
           <NavContainer>
             <Nav
                 defaultActiveKey='/home'
                 className='flex-column'
-                style={{ fontSize: '20px', paddingLeft: '5px' }}
+                style={{ fontSize: '20px' }}
             >
             <Nav.Link
             href={profileURL}
@@ -70,6 +69,7 @@ export function OffCanvasNav() {
                 style={{
                 color: 'white',
                 marginRight: '10px',
+                marginLeft:'-1rem',
                 marginBottom: '3.5px',
                 }}
             />
@@ -85,6 +85,7 @@ export function OffCanvasNav() {
                 style={{
                 color: 'white',
                 marginRight: '10px',
+                marginLeft:'-1rem',
                 marginBottom: '3.5px',
                 }}
             />

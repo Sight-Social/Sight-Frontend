@@ -31,10 +31,6 @@ export const NavContainer = styled.div`
   top: 0;
   height: 100vh;
   z-index: 999;
-
-  /* @media screen and (max-width: 768px) {
-    display: none;
-  } */
 `;
 
 export const NavSubHeader = styled.h2`
@@ -47,6 +43,6 @@ export const SightBanner = styled.div`
   display: flex;
   align-items: center;
   align-content: center;
-  padding: 10px 0px 0px 6px;
+  padding: 10px 0px 0px 0px;
   font-size: 1.38rem;
 `;

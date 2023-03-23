@@ -71,29 +71,6 @@ export function FocalPoints() {
     biohackingLogo,
   ];
 
-  
-
-  /* const handleAddFP = async (title, description) => {
-    setCardList([...cardList, { title: title, description }]);
-
-    try {
-      const config = {
-        headers: {
-          'authorization': `Bearer ${sightToken}`,
-          'content-type': 'application/json',
-        },
-      };
-      const res = await axios.post(`http://localhost:3000/user/${username}/focalpoints`,
-        { title: title, description: description, email: email },
-        config
-      );
-
-      focalpoints = cardList;
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
-
   // const handleDeleteFP = async (selectedToDelete) => {
   //   try {
   //     await axios.delete(

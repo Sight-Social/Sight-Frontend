@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const NavContainer = styled.div`
   padding-top: 27px;
   width: 20vw;
+  min-width: 175px;
 
   position: sticky;
   top: 0;
