@@ -23,6 +23,7 @@ export function FeedFilterBar() {
  async function handleToggle(type, value){
     //Add or remove filter from filters object in store
     // Create a new object with the updated properties
+    console.log('type:', type, 'value:', value);
     const updatedFilters = {
       ...filters,
       [type]: filters[type].includes(value)
@@ -58,27 +59,24 @@ export function FeedFilterBar() {
       </SubscriptionsContainer>
       <List>
         <Header>Source</Header>
-        <ListItem
-          active={true}
+        <ListItem 
           onClick={() => handleToggle('source', 'YouTube')}
         >
-          <ToggleSwitch active={true} />
+          <ToggleSwitch />
           <FaYoutube style={{ color: '#FF0000', margin: '5px' }} />
           <Label>YouTube</Label>
         </ListItem>
-        <ListItem active={true}>
-          <ToggleSwitch
-            active={true}
-            onClick={() => handleToggle('source', 'Spotify')}
-          />
+        <ListItem
+          onClick={() => handleToggle('source', 'Spotify')}
+        >
+          <ToggleSwitch />
           <FaSpotify style={{ color: '#1DB954', margin: '5px' }} />
           <Label>Spotify</Label>
         </ListItem>
-        <ListItem active={true}>
-          <ToggleSwitch
-            active={true}
-            onClick={() => handleToggle('source', 'Twitter')}
-          />
+        <ListItem
+           onClick={() => handleToggle('source', 'Twitter')}
+        >
+          <ToggleSwitch />
           <FaTwitter style={{ color: '#00acee', margin: '5px' }} />
           <Label>Twitter</Label>
         </ListItem>
@@ -86,25 +84,22 @@ export function FeedFilterBar() {
       </List>
       <List>
         <Header>Media Type</Header>
-        <ListItem active={true}>
-          <ToggleSwitch
-            active={true}
-            onClick={() => handleToggle('mediaType', 'video')}
-          />
+        <ListItem
+          onClick={() => handleToggle('mediaType', 'video')}
+        >
+          <ToggleSwitch />
           <Label>Video</Label>
         </ListItem>
-        <ListItem active={false}>
-          <ToggleSwitch
-            active={true}
-            onClick={() => handleToggle('mediaType', 'podcast')}
-          />
+        <ListItem
+           onClick={() => handleToggle('mediaType', 'podcast')}
+        >
+          <ToggleSwitch />
           <Label>Podcasts</Label>
         </ListItem>
-        <ListItem active={false}>
-          <ToggleSwitch
-            active={false}
-            onClick={() => handleToggle('mediaType', 'tweet')}
-          />
+        <ListItem
+          onClick={() => handleToggle('mediaType', 'tweet')}
+        >
+          <ToggleSwitch />
           <Label>Tweets</Label>
         </ListItem>
         <ListItem></ListItem>
