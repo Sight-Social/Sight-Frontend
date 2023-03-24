@@ -193,7 +193,7 @@ export function InsightGrid() {
     // s3://sight-image-bucket-323/Sight-Insta.png
     <NavAndContentContainer>
       <MainContainer>
-      < UploadImage />
+      
           <EditCardBody>
             {isEditing ? (
               <Card
@@ -218,7 +218,9 @@ export function InsightGrid() {
                 }}
               ></Card.Img>
               {/* <UploadImageIcon /> */}
+
               </UploadImageButton>
+              
               <Card.Body style={{ width: 'auto' }}>
                 <Card.Title
                   style={{
@@ -264,6 +266,7 @@ export function InsightGrid() {
                   Delete
                 </Button>
               </Card.Body>
+              < UploadImage />
               </Card>
             ) : (
               <Card
