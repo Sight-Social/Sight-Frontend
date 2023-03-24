@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 import '../../../App.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import {MdAddPhotoAlternate} from 'react-icons/md';
+
+export const UploadImageButton = styled.button`
+border: solid red 5px;
+width: 200px;
+height: 200px;
+background-color: transparent;
+display: flex;
+  justify-content: center;
+  align-items: center;
+
+`;
+
+export const UploadImageIcon = styled(RiDeleteBinLine)`
+  width: 50px;
+  height: 50px;
+`;
 
 export const StyledRiDeleteBinLine = styled(RiDeleteBinLine)`
   padding: 0px;

@@ -165,7 +165,7 @@ export function FocalPoints() {
                       >
                         <Card.Img
                           variant='top'
-                          src={imageSet[index]}
+                          src={focalpoint.imageUrl ? focalpoint.imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
                           style={{
                             display: 'flex',
                             alignItems: 'center',

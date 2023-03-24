@@ -32,6 +32,8 @@ import {
   EditableDescription,
   InsightWrapper,
   ButtonRow,
+  UploadImageButton,
+  UploadImageIcon
 } from './InsightGridElements';
 
 import { DeleteInsight } from '../InsightDelete/DeleteInsight';
@@ -71,15 +73,17 @@ export function InsightGrid() {
   const username = useSelector((state) => state.profile.username);
   const [formUrl, setUrl] = useState('');
   const [tags, setTags] = useState('');
-
+  
   /* USE THE URL TO KNOW WHICH FOCAL POINT IS SELECTED  */
   let url = window.location.href;
   let spliturl = url.split('/');
   let focalpointId = spliturl[spliturl.length - 1];
   const focalpoint = focalpoints.find(
     (focalpoint) => focalpoint._id === focalpointId
-  );
-
+    );
+    
+  let imageUrl = focalpoint.imageUrl;
+  /* let imageUrl = useSelector((state) => state.focalpoint.fp_array.imageUrl); */
   const [isEditing, setIsEditing] = useState(false);
 
   const [insightArray, setInsightArray] = useState(
@@ -88,7 +92,7 @@ export function InsightGrid() {
 
   useEffect(() => {
     setInsightArray(focalpoint.insights ? focalpoint.insights : []);
-  }, [focalpoints]);
+  }, [focalpoints, imageUrl]);
 
   let imageSet = [
     financeLogo,
@@ -183,32 +187,38 @@ export function InsightGrid() {
   };
   console.log('insights:', insightArray);
 
+  
+  console.log('imageUrl:', imageUrl)
   return (
+    // s3://sight-image-bucket-323/Sight-Insta.png
     <NavAndContentContainer>
       <MainContainer>
       < UploadImage />
-        <Card
-          bg='transparent'
-          text='light'
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100%',
-            margin: '40px 0px 40px 60px',
-            alignItems: 'center',
-          }}
-        >
-          <Card.Img
-            variant='top'
-            src={imageSet[0]}
-            style={{
-              height: '200px',
-              width: '200px',
-            }}
-          ></Card.Img>
-
           <EditCardBody>
             {isEditing ? (
+              <Card
+              bg='transparent'
+              text='light'
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: '100%',
+                margin: '40px 0px 40px 60px',
+                alignItems: 'center',
+              }}
+            >
+              <UploadImageButton>
+              <Card.Img
+                variant='top'
+                src={imageUrl ? imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
+                style={{
+                  height: '200px',
+                  width: '200px',
+                  opacity: '0.5', 
+                }}
+              ></Card.Img>
+              {/* <UploadImageIcon /> */}
+              </UploadImageButton>
               <Card.Body style={{ width: 'auto' }}>
                 <Card.Title
                   style={{
@@ -254,7 +264,27 @@ export function InsightGrid() {
                   Delete
                 </Button>
               </Card.Body>
+              </Card>
             ) : (
+              <Card
+              bg='transparent'
+              text='light'
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: '100%',
+                margin: '40px 0px 40px 60px',
+                alignItems: 'center',
+              }}
+            >
+              <Card.Img
+                variant='top'
+                src={imageUrl ? imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
+                style={{
+                  height: '200px',
+                  width: '200px',
+                }}
+              ></Card.Img>
               <Card.Body onClick={editFPState}>
                 <Card.Title
                   style={{
@@ -271,9 +301,10 @@ export function InsightGrid() {
                   {focalpoint.description}
                 </Card.Text>
               </Card.Body>
+              </Card>
             )}
           </EditCardBody>
-        </Card>
+        
 
         <NavContainer>
           <Nav justify variant='tabs' defaultActiveKey='link-1'>

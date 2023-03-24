@@ -16,6 +16,7 @@ const setInitialState = () => {
           filters: [{}],
           queue: [{}],
           catalog: [{}],
+          imageUrl: '',
         },
       ],
       pinned_insights: [{}],
@@ -35,6 +36,7 @@ const setInitialState = () => {
           filters: [{}],
           queue: [{}],
           catalog: [{}],
+          imageUrl: '',
         },
       ],
       pinned_insights: [{}],
@@ -282,6 +284,44 @@ export const deleteInsight = createAsyncThunk(
   }
 );
 
+export const updateFocalpointImage = createAsyncThunk(
+  'focalpoint/updateFocalpointImage',
+  async (
+    { focalpointId, imageUrl, focalpointIndex, sightToken },
+    { rejectWithValue }
+  ) => {
+    try {
+      console.log('SLIICEimageUrl:', imageUrl);
+      const config = {
+        headers: {
+          'authorization': `Bearer ${sightToken}`,
+          'content-type': 'application/json',
+        },
+      };
+      const res = await axios.patch(
+        `http://localhost:3000/user/${storedUser.username}/focalpoints/image`,
+        {
+          imageUrl: imageUrl,
+          focalpointIndex: focalpointIndex,
+        },
+        config
+      );
+      
+      if (res.status === 201) {
+        console.log('[200] Update Focal Point Image Successful');
+        console.log('res.data: ', res.data);
+        return {url: res.data, index: focalpointIndex};
+      } else if (res.status === 400) {
+        console.log('[400] Update Focal Point Image Failure');
+        console.log('res.data: ', res.data);
+        throw new Error(res.data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 //****SLICE*************************************** */
 export const focalpointSlice = createSlice({
   name: 'focalpoint',
@@ -438,6 +478,30 @@ export const focalpointSlice = createSlice({
       .addCase(deleteFocalPoint.rejected, (state, { payload }) => {
         console.log('[Delete-FocalPoint] deleteFocalPoint.rejected payload: ', payload);
         alert('Delete Focal Point failed. Please try again.');
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(updateFocalpointImage.pending, (state, { payload }) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateFocalpointImage.fulfilled, (state, { payload }) => {
+        if (payload === undefined) {
+          state.loading = false;
+          state.error = 'Update Focal Point Image failed';
+        } else {
+          console.log('[Update-FocalPoint-Image] updateFocalpointImage.fulfilled payload: ', payload);
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          storedUser.focalpoints[payload.index].imageUrl = payload.url;
+          localStorage.setItem('user', JSON.stringify(storedUser));
+          state.fp_array[payload.index].imageUrl = payload.url;
+          state.loading = false;
+          state.success = true;
+        }
+      })
+      .addCase(updateFocalpointImage.rejected, (state, { payload }) => {
+        console.log('[Update-FocalPoint-Image] updateFocalpointImage.rejected payload: ', payload);
+        alert('Update Focal Point Image failed. Please try again.');
         state.loading = false;
         state.error = payload;
       });
