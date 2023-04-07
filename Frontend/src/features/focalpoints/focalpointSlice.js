@@ -90,29 +90,24 @@ export const loadMoreCards = createAsyncThunk(
 /* FOCALPOINTS */
 export const addFocalPoint = createAsyncThunk(
   'focalpoint/addFocalPoint',
-  async (
-    { title, description, sightToken },
-    { rejectWithValue }
-  ) => {
+  async ({ title, description, sightToken }, { rejectWithValue }) => {
     try {
-      console.log('check:',sightToken)
+      console.log('check:', sightToken);
       const config = {
         headers: {
-          'authorization': `Bearer ${sightToken}`,
+          authorization: `Bearer ${sightToken}`,
           'content-type': 'application/json',
         },
       };
-      const res = await axios.post(`http://localhost:3000/user/${storedUser.username}/focalpoints`,
+      const res = await axios.post(
+        `http://localhost:3000/user/${storedUser.username}/focalpoints`,
         { title: title, description: description },
         config
       );
 
       if (res.status === 201) {
         console.log('[200] Add Focal Point Successful');
-        console.log(
-          '[Add-FocalPoint] res.data: ',
-          res.data
-        ); 
+        console.log('[Add-FocalPoint] res.data: ', res.data);
         return res.data;
       } else if (res.status === 400) {
         console.log('[400] Add Focal Point Failure');
@@ -123,34 +118,28 @@ export const addFocalPoint = createAsyncThunk(
       return rejectWithValue(error.response.data.message);
     }
   }
-)
+);
 
 export const deleteFocalPoint = createAsyncThunk(
   'focalpoint/deleteFocalPoint',
-  async (
-    { focalpoint, sightToken },
-    { rejectWithValue }
-  ) => {
+  async ({ focalpoint, sightToken }, { rejectWithValue }) => {
     try {
       const res = await axios.delete(
         `http://localhost:3000/user/${storedUser.username}/focalpoints`,
         {
           headers: {
-            'authorization': `Bearer ${sightToken}`,
+            authorization: `Bearer ${sightToken}`,
             'content-type': 'application/json',
           },
-          data:{
-            focalpoint: focalpoint
-          }  
-        },
+          data: {
+            focalpoint: focalpoint,
+          },
+        }
       );
 
       if (res.status === 201) {
         console.log('[200] Delete Focal Point Successful');
-        console.log(
-          '[Delete-FocalPoint] res.data: ',
-          res.data
-        ); 
+        console.log('[Delete-FocalPoint] res.data: ', res.data);
         return res.data;
       } else if (res.status === 400) {
         console.log('[400] Delete Focal Point Failure');
@@ -161,8 +150,7 @@ export const deleteFocalPoint = createAsyncThunk(
       return rejectWithValue(error.response.data.message);
     }
   }
-)
-
+);
 
 /* INSIGHTS */
 export const editFPDetails = createAsyncThunk(
@@ -175,7 +163,7 @@ export const editFPDetails = createAsyncThunk(
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'authoriation': 'Bearer ' + sightToken,
+          authoriation: 'Bearer ' + sightToken,
         },
       };
       const res = await axios.patch(
@@ -212,7 +200,7 @@ export const addInsight = createAsyncThunk(
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'authorization': 'Bearer ' + sightToken,
+          authorization: 'Bearer ' + sightToken,
         },
       };
 
@@ -250,23 +238,23 @@ export const deleteInsight = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'authorization': `Bearer ${sightToken}`,
+          authorization: `Bearer ${sightToken}`,
           'content-type': 'application/json',
         },
       };
-    
+
       const res = await axios.delete(
         `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
         {
           headers: {
-            'authorization': `Bearer ${sightToken}`,
+            authorization: `Bearer ${sightToken}`,
             'content-type': 'application/json',
           },
-          data:{
+          data: {
             insight: insight,
-            focalpointId: focalpointId
-          }  
-        },
+            focalpointId: focalpointId,
+          },
+        }
       );
 
       if (res.status === 201) {
@@ -286,31 +274,27 @@ export const deleteInsight = createAsyncThunk(
 
 export const updateFocalpointImage = createAsyncThunk(
   'focalpoint/updateFocalpointImage',
-  async (
-    { focalpointId, imageUrl, focalpointIndex, sightToken },
-    { rejectWithValue }
-  ) => {
+  async ({ sightToken, formData, focalpointIndex }, { rejectWithValue }) => {
     try {
-      console.log('SLIICEimageUrl:', imageUrl);
+      console.log('---------SLICE--------');
+
       const config = {
         headers: {
-          'authorization': `Bearer ${sightToken}`,
-          'content-type': 'application/json',
+          authorization: `Bearer ${sightToken}`,
+          'content-type': 'multipart/form-data',
         },
       };
+
       const res = await axios.patch(
         `http://localhost:3000/user/${storedUser.username}/focalpoints/image`,
-        {
-          imageUrl: imageUrl,
-          focalpointIndex: focalpointIndex,
-        },
+        formData,
         config
       );
-      
+
       if (res.status === 201) {
         console.log('[200] Update Focal Point Image Successful');
         console.log('res.data: ', res.data);
-        return {url: res.data, index: focalpointIndex};
+        return { url: res.data, index: focalpointIndex };
       } else if (res.status === 400) {
         console.log('[400] Update Focal Point Image Failure');
         console.log('res.data: ', res.data);
@@ -403,14 +387,24 @@ export const focalpointSlice = createSlice({
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Delete insight details failed';
-        } 
-        else {
-          console.log('[Delete-Insight] deleteInsight.fulfilled payload:', payload);
+        } else {
+          console.log(
+            '[Delete-Insight] deleteInsight.fulfilled payload:',
+            payload
+          );
           //Change Redux State
-          state.fp_array.find((fp) => fp._id === payload.focalpointId).insights = state.fp_array.find((fp) => fp._id === payload.focalpointId).insights.filter((insight) => insight._id !== payload.insight._id);
+          state.fp_array.find(
+            (fp) => fp._id === payload.focalpointId
+          ).insights = state.fp_array
+            .find((fp) => fp._id === payload.focalpointId)
+            .insights.filter((insight) => insight._id !== payload.insight._id);
           //Change localStorage
           const storedUser = JSON.parse(localStorage.getItem('user'));
-          storedUser.focalpoints.find((fp) => fp._id === payload.focalpointId).insights = storedUser.focalpoints.find((fp) => fp._id === payload.focalpointId).insights.filter((insight) => insight._id !== payload.insight._id);
+          storedUser.focalpoints.find(
+            (fp) => fp._id === payload.focalpointId
+          ).insights = storedUser.focalpoints
+            .find((fp) => fp._id === payload.focalpointId)
+            .insights.filter((insight) => insight._id !== payload.insight._id);
           localStorage.setItem('user', JSON.stringify(storedUser));
           state.loading = false;
           state.success = true;
@@ -434,7 +428,10 @@ export const focalpointSlice = createSlice({
           state.loading = false;
           state.error = 'Add focal point details failed';
         } else {
-          console.log('[Add-FocalPoint] addFocalPoint.fulfilled payload: ', payload);
+          console.log(
+            '[Add-FocalPoint] addFocalPoint.fulfilled payload: ',
+            payload
+          );
           const storedUser = JSON.parse(localStorage.getItem('user'));
           storedUser.focalpoints.push(payload);
           localStorage.setItem('user', JSON.stringify(storedUser));
@@ -444,7 +441,10 @@ export const focalpointSlice = createSlice({
         }
       })
       .addCase(addFocalPoint.rejected, (state, { payload }) => {
-        console.log('[Add-FocalPoint] addFocalPoint.rejected payload: ', payload);
+        console.log(
+          '[Add-FocalPoint] addFocalPoint.rejected payload: ',
+          payload
+        );
         alert('Add Focal Point failed. Please try again.');
         state.loading = false;
         state.error = payload;
@@ -458,13 +458,19 @@ export const focalpointSlice = createSlice({
           state.loading = false;
           state.error = 'Delete focal point details failed';
         } else {
-          console.log('[Delete-FocalPoint] deleteFocalPoint.fulfilled payload: ', payload);
+          console.log(
+            '[Delete-FocalPoint] deleteFocalPoint.fulfilled payload: ',
+            payload
+          );
           const storedUser = JSON.parse(localStorage.getItem('user'));
-          const indexToDelete = storedUser.focalpoints.findIndex(fp => fp._id.toString() === payload._id.toString()); // find the index of the fpDelete item in the array
+          const indexToDelete = storedUser.focalpoints.findIndex(
+            (fp) => fp._id.toString() === payload._id.toString()
+          ); // find the index of the fpDelete item in the array
 
-          if (indexToDelete !== -1) { // check if the item was found
+          if (indexToDelete !== -1) {
+            // check if the item was found
             storedUser.focalpoints.splice(indexToDelete, 1); // remove the item using the splice method
-            console.log('Successfully removed', payload)
+            console.log('Successfully removed', payload);
           } else {
             console.log('Not found in fp_array: ', payload);
           }
@@ -476,7 +482,10 @@ export const focalpointSlice = createSlice({
         }
       })
       .addCase(deleteFocalPoint.rejected, (state, { payload }) => {
-        console.log('[Delete-FocalPoint] deleteFocalPoint.rejected payload: ', payload);
+        console.log(
+          '[Delete-FocalPoint] deleteFocalPoint.rejected payload: ',
+          payload
+        );
         alert('Delete Focal Point failed. Please try again.');
         state.loading = false;
         state.error = payload;
@@ -486,11 +495,15 @@ export const focalpointSlice = createSlice({
         state.error = null;
       })
       .addCase(updateFocalpointImage.fulfilled, (state, { payload }) => {
+        console.log('HEY:', payload);
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Update Focal Point Image failed';
         } else {
-          console.log('[Update-FocalPoint-Image] updateFocalpointImage.fulfilled payload: ', payload);
+          console.log(
+            '[Update-FocalPoint-Image] updateFocalpointImage.fulfilled payload: ',
+            payload
+          );
           const storedUser = JSON.parse(localStorage.getItem('user'));
           storedUser.focalpoints[payload.index].imageUrl = payload.url;
           localStorage.setItem('user', JSON.stringify(storedUser));
@@ -500,7 +513,10 @@ export const focalpointSlice = createSlice({
         }
       })
       .addCase(updateFocalpointImage.rejected, (state, { payload }) => {
-        console.log('[Update-FocalPoint-Image] updateFocalpointImage.rejected payload: ', payload);
+        console.log(
+          '[Update-FocalPoint-Image] updateFocalpointImage.rejected payload: ',
+          payload
+        );
         alert('Update Focal Point Image failed. Please try again.');
         state.loading = false;
         state.error = payload;
