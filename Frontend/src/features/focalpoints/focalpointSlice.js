@@ -159,11 +159,12 @@ export const editFPDetails = createAsyncThunk(
     { editedName, editedDescription, sightToken, focalpointId },
     { rejectWithValue }
   ) => {
+    console.log('-------- SLICE -----------');
     try {
       const config = {
         headers: {
+          authorization: `Bearer ${sightToken}`,
           'Content-Type': 'application/json',
-          authoriation: 'Bearer ' + sightToken,
         },
       };
       const res = await axios.patch(
@@ -495,7 +496,6 @@ export const focalpointSlice = createSlice({
         state.error = null;
       })
       .addCase(updateFocalpointImage.fulfilled, (state, { payload }) => {
-        console.log('HEY:', payload);
         if (payload === undefined) {
           state.loading = false;
           state.error = 'Update Focal Point Image failed';
