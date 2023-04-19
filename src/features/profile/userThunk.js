@@ -10,7 +10,7 @@ export const addInsightToFocalPoint = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'authorization': `Bearer ${sightToken}`,
+          authorization: `Bearer ${sightToken}`,
           'content-type': 'application/json',
         },
       };
@@ -19,7 +19,7 @@ export const addInsightToFocalPoint = createAsyncThunk(
       console.log('[userThunk.js] focalPointId: ', focalpointId);
       console.log('[userThunk.js] insight: ', insight);
 
-      const backendURL = `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`;
+      const backendURL = `${process.env.REACT_APP_API_URL_DEV}/user/${username}/focalpoints/${focalpointId}`;
 
       const res = await axios.post(
         `${backendURL}`,
@@ -59,11 +59,11 @@ export const updateUsername = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'authorization': `Bearer ${sightToken}`,
+          authorization: `Bearer ${sightToken}`,
           'content-type': 'application/json',
         },
       };
-      const backendURL = `http://localhost:3000/user/${oldUsername}/update`;
+      const backendURL = `${process.env.REACT_APP_API_URL_DEV}/user/${oldUsername}/update`;
 
       const res = await axios.put(
         `${backendURL}`,

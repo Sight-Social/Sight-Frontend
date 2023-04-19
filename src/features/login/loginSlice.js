@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { setProfile } from '../profile/profileSlice';
 import axios from 'axios';
 
-const backendURL = 'http://localhost:3000/login';
+const backendURL = `${process.env.REACT_APP_API_URL_DEV}/login`;
 
 const initialState = {
   isAuthenticated: false,

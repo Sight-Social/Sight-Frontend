@@ -100,7 +100,7 @@ export const addFocalPoint = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        `http://localhost:3000/user/${storedUser.username}/focalpoints`,
+        `${process.env.REACT_APP_API_URL_DEV}/${storedUser.username}/focalpoints`,
         { title: title, description: description },
         config
       );
@@ -125,7 +125,7 @@ export const deleteFocalPoint = createAsyncThunk(
   async ({ focalpoint, sightToken }, { rejectWithValue }) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/user/${storedUser.username}/focalpoints`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${storedUser.username}/focalpoints`,
         {
           headers: {
             authorization: `Bearer ${sightToken}`,
@@ -168,7 +168,7 @@ export const editFPDetails = createAsyncThunk(
         },
       };
       const res = await axios.patch(
-        `http://localhost:3000/user/${storedUser.username}/focalpoints`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${storedUser.username}/focalpoints`,
         {
           editedName: editedName,
           editedDescription: editedDescription,
@@ -206,7 +206,7 @@ export const addInsight = createAsyncThunk(
       };
 
       const res = await axios.post(
-        `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${username}/focalpoints/${focalpointId}`,
         {
           insight: insight,
           focalpointId: focalpointId,
@@ -245,7 +245,7 @@ export const deleteInsight = createAsyncThunk(
       };
 
       const res = await axios.delete(
-        `http://localhost:3000/user/${username}/focalpoints/${focalpointId}`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${username}/focalpoints/${focalpointId}`,
         {
           headers: {
             authorization: `Bearer ${sightToken}`,
@@ -287,7 +287,7 @@ export const updateFocalpointImage = createAsyncThunk(
       };
 
       const res = await axios.patch(
-        `http://localhost:3000/user/${storedUser.username}/focalpoints/image`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${storedUser.username}/focalpoints/image`,
         formData,
         config
       );

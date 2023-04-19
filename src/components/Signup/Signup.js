@@ -26,11 +26,14 @@ export function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/signup', {
-        email: email,
-        password: password,
-        username: username,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL_DEV}/signup`,
+        {
+          email: email,
+          password: password,
+          username: username,
+        }
+      );
       if (res.data) {
         console.log('Signup successful');
         alert('Signup successful');
@@ -49,39 +52,38 @@ export function Signup() {
 
   return (
     <Container>
-      <Icon to="/">Sight</Icon>
+      <Icon to='/'>Sight</Icon>
       <FormContent>
         <Form onSubmit={handleSignup}>
           <IconWrapper>
             <SightIcon src={SightWhiteIcon} />
           </IconWrapper>
           <FormH1>Welcome!</FormH1>
-          <FormLabel htmlFor="for">Email</FormLabel>
+          <FormLabel htmlFor='for'>Email</FormLabel>
           <FormInput
-            type="email"
+            type='email'
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-          <FormLabel htmlFor="for">Username</FormLabel>
+          <FormLabel htmlFor='for'>Username</FormLabel>
           <FormInput
-            type="username"
+            type='username'
             required
             onChange={(e) => setUsername(e.target.value)}
           />
-          <FormLabel htmlFor="for">Password</FormLabel>
+          <FormLabel htmlFor='for'>Password</FormLabel>
           <FormInput
-            type="password"
+            type='password'
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-          <FormButton type="submit" onSubmit={handleSignup}>
+          <FormButton type='submit' onSubmit={handleSignup}>
             Sign Up
           </FormButton>
-          <Text to="/login">Login</Text>
-          <Text to="/help">Help</Text>
+          <Text to='/login'>Login</Text>
+          <Text to='/help'>Help</Text>
         </Form>
       </FormContent>
     </Container>
   );
 }
-

@@ -17,7 +17,6 @@ import HeroSection from '../components/LandingPage/Option2/HeroSection';
 import Showcase from '../components/LandingPage/Option2/Showcase';
 
 export function HomePage() {
-
   const [view, setView] = useState('option1');
   const changeView = (view) => {
     switch (view) {

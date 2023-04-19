@@ -37,7 +37,11 @@ export function Profile() {
     setIsEditing(false);
     try {
       dispatch(
-        updateUsername({ sightToken: sightToken, oldUsername: username, newUsername: editedName })
+        updateUsername({
+          sightToken: sightToken,
+          oldUsername: username,
+          newUsername: editedName,
+        })
       );
       navigate(`/user/${editedName}`);
     } catch (error) {
