@@ -11,13 +11,6 @@ import {
   FormButton,
 } from '../InsightAdd/InsightAddElements';
 
-/* ASSETS */
-import hikingLogo from '../../../assets/backgrounds/hikingBackground.png';
-import financeLogo from '../../../assets/backgrounds/financeBackground.png';
-import fitnessLogo from '../../../assets/backgrounds/fitnessBackground.png';
-import biohackingLogo from '../../../assets/biohacking-logo.avif';
-import musicLogo from '../../../assets/backgrounds/musicBackground.png';
-
 /* MAIN STYLING */
 import { MainContainer } from './InsightGridElements';
 import {
@@ -30,40 +23,36 @@ import {
   EditCardBody,
   EditableFpName,
   EditableDescription,
-  InsightWrapper,
-  ButtonRow,
   UploadImageButton,
-  UploadImageIcon
 } from './InsightGridElements';
 
-import { DeleteInsight } from '../InsightDelete/DeleteInsight';
+/* import { DeleteInsight } from '../InsightDelete/DeleteInsight'; */
 
 //*********************8 */
 import { InsightCard } from './InsightCard/InsightCard';
-import { Dropdown, InputGroup, InputIcon } from 'react-bootstrap';
+/* import { Dropdown, InputGroup, InputIcon } from 'react-bootstrap'; */
 
 //************************ */
 
 /* INTERACTIVE COMPONENTS */
 import { SelFocalPointFeed } from '../../SelFocalPoint/SelFocalPointFeed';
-import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
-import { SpotifyEmbed } from '../../SpotifyEmbed/SpotifyEmbed';
+/* import YouTubeVideo from '../../YouTubeVideo/YouTubeVideo';
+import { SpotifyEmbed } from '../../SpotifyEmbed/SpotifyEmbed'; */
 import { ButtonGrouping } from '../../RequestButtonElements';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Feed } from '../../Feed/Feed.js';
+/* import { Feed } from '../../Feed/Feed.js'; */
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   editFPDetails,
   addInsight,
-  deleteFocalPoint
+  deleteFocalPoint,
 } from '../../../features/focalpoints/focalpointSlice';
-import {UploadImage} from '../../AwsImageUpload';
-
+import { UploadImage } from '../../AwsImageUpload';
 
 export function InsightGrid() {
   const dispatch = useDispatch();
@@ -73,15 +62,15 @@ export function InsightGrid() {
   const username = useSelector((state) => state.profile.username);
   const [formUrl, setUrl] = useState('');
   const [tags, setTags] = useState('');
-  
+
   /* USE THE URL TO KNOW WHICH FOCAL POINT IS SELECTED  */
   let url = window.location.href;
   let spliturl = url.split('/');
   let focalpointId = spliturl[spliturl.length - 1];
   const focalpoint = focalpoints.find(
     (focalpoint) => focalpoint._id === focalpointId
-    );
-    
+  );
+
   let imageUrl = focalpoint.imageUrl;
   /* let imageUrl = useSelector((state) => state.focalpoint.fp_array.imageUrl); */
   const [isEditing, setIsEditing] = useState(false);
@@ -93,14 +82,6 @@ export function InsightGrid() {
   useEffect(() => {
     setInsightArray(focalpoint.insights ? focalpoint.insights : []);
   }, [focalpoints, imageUrl]);
-
-  let imageSet = [
-    financeLogo,
-    fitnessLogo,
-    musicLogo,
-    biohackingLogo,
-    hikingLogo,
-  ];
 
   const [view, setView] = useState('insights');
 
@@ -172,9 +153,8 @@ export function InsightGrid() {
   }
 
   const handleDeleteFP = async () => {
-    console.log('deleting...')
     try {
-      await dispatch(deleteFocalPoint({focalpoint, sightToken}));
+      await dispatch(deleteFocalPoint({ focalpoint, sightToken }));
       navigate(`/user/${username}`);
       window.location.reload();
     } catch (error) {
@@ -185,18 +165,14 @@ export function InsightGrid() {
   const editFPState = () => {
     setIsEditing(!isEditing);
   };
-  console.log('insights:', insightArray);
 
-  
-  console.log('imageUrl:', imageUrl)
   return (
     // s3://sight-image-bucket-323/Sight-Insta.png
     <NavAndContentContainer>
       <MainContainer>
-      
-          <EditCardBody>
-            {isEditing ? (
-              <Card
+        <EditCardBody>
+          {isEditing ? (
+            <Card
               bg='transparent'
               text='light'
               style={{
@@ -208,19 +184,22 @@ export function InsightGrid() {
               }}
             >
               <UploadImageButton>
-              <Card.Img
-                variant='top'
-                src={imageUrl ? imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
-                style={{
-                  height: '200px',
-                  width: '200px',
-                  opacity: '0.5', 
-                }}
-              ></Card.Img>
-              {/* <UploadImageIcon /> */}
-
+                <Card.Img
+                  variant='top'
+                  src={
+                    imageUrl
+                      ? imageUrl
+                      : 'https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png'
+                  }
+                  style={{
+                    height: '200px',
+                    width: '200px',
+                    opacity: '0.5',
+                  }}
+                ></Card.Img>
+                {/* <UploadImageIcon /> */}
               </UploadImageButton>
-              
+
               <Card.Body style={{ width: 'auto' }}>
                 <Card.Title
                   style={{
@@ -250,11 +229,7 @@ export function InsightGrid() {
                 >
                   Cancel
                 </Button>
-                <Button
-                  variant='success'
-                  size='md'
-                  onClick={handleEditFPCard}
-                >
+                <Button variant='success' size='md' onClick={handleEditFPCard}>
                   Save
                 </Button>
                 <Button
@@ -266,10 +241,10 @@ export function InsightGrid() {
                   Delete
                 </Button>
               </Card.Body>
-              < UploadImage />
-              </Card>
-            ) : (
-              <Card
+              <UploadImage />
+            </Card>
+          ) : (
+            <Card
               bg='transparent'
               text='light'
               style={{
@@ -282,7 +257,11 @@ export function InsightGrid() {
             >
               <Card.Img
                 variant='top'
-                src={imageUrl ? imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
+                src={
+                  imageUrl
+                    ? imageUrl
+                    : 'https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png'
+                }
                 style={{
                   height: '200px',
                   width: '200px',
@@ -304,10 +283,9 @@ export function InsightGrid() {
                   {focalpoint.description}
                 </Card.Text>
               </Card.Body>
-              </Card>
-            )}
-          </EditCardBody>
-        
+            </Card>
+          )}
+        </EditCardBody>
 
         <NavContainer>
           <Nav justify variant='tabs' defaultActiveKey='link-1'>
@@ -383,13 +361,13 @@ export function InsightGrid() {
             </HeaderContainer>
             <GridWrapper>
               <InsightsGrid>
-                {insightArray
-                  ? insightArray.map((insight, index) =>
-                        <InsightCard insight = {insight} />
-                      ) : (
-                        <div>loading</div>
-                      )                
-                }
+                {insightArray ? (
+                  insightArray.map((insight, index) => (
+                    <InsightCard insight={insight} />
+                  ))
+                ) : (
+                  <div>loading</div>
+                )}
               </InsightsGrid>
             </GridWrapper>
           </InsightBackgrund>

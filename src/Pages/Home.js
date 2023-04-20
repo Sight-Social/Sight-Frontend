@@ -1,23 +1,20 @@
-import { useState } from 'react';
+/* import { useState } from 'react'; */
 import Navbar from '../components/PageComponents/NavBar';
 import Footer from '../components/PageComponents/Footer/Footer';
-import IntroSection from '../components/LandingPage/IntroSection';
+/* import IntroSection from '../components/LandingPage/IntroSection'; */
 import InfoSection from '../components/LandingPage/InfoSection';
 import {
-  FocalPoints,
-  Feed,
-  Discover,
   ContentCurationTool,
   Algorithm,
   SaveSortShare,
 } from '../components/LandingPage/InfoSection/Data';
-import styled from 'styled-components';
-import Nav from 'react-bootstrap/Nav';
+/* import styled from 'styled-components'; */
+/* import Nav from 'react-bootstrap/Nav'; */
 import HeroSection from '../components/LandingPage/Option2/HeroSection';
 import Showcase from '../components/LandingPage/Option2/Showcase';
 
 export function HomePage() {
-  const [view, setView] = useState('option1');
+  /* const [view, setView] = useState('option1');
   const changeView = (view) => {
     switch (view) {
       case 'option1':
@@ -30,16 +27,16 @@ export function HomePage() {
         setView('option1');
         break;
     }
-  };
-  const NavContainer = styled.div`
+  }; */
+  /* const NavContainer = styled.div`
     width: 100%;
     height: 100%;
-  `;
+  `; */
 
   return (
     <>
       <Navbar />
-      <NavContainer>
+      {/* <NavContainer>
         <Nav
           justify
           variant='tabs'
@@ -79,8 +76,8 @@ export function HomePage() {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-      </NavContainer>
-      {view === 'option1' ? (
+      </NavContainer> */}
+      {/* {view === 'option1' ? (
         // render focal points section
         <>
           <IntroSection />
@@ -90,13 +87,13 @@ export function HomePage() {
         </>
       ) : view === 'option2' ? (
         // render shared section
-        <>
-          <HeroSection />
-          <Showcase />
-          <InfoSection {...ContentCurationTool} />
-          <InfoSection {...Algorithm} />
-          <InfoSection {...SaveSortShare} />
-        </>
+        <> */}
+      <HeroSection />
+      <Showcase />
+      <InfoSection {...ContentCurationTool} />
+      <InfoSection {...Algorithm} />
+      <InfoSection {...SaveSortShare} />
+      {/*   </>
       ) : (
         // default case - render focal points section
         <>
@@ -105,8 +102,7 @@ export function HomePage() {
           <InfoSection {...Feed} />
           <InfoSection {...Discover} />
         </>
-      )}
-
+      )} */}
       <Footer />
     </>
   );

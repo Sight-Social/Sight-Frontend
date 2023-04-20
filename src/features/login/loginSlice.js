@@ -22,8 +22,6 @@ const initialState = {
 export const login = createAsyncThunk(
   'login/login',
   async ({ username, password }, { rejectWithValue }) => {
-    console.log('TEST-username:', username);
-    console.log('TEST-password:', password);
     try {
       const config = {
         headers: {
