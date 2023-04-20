@@ -10,7 +10,7 @@ export const IntroContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 460px) {
-    height: 60vh;
+    height: 65vh;
     flex-direction: column;
     justify-content: flex-start;
   }
@@ -56,20 +56,13 @@ export const IntroSubHeading = styled.p`
 `;
 
 export const IntroP = styled.p`
-  /* border: 5px solid white; */
   color: #fff;
   text-align: left;
   max-width: 800px;
   font-size: 30px;
   font-weight: 500;
   margin: 25px 0;
-  /* padding: 0 2em; */
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-  }
-  @media screen and (max-width: 550px) {
-    font-size: 18px;
-  }
+
   @media screen and (max-width: 460px) {
     font-size: 16px;
   }
@@ -83,8 +76,8 @@ export const ShowcaseGrids = styled.div`
   align-items: center;
 
   @media screen and (max-width: 460px) {
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
   }
 `;
 
