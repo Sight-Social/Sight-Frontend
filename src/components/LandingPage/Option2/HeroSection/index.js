@@ -26,7 +26,7 @@ const HeroSection = () => {
     transition: all 0.1s ease;
     height: 75px;
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;
@@ -36,7 +36,7 @@ const HeroSection = () => {
     margin-left: 160px;
     transition: all 0.1s ease;
     height: 70px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;
@@ -46,7 +46,7 @@ const HeroSection = () => {
     margin-left: 300px;
     transition: all 0.5s ease;
     height: 75px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;
@@ -56,7 +56,7 @@ const HeroSection = () => {
     margin-right: 300px;
     transition: all 0.5s ease;
     height: 75px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;
@@ -66,7 +66,7 @@ const HeroSection = () => {
     margin-right: 175px;
     transition: all 0.25s ease;
     height: 75px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;
@@ -76,7 +76,7 @@ const HeroSection = () => {
     margin-right: 50px;
     transition: all 0.1s ease;
     height: 100px;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 460px) {
       display: none;
     }
   `;

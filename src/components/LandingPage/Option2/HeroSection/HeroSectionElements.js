@@ -15,7 +15,7 @@ export const ImageContainer = styled.div`
   align-items: center;
   padding: 50px;
   overflow: hidden;
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 460px) {
     padding: 0px;
   }
 `;
@@ -32,7 +32,7 @@ export const ImageMiddle = styled.img`
   height: 300px;
   padding: 0px 80px;
   background-color: var(--clr-black);
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 460px) {
     padding: 0px 0px;
     height: 250px;
   }
@@ -115,7 +115,7 @@ export const IntroH1 = styled.h1`
   text-align: left;
   margin: 0 auto;
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 460px) {
     font-size: 40px;
   }
 `;
@@ -126,7 +126,7 @@ export const IntroSubHeading = styled.p`
   text-align: left;
   margin: 10px auto;
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 460px) {
     font-size: 32px;
     margin-bottom: 50px;
   }
