@@ -2,16 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { updateUsername, addInsightToFocalPoint } from './userThunk';
 
 const initialState = {
-  /* isAuthenticated: false,
-  loading: false,
-  error: null,
-  username: '',
-  email: '',
-  password: '',
-  avatar: '',
-  tokens: [],
-  subscriptions: [], */
-
   isAuthenticated: false,
   loading: false,
   error: null,
