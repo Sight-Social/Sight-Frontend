@@ -15,6 +15,9 @@ export const ImageContainer = styled.div`
   align-items: center;
   padding: 50px;
   overflow: hidden;
+  @media screen and (max-width: 425px) {
+    padding: 0px;
+  }
 `;
 
 export const ImageLeft = styled.img`
@@ -29,6 +32,10 @@ export const ImageMiddle = styled.img`
   height: 300px;
   padding: 0px 80px;
   background-color: var(--clr-black);
+  @media screen and (max-width: 425px) {
+    padding: 0px 0px;
+    height: 250px;
+  }
 `;
 
 export const ImageRight = styled.img`
@@ -108,14 +115,8 @@ export const IntroH1 = styled.h1`
   text-align: left;
   margin: 0 auto;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 425px) {
     font-size: 40px;
-  }
-  @media screen and (max-width: 550px) {
-    font-size: 32px;
-  }
-  @media screen and (max-width: 460px) {
-    font-size: 24px;
   }
 `;
 
@@ -125,14 +126,9 @@ export const IntroSubHeading = styled.p`
   text-align: left;
   margin: 10px auto;
 
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-  }
-  @media screen and (max-width: 550px) {
-    font-size: 20px;
-  }
-  @media screen and (max-width: 460px) {
-    font-size: 18px;
+  @media screen and (max-width: 425px) {
+    font-size: 32px;
+    margin-bottom: 50px;
   }
 `;
 

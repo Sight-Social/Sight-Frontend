@@ -8,6 +8,12 @@ export const IntroContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 425px) {
+    height: 60vh;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 export const IntroContent = styled.div`
@@ -16,9 +22,17 @@ export const IntroContent = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
-  text-align: left;
   max-width: 40vw;
   padding-right: 30px;
+
+  @media screen and (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 40px 20px 40px 30px;
+    max-width: 100vw;
+  }
 `;
 
 export const IntroH1 = styled.h1`
@@ -26,13 +40,7 @@ export const IntroH1 = styled.h1`
   font-size: 40px;
   text-align: left;
 
-  @media screen and (max-width: 768px) {
-    font-size: 40px;
-  }
-  @media screen and (max-width: 550px) {
-    font-size: 32px;
-  }
-  @media screen and (max-width: 460px) {
+  @media screen and (max-width: 425px) {
     font-size: 24px;
   }
 `;
@@ -42,13 +50,7 @@ export const IntroSubHeading = styled.p`
   font-size: 32px;
   text-align: left;
 
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-  }
-  @media screen and (max-width: 550px) {
-    font-size: 20px;
-  }
-  @media screen and (max-width: 460px) {
+  @media screen and (max-width: 425px) {
     font-size: 18px;
   }
 `;
@@ -79,6 +81,11 @@ export const ShowcaseGrids = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media screen and (max-width: 425px) {
+    height: 250px;
+    width: 250px;
+  }
 `;
 
 export const Img = styled.img`

@@ -25,6 +25,10 @@ const HeroSection = () => {
     margin-left: 50px;
     transition: all 0.1s ease;
     height: 75px;
+
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const ImageLeft2 = styled.img`
     position: absolute;
@@ -32,6 +36,9 @@ const HeroSection = () => {
     margin-left: 160px;
     transition: all 0.1s ease;
     height: 70px;
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const ImageLeft3 = styled.img`
     position: absolute;
@@ -39,6 +46,9 @@ const HeroSection = () => {
     margin-left: 300px;
     transition: all 0.5s ease;
     height: 75px;
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const ImageRight3 = styled.img`
     position: absolute;
@@ -46,6 +56,9 @@ const HeroSection = () => {
     margin-right: 300px;
     transition: all 0.5s ease;
     height: 75px;
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const ImageRight2 = styled.img`
     position: absolute;
@@ -53,6 +66,9 @@ const HeroSection = () => {
     margin-right: 175px;
     transition: all 0.25s ease;
     height: 75px;
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const ImageRight1 = styled.img`
     position: absolute;
@@ -60,6 +76,9 @@ const HeroSection = () => {
     margin-right: 50px;
     transition: all 0.1s ease;
     height: 100px;
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
   `;
   const leftRef1 = useRef();
   const leftRef2 = useRef();
@@ -67,38 +86,7 @@ const HeroSection = () => {
   const rightRef1 = useRef();
   const rightRef2 = useRef();
   const rightRef3 = useRef();
-  /* 
-  const handleScroll = () => {
-    const scrollTop = window.pageYOffset;
-    const screenWidth = window.innerWidth;
 
-    const maxTranslation = screenWidth / 2 - leftRef1.current.clientWidth / 2;
-    const translation = Math.min(scrollTop, maxTranslation);
-
-    leftRef1.current.style.transform = `translateX(${translation}px)`;
-    leftRef2.current.style.transform = `translateX(${translation}px)`;
-    leftRef3.current.style.transform = `translateX(${translation}px)`;
-    rightRef1.current.style.transform = `translateX(-${translation}px)`;
-    rightRef2.current.style.transform = `translateX(-${translation}px)`;
-    rightRef3.current.style.transform = `translateX(-${translation}px)`;
-  }; */
-
-  /* const handleScroll = () => {
-    const scrollTop = window.pageYOffset;
-    const screenWidth = window.innerWidth;
-
-    const maxTranslation = screenWidth / 2 - leftRef1.current.clientWidth / 2;
-    const translation = Math.min(scrollTop, maxTranslation);
-
-    if (scrollTop < maxTranslation) {
-      leftRef1.current.style.transform = `translateX(${translation}px)`;
-      leftRef2.current.style.transform = `translateX(${translation}px)`;
-      leftRef3.current.style.transform = `translateX(${translation}px)`;
-      rightRef1.current.style.transform = `translateX(-${translation}px)`;
-      rightRef2.current.style.transform = `translateX(-${translation}px)`;
-      rightRef3.current.style.transform = `translateX(-${translation}px)`;
-    }
-  }; */
   const handleScroll = () => {
     const scrollTop = window.pageYOffset;
     const screenWidth = window.innerWidth;

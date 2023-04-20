@@ -10,10 +10,22 @@ import { RiDashboardLine } from 'react-icons/ri';
 import { MdOutlineKeyboardArrowRight, MdTableRows } from 'react-icons/md';
 import { FaSlideshare } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+/* import { clearProfile } from '../../../features/profile/profileSlice';
+import { useNavigate } from 'react-router-dom'; */
 
 export function WebAppNav() {
   const focalpoints = useSelector((state) => state.focalpoint.fp_array);
   const username = useSelector((state) => state.profile.username);
+  /* const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log('[NavBar/index.js] Logout btn clicked');
+    localStorage.removeItem('user');
+    dispatch(clearProfile());
+    navigate('/');
+    window.location.reload();
+  }; */
 
   let feedURL = `/user/${username}/feed`;
   let profileURL = `/user/${username}`;

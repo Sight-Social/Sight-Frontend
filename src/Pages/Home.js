@@ -12,6 +12,7 @@ import {
 /* import Nav from 'react-bootstrap/Nav'; */
 import HeroSection from '../components/LandingPage/Option2/HeroSection';
 import Showcase from '../components/LandingPage/Option2/Showcase';
+import { OffCanvasNav } from '../components/NavOffcanvas';
 
 export function HomePage() {
   /* const [view, setView] = useState('option1');
@@ -35,7 +36,8 @@ export function HomePage() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <OffCanvasNav />
       {/* <NavContainer>
         <Nav
           justify
