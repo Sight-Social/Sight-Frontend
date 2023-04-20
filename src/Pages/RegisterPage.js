@@ -4,7 +4,7 @@ import RegisterGoogle from '../components/RegisterGoogle/RegisterGoogle.js';
 export function RegisterPage() {
   async function onGoogleLogin() {
     try {
-      window.location.href = 'http://localhost:3000/auth/google';
+      window.location.href = `${process.env.REACT_APP_API_URL_DEV}/auth/google`;
     } catch (error) {
       console.log('[RegisterPage/google] Google Login failed');
       console.log('[RegisterPage/google] error: ', error);
@@ -15,5 +15,4 @@ export function RegisterPage() {
       <RegisterGoogle onGoogleLogin={onGoogleLogin} />
     </>
   );
-};
-
+}

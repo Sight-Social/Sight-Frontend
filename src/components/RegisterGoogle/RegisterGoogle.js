@@ -13,7 +13,7 @@ export default function RegisterGoogle() {
   const { tokens } = useSelector((state) => state.profile.tokens);
   const onGoogleLogin = () => {
     console.log('Google login clicked');
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = `${process.env.REACT_APP_API_URL_DEV}/auth/google`;
   };
 
   return (

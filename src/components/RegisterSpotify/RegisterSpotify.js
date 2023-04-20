@@ -14,7 +14,7 @@ export default function RegisterSpotify() {
   const { tokens } = useSelector((state) => state.profile.tokens);
   const onSpotifyLogin = () => {
     console.log('Spotify login clicked');
-    window.location.href = 'http://localhost:3000/auth/spotify';
+    window.location.href = `${process.env.REACT_APP_API_URL_DEV}/auth/spotify`;
   };
 
   console.log('RegisterPage popped');
