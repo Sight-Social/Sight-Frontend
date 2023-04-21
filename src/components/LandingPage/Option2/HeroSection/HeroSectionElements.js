@@ -4,7 +4,7 @@ import { MdArrowForward, MdKeyboardArrowRight } from 'react-icons/md';
 export const IntroContainer = styled.div`
   /* border: 5px solid red; */
   background: var(--clr-black);
-  height: 90vh;
+  height: 100vh;
   width: 100%;
   box-sizing: border-box;
 `;
@@ -105,8 +105,7 @@ export const IntroContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 10vh;
-  height: 90vh;
+  height: 100vh;
 `;
 
 export const IntroH1 = styled.h1`

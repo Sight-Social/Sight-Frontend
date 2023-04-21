@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 
 import {
   MainContainer,
@@ -12,8 +11,8 @@ import {
   Title,
   NavContainer,
 } from './FocalPointsElements';
-import SearchBar from '../FocalPointsSearchBar';
-import {AddButton} from '../AddFpButton';
+// import SearchBar from '../FocalPointsSearchBar';
+import { AddButton } from '../AddFpButton';
 
 import Nav from 'react-bootstrap/Nav';
 import Card from 'react-bootstrap/Card';
@@ -35,10 +34,7 @@ export function FocalPoints() {
     (state) => state.focalpoint.pinned_insights
   );
 
-
-  const [cardList, setCardList] = useState(
-    focalpoints ? focalpoints : []
-  );
+  const [cardList, setCardList] = useState(focalpoints ? focalpoints : []);
 
   useEffect(() => {
     setCardList(focalpoints ? focalpoints : []);
@@ -70,7 +66,6 @@ export function FocalPoints() {
     fitnessLogo,
     biohackingLogo,
   ];
-
 
   const toggleHome = () => {
     scroll.scrollToTop();
@@ -138,7 +133,7 @@ export function FocalPoints() {
           <HeaderAndButtons>
             <Title>Focal Points</Title>
             <AddButton />
-            <SearchBar />
+            {/* <SearchBar /> */}
           </HeaderAndButtons>
 
           <Row xs={1} md={2} className='g-4'>
@@ -165,7 +160,11 @@ export function FocalPoints() {
                       >
                         <Card.Img
                           variant='top'
-                          src={focalpoint.imageUrl ? focalpoint.imageUrl : "https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png"}
+                          src={
+                            focalpoint.imageUrl
+                              ? focalpoint.imageUrl
+                              : 'https://sight-image-bucket-323.s3.amazonaws.com/Sight-Insta.png'
+                          }
                           style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -192,7 +191,7 @@ export function FocalPoints() {
           <HeaderAndButtons>
             <Title>Shared Focal Points</Title>
             <AddButton />
-            <SearchBar />
+            {/* <SearchBar /> */}
           </HeaderAndButtons>
 
           <Row xs={1} md={2} className='g-4'>
@@ -246,7 +245,7 @@ export function FocalPoints() {
           <HeaderAndButtons>
             <Title>Pinned Insights</Title>
             <AddButton />
-            <SearchBar />
+            {/* <SearchBar /> */}
           </HeaderAndButtons>
 
           <Row xs={1} md={2} className='g-4'>
@@ -272,7 +271,7 @@ export function FocalPoints() {
           <HeaderAndButtons>
             <Title>Focal Points</Title>
             <AddButton />
-            <SearchBar />
+            {/* <SearchBar /> */}
           </HeaderAndButtons>
 
           <Row xs={1} md={2} className='g-4'>

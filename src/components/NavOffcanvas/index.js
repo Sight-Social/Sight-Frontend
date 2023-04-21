@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {
-  ButtonWrapper,
   MobileIcon,
   NavContainer,
   NavSubHeader,
@@ -41,7 +39,8 @@ export function OffCanvasNav() {
   let feedURL = `/user/${username}/feed`;
   let profileURL = `/user/${username}`;
   let loginURL = `/login`;
-
+  const { isAuthenticated } = useSelector((state) => state.profile);
+  console.log('isAuthenticatedNavOff: ' + isAuthenticated);
   return (
     <>
       <MobileIcon onClick={toggleShow}>
@@ -51,195 +50,232 @@ export function OffCanvasNav() {
         show={show}
         onHide={handleClose}
         placement='end'
-        style={{ backgroundColor: 'black', width: '70vw' }}
+        style={{ backgroundColor: 'black', width: '250px' }}
       >
-        <Offcanvas.Header closeButton style={{ marginBottom: '-1rem' }}>
-          <SightBanner>
-            <SightLogo style={{ marginRight: '15px' }} />
-            <Nav.Link
-              href='/'
-              style={{
-                color: 'white',
-                transition: 'color 0.3s ease-in-out',
-              }}
-              onMouseEnter={(e) => (e.target.style.color = 'white')}
-              onMouseLeave={(e) => (e.target.style.color = 'clr-white')}
-            >
-              Sight
-            </Nav.Link>
-          </SightBanner>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <NavContainer>
-            <Nav
-              defaultActiveKey='/home'
-              className='flex-column'
-              style={{ fontSize: '20px' }}
-            >
-              <Nav.Link
-                href={profileURL}
-                style={{
-                  color: '#AEAEAE',
-                  transition: 'color 0.3s ease-in-out',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'white')}
-                onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-              >
-                <IoMdPerson
+        {isAuthenticated ? (
+          <>
+            <Offcanvas.Header closeButton style={{ marginBottom: '-1rem' }}>
+              <SightBanner>
+                <SightLogo style={{ marginRight: '15px' }} />
+                <Nav.Link
+                  href='/'
                   style={{
                     color: 'white',
-                    marginRight: '10px',
-                    marginLeft: '-1rem',
-                    marginBottom: '3.5px',
+                    transition: 'color 0.3s ease-in-out',
                   }}
-                />
-                Profile
-              </Nav.Link>
-              <Nav.Link
-                href={feedURL}
-                style={{
-                  color: '#AEAEAE',
-                  transition: 'color 0.3s ease-in-out',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'white')}
-                onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-              >
-                <RiDashboardLine
-                  style={{
-                    color: 'white',
-                    marginRight: '10px',
-                    marginLeft: '-1rem',
-                    marginBottom: '3.5px',
-                  }}
-                />
-                Feed
-              </Nav.Link>
-            </Nav>
-            <hr
-              style={{
-                background: 'white',
-                height: '3px',
-                border: 'none',
-              }}
-            />
-            <NavSubHeader>
-              <MdTableRows
-                style={{
-                  color: 'white',
-                  marginRight: '10px',
-                  marginBottom: '2.75px',
-                }}
-              />
-              Focal Points
-            </NavSubHeader>
-            <Nav
-              defaultActiveKey='/home'
-              className='flex-column'
-              style={{
-                paddingLeft: '15px',
-                marginTop: '10px',
-                marginBottom: '50px',
-              }}
-            >
-              {focalpoints
-                ? focalpoints.map((focalpoint, index) => (
-                    <Nav.Link
-                      key={index}
-                      href={`/user/${username}/focalpoints/${focalpoint._id}`}
+                  onMouseEnter={(e) => (e.target.style.color = 'white')}
+                  onMouseLeave={(e) => (e.target.style.color = 'clr-white')}
+                >
+                  Sighttrue
+                </Nav.Link>
+              </SightBanner>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <NavContainer>
+                <Nav
+                  defaultActiveKey='/home'
+                  className='flex-column'
+                  style={{ fontSize: '20px' }}
+                >
+                  <Nav.Link
+                    href={profileURL}
+                    style={{
+                      color: '#AEAEAE',
+                      transition: 'color 0.3s ease-in-out',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = 'white')}
+                    onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
+                  >
+                    <IoMdPerson
                       style={{
-                        color: '#AEAEAE',
-                        transition: 'color 0.3s ease-in-out',
+                        color: 'white',
+                        marginRight: '10px',
+                        marginLeft: '-1rem',
+                        marginBottom: '3.5px',
                       }}
-                      onMouseEnter={(e) => (e.target.style.color = 'white')}
-                      onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-                    >
-                      {<MdOutlineKeyboardArrowRight />}
-                      {focalpoint.title}
-                    </Nav.Link>
-                  ))
-                : null}
-            </Nav>
-            <NavSubHeader>
-              <FaSlideshare
-                style={{
-                  color: 'white',
-                  marginRight: '10px',
-                  marginBottom: '2.75px',
-                }}
-              />
-              Shared Focal Points
-            </NavSubHeader>
-            <Nav
-              defaultActiveKey='/home'
-              className='flex-column'
-              style={{ paddingLeft: '15px' }}
-            >
-              {focalpoints
-                ? focalpoints.map((focalpoint, index) => (
-                    <Nav.Link
-                      key={index}
-                      href={`/user/${username}/focalpoints/${focalpoint._id}`}
+                    />
+                    Profile
+                  </Nav.Link>
+                  <Nav.Link
+                    href={feedURL}
+                    style={{
+                      color: '#AEAEAE',
+                      transition: 'color 0.3s ease-in-out',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = 'white')}
+                    onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
+                  >
+                    <RiDashboardLine
                       style={{
-                        color: '#AEAEAE',
-                        transition: 'color 0.3s ease-in-out',
+                        color: 'white',
+                        marginRight: '10px',
+                        marginLeft: '-1rem',
+                        marginBottom: '3.5px',
                       }}
-                      onMouseEnter={(e) => (e.target.style.color = 'white')}
-                      onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-                    >
-                      {<MdOutlineKeyboardArrowRight />}
-                      {focalpoint.title}
-                    </Nav.Link>
-                  ))
-                : null}
-            </Nav>
-            <Nav
-              defaultActiveKey='/home'
-              className='flex-column'
-              style={{ fontSize: '20px' }}
-            >
-              <Nav.Link
-                href={loginURL}
-                style={{
-                  color: '#AEAEAE',
-                  transition: 'color 0.3s ease-in-out',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'white')}
-                onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-              >
-                <IoMdPerson
+                    />
+                    Feed
+                  </Nav.Link>
+                </Nav>
+                <hr
                   style={{
-                    color: 'white',
-                    marginRight: '10px',
-                    marginLeft: '-1rem',
-                    marginBottom: '3.5px',
+                    background: 'white',
+                    height: '3px',
+                    border: 'none',
                   }}
                 />
-                login
-              </Nav.Link>
-              <Nav.Link
-                to='/'
-                onClick={handleLogout}
-                style={{
-                  color: '#AEAEAE',
-                  transition: 'color 0.3s ease-in-out',
-                  marginTop: '100%',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'white')}
-                onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
-              >
-                <IoMdPerson
+                <NavSubHeader>
+                  <MdTableRows
+                    style={{
+                      color: 'white',
+                      marginRight: '10px',
+                      marginBottom: '2.75px',
+                    }}
+                  />
+                  Focal Points
+                </NavSubHeader>
+                <Nav
+                  defaultActiveKey='/home'
+                  className='flex-column'
+                  style={{
+                    paddingLeft: '15px',
+                    marginTop: '10px',
+                    marginBottom: '50px',
+                  }}
+                >
+                  {focalpoints
+                    ? focalpoints.map((focalpoint, index) => (
+                        <Nav.Link
+                          key={index}
+                          href={`/user/${username}/focalpoints/${focalpoint._id}`}
+                          style={{
+                            color: '#AEAEAE',
+                            transition: 'color 0.3s ease-in-out',
+                          }}
+                          onMouseEnter={(e) => (e.target.style.color = 'white')}
+                          onMouseLeave={(e) =>
+                            (e.target.style.color = '#AEAEAE')
+                          }
+                        >
+                          {<MdOutlineKeyboardArrowRight />}
+                          {focalpoint.title}
+                        </Nav.Link>
+                      ))
+                    : null}
+                </Nav>
+                <NavSubHeader>
+                  <FaSlideshare
+                    style={{
+                      color: 'white',
+                      marginRight: '10px',
+                      marginBottom: '2.75px',
+                    }}
+                  />
+                  Shared Focal Points
+                </NavSubHeader>
+                <Nav
+                  defaultActiveKey='/home'
+                  className='flex-column'
+                  style={{ paddingLeft: '15px' }}
+                >
+                  {focalpoints
+                    ? focalpoints.map((focalpoint, index) => (
+                        <Nav.Link
+                          key={index}
+                          href={`/user/${username}/focalpoints/${focalpoint._id}`}
+                          style={{
+                            color: '#AEAEAE',
+                            transition: 'color 0.3s ease-in-out',
+                          }}
+                          onMouseEnter={(e) => (e.target.style.color = 'white')}
+                          onMouseLeave={(e) =>
+                            (e.target.style.color = '#AEAEAE')
+                          }
+                        >
+                          {<MdOutlineKeyboardArrowRight />}
+                          {focalpoint.title}
+                        </Nav.Link>
+                      ))
+                    : null}
+                </Nav>
+                <Nav
+                  defaultActiveKey='/home'
+                  className='flex-column'
+                  style={{ fontSize: '20px' }}
+                >
+                  <Nav.Link
+                    to='/'
+                    onClick={handleLogout}
+                    style={{
+                      color: '#AEAEAE',
+                      transition: 'color 0.3s ease-in-out',
+                      marginTop: '100%',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = 'white')}
+                    onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
+                  >
+                    <IoMdPerson
+                      style={{
+                        color: 'white',
+                        marginRight: '10px',
+                        marginLeft: '-1rem',
+                        marginBottom: '3.5px',
+                      }}
+                    />
+                    Log out
+                  </Nav.Link>
+                </Nav>
+              </NavContainer>
+            </Offcanvas.Body>
+          </>
+        ) : (
+          <>
+            <Offcanvas.Header closeButton style={{ marginBottom: '-1rem' }}>
+              <SightBanner>
+                <SightLogo style={{ marginRight: '15px' }} />
+                <Nav.Link
+                  href='/'
                   style={{
                     color: 'white',
-                    marginRight: '10px',
-                    marginLeft: '-1rem',
-                    marginBottom: '3.5px',
+                    transition: 'color 0.3s ease-in-out',
                   }}
-                />
-                Log out
-              </Nav.Link>
-            </Nav>
-          </NavContainer>
-        </Offcanvas.Body>
+                  onMouseEnter={(e) => (e.target.style.color = 'white')}
+                  onMouseLeave={(e) => (e.target.style.color = 'clr-white')}
+                >
+                  Sight
+                </Nav.Link>
+              </SightBanner>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <NavContainer>
+                <Nav
+                  defaultActiveKey='/home'
+                  className='flex-column'
+                  style={{ fontSize: '20px' }}
+                >
+                  <Nav.Link
+                    href={loginURL}
+                    style={{
+                      color: '#AEAEAE',
+                      transition: 'color 0.3s ease-in-out',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = 'white')}
+                    onMouseLeave={(e) => (e.target.style.color = '#AEAEAE')}
+                  >
+                    <IoMdPerson
+                      style={{
+                        color: 'white',
+                        marginRight: '10px',
+                        marginLeft: '-1rem',
+                        marginBottom: '3.5px',
+                      }}
+                    />
+                    login
+                  </Nav.Link>
+                </Nav>
+              </NavContainer>
+            </Offcanvas.Body>
+          </>
+        )}
       </Offcanvas>
     </>
   );

@@ -43,11 +43,11 @@ const InfoSection = ({
                 <TopLine>{topLine}</TopLine>
                 <Heading lightText={lightText}>{headLine}</Heading>
                 <Subtitle lightTextDesc={lightTextDesc}>{description}</Subtitle>
-                <BtnWrap>
+                {/* <BtnWrap>
                   <Button variant="primary" size="lg">
                     Learn More
                   </Button>{' '}
-                </BtnWrap>
+                </BtnWrap> */}
               </TextWrapper>
             </Column1>
             <Column2>

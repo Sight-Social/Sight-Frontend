@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUsername } from '../../features/profile/userThunk.js';
 import Button from 'react-bootstrap/Button';
-import Footer from '../PageComponents/Footer/Footer';
+// import Footer from '../PageComponents/Footer/Footer';
 import {
   MainContainer,
   Container,
@@ -52,11 +52,11 @@ export function Profile() {
     setIsEditing(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/');
-    window.location.reload();
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('user');
+  //   navigate('/');
+  //   window.location.reload();
+  // };
 
   return (
     <MainContainer>
@@ -117,7 +117,7 @@ export function Profile() {
               </>
             )}
           </ProfileDetailsWrapper>
-          <Button
+          {/* <Button
             variant='secondary'
             style={{
               height: '40%',
@@ -127,10 +127,10 @@ export function Profile() {
             onClick={handleLogout}
           >
             Logout
-          </Button>
+          </Button> */}
         </UserProfile>
         <FocalPoints />
-        <Footer />
+        {/* <Footer /> */}
       </Container>
     </MainContainer>
   );

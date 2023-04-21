@@ -6,7 +6,6 @@ import WebAppNav from '../components/WebAppNav';
 import { FeedFilterBar } from '../components/Feed/FeedFilterBar';
 import { OffCanvasNav } from '../components/NavOffcanvas';
 export function FeedPage() {
-
   const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -24,14 +23,14 @@ export function FeedPage() {
   return (
     <>
       <Wrapper>
-      <OffCanvasNav />
+        <OffCanvasNav />
         <WebAppNav />
         <FeedWrapper>
           <Feed />
         </FeedWrapper>
         <FeedFilterBar />
       </Wrapper>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -50,13 +50,12 @@ export const Column2 = styled.div`
   margin-bottom: 15px;
   padding: 0 15px;
   grid-area: col2;
-  /* border: solid green 5px; */
 `;
 
 export const TextWrapper = styled.div`
   max-width: 540px;
   padding-top: 0;
-  padding-bottom: 60px;
+  /* border: solid green 5px; */
 `;
 
 export const TopLine = styled.p`
@@ -86,7 +85,7 @@ export const Subtitle = styled.p`
   max-width: 440px;
   margin-bottom: 35px;
   font-size: 22px;
-  line-height: 28px;
+  line-height: 32px;
   color: ${({ lightTextDesc }) =>
     lightTextDesc ? 'var(--clr-light)' : 'var(--clr-black)'};
 `;

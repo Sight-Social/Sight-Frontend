@@ -100,38 +100,14 @@ export const ContentCurationTool = {
   lightTextDesc: true,
 
   /* Text */
-  topLine: 'Aggregate your social media feeds',
+  topLine: 'Bring it All Together',
   headLine: 'One Feed',
   description:
-    'Focus in on a single feed and learn about a topic or interest of yours.',
+    'Sign in to all of your social media accounts and we will aggregate your feeds. By streamlining your social media experience, you can focus on what really matters - enjoying and sharing your favorite content.',
 
   /* Image Styling */
   imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,
   img: FeedPic,
-  alt: 'Car',
-
-  /* Button Styling */
-  buttonLabel: 'Learn More',
-  dark: true,
-  primary: true,
-  darkText: true,
-};
-
-export const Aggregate = {
-  id: 'aggregate',
-  /* Main Color Choices */
-  lightBg: false,
-  lightText: true,
-  lightTextDesc: true,
-
-  /* Text */
-  topLine: 'Aggregate your social media feeds',
-  headLine: 'One Feed',
-  description: 'Bring all of your social media accounts into one feed.',
-
-  /* Image Styling */
-  imgStart: true /* alter this property to flip the positioning of the svg and text + button from left to right */,
-  img: feedImg,
   alt: 'Car',
 
   /* Button Styling */
@@ -152,7 +128,7 @@ export const Algorithm = {
   topLine: 'control your algorithm',
   headLine: 'Feed Settings',
   description:
-    'Take the controls to your algorithm. Use your feeds settings to directly control what you are recommended.',
+    "Our aggregation technology ensures that you receive unbiased recommendations, free from the influence of any platform. And with our feed settings, you're in charge of your algorithm - so you'll only see the media that truly matters to you.",
 
   /* Image Styling */
   imgStart: true /* alter this property to flip the positioning of the svg and text + button from left to right */,
@@ -177,7 +153,7 @@ export const SaveSortShare = {
   topLine: 'Save by topic, Not by platform',
   headLine: 'Focal Points',
   description:
-    'Save, sort, and share media from popular media platforms (Supported: YouTube, Instagram, Spotify and Twitter).',
+    'No more digging through different apps to find the content you want. Our focal points allow you to easily save, sort, and share media from popular platforms like YouTube, Instagram, Spotify, and Twitter. Plus, each Focal Point has a custom consisting of content similar to what you have saved.',
 
   /* Image Styling */
   imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,

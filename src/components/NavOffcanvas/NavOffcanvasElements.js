@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ButtonWrapper = styled.div`
-position: sticky;
+  position: sticky;
   z-index: 999;
   width: 100%;
   height: 100%;
@@ -12,7 +12,15 @@ position: sticky;
 `;
 
 export const MobileIcon = styled.div`
-  display: none;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-100%, 60%);
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #fff;
+  /* display: none;
   @media screen and (max-width: 768px) {
     display: block;
     position: absolute;
@@ -22,7 +30,7 @@ export const MobileIcon = styled.div`
     font-size: 1.8rem;
     cursor: pointer;
     color: #fff;
-  }
+  } */
 `;
 
 export const NavContainer = styled.div`
