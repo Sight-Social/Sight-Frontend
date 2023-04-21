@@ -1,6 +1,6 @@
 import React from 'react';
 /* import { Button } from '../../ButtonElements'; */
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
 import {
   InfoContainer,
@@ -12,7 +12,6 @@ import {
   TopLine,
   Heading,
   Subtitle,
-  BtnWrap,
   ImgWrap,
   Img,
 } from './InfoElements';

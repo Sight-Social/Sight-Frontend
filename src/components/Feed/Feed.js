@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadMoreCards, setQueue } from '../../features/feed/feedSlice';
 import Card from './FeedCard/index';
-import SearchBar from './FeedSearchBar';
+// import SearchBar from './FeedSearchBar';
 import RefreshButton from '../PageComponents/RefreshButton/RefreshButton';
 import {
   MainContainer,
@@ -16,12 +16,16 @@ export function Feed() {
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef();
   const dispatch = useDispatch();
-  const { catalog, queue, subscriptions, filters } = useSelector((state) => state.feed);
+  const { catalog, queue, subscriptions, filters } = useSelector(
+    (state) => state.feed
+  );
   const { isAuthenticated } = useSelector((state) => state.profile);
   console.log('Feed queue: ', queue);
 
   async function handleRefresh() {
-    console.log('[Feed.js]: handleRefresh() called, dispatching loadMoreCards action..');
+    console.log(
+      '[Feed.js]: handleRefresh() called, dispatching loadMoreCards action..'
+    );
     const action = await dispatch(
       loadMoreCards({
         catalog,
@@ -81,7 +85,7 @@ export function Feed() {
         <Text>Feed</Text>
         <RefreshSearchContainer>
           <RefreshButton />
-          <SearchBar />
+          {/* <SearchBar /> */}
         </RefreshSearchContainer>
       </Header>
       <Container>

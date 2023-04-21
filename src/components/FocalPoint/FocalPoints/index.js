@@ -112,7 +112,7 @@ export function FocalPoints() {
               Shared
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Nav.Link
               eventKey='link-3'
               style={{
@@ -124,7 +124,7 @@ export function FocalPoints() {
             >
               Pinned Insights
             </Nav.Link>
-          </Nav.Item>
+          </Nav.Item> */}
         </Nav>
       </NavContainer>
       {view === 'focalpoints' ? (

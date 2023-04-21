@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: black;
-  width:100%;
+  width: 100%;
   min-height: 70vh;
 `;
 
@@ -19,7 +19,7 @@ export const Container = styled.div`
 `;
 
 export const RefreshSearchContainer = styled.div`
-  padding: 5px 0px;
+  padding: 20px 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

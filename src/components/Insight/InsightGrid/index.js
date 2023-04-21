@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import {
   Container,
   FormContent,
@@ -179,8 +179,8 @@ export function InsightGrid() {
                 display: 'flex',
                 flexDirection: 'row',
                 width: '100%',
-                margin: '40px 0px 40px 60px',
                 alignItems: 'center',
+                flexWrap: 'wrap',
               }}
             >
               <UploadImageButton>
@@ -195,6 +195,7 @@ export function InsightGrid() {
                     height: '200px',
                     width: '200px',
                     opacity: '0.5',
+                    margin: '1rem 1rem 1rem 1rem',
                   }}
                 ></Card.Img>
                 {/* <UploadImageIcon /> */}
@@ -251,8 +252,8 @@ export function InsightGrid() {
                 display: 'flex',
                 flexDirection: 'row',
                 width: '100%',
-                margin: '40px 0px 40px 60px',
                 alignItems: 'center',
+                flexWrap: 'wrap',
               }}
             >
               <Card.Img
@@ -265,6 +266,7 @@ export function InsightGrid() {
                 style={{
                   height: '200px',
                   width: '200px',
+                  margin: '1rem 1rem 1rem 1rem',
                 }}
               ></Card.Img>
               <Card.Body onClick={editFPState}>
@@ -278,6 +280,7 @@ export function InsightGrid() {
                 <Card.Text
                   style={{
                     fontSize: '1rem',
+                    marginBottom: '1rem',
                   }}
                 >
                   {focalpoint.description}
@@ -311,7 +314,7 @@ export function InsightGrid() {
                 <DropdownButton
                   id='dropdown-basic-button'
                   title='Add'
-                  style={{ marginLeft: '25px' }}
+                  style={{ marginRight: '25px' }}
                 >
                   <Container>
                     <FormWrap>
@@ -342,7 +345,7 @@ export function InsightGrid() {
                   </Container>
                 </DropdownButton>
               </ButtonGrouping>
-              <Form
+              {/* <Form
                 style={{
                   marginRight: '25px',
                 }}
@@ -357,7 +360,7 @@ export function InsightGrid() {
                 >
                   <Form.Control type='email' placeholder='Search' />
                 </Form.Group>
-              </Form>
+              </Form> */}
             </HeaderContainer>
             <GridWrapper>
               <InsightsGrid>

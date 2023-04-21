@@ -17,10 +17,11 @@ export const Container = styled.div`
 `;
 
 export const RefreshSearchContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;    
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 15px;
 `;
 
 export const Header = styled.h1`
@@ -28,12 +29,17 @@ export const Header = styled.h1`
   flex-direction: row;
   justify-content: space-between;
   font-size: 1.8rem;
-  width: 97%;
+  width: 100%;
   color: white;
   padding-left: 5px;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 5px;
 `;
 
 export const Text = styled.p`
   font-size: 1.8rem;
   color: white;
+  margin-top: 0px;
+  margin-bottom: 0;
 `;

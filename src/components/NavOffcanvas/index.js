@@ -66,7 +66,7 @@ export function OffCanvasNav() {
                   onMouseEnter={(e) => (e.target.style.color = 'white')}
                   onMouseLeave={(e) => (e.target.style.color = 'clr-white')}
                 >
-                  Sighttrue
+                  Sight
                 </Nav.Link>
               </SightBanner>
             </Offcanvas.Header>

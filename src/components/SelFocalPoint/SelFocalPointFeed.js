@@ -105,7 +105,7 @@ export function SelFocalPointFeed() {
       <Header>
         <RefreshSearchContainer>
           <RefreshButton />
-          <Form
+          {/* <Form
                 style={{
                   marginRight: '10px',
                   marginLeft: '20px',
@@ -121,7 +121,7 @@ export function SelFocalPointFeed() {
                 >
                   <Form.Control type='email' placeholder='Search' />
                 </Form.Group>
-              </Form>
+              </Form> */}
           {/* <SearchBar /> */}
         </RefreshSearchContainer>
       </Header>
