@@ -6,6 +6,7 @@ import {
   IntroContent,
   ImageContainer,
   ImageMiddle,
+  SightHeading,
 } from './HeroSectionElements';
 import Insta from '../../../../assets/IconTransistion/Insta.png';
 import TikTok from '../../../../assets/IconTransistion/TikTok.png';
@@ -80,6 +81,7 @@ const HeroSection = () => {
       display: none;
     }
   `;
+
   const leftRef1 = useRef();
   const leftRef2 = useRef();
   const leftRef3 = useRef();
@@ -124,6 +126,7 @@ const HeroSection = () => {
           <Blurs src={Blur} />
           <IntroImage src={LandingImage} />
         </IntroRoundedDiv> */}
+        <SightHeading>Sight</SightHeading>
         <IntroContent>
           <IntroH1>All your media</IntroH1>
           <IntroSubHeading>In one feed</IntroSubHeading>

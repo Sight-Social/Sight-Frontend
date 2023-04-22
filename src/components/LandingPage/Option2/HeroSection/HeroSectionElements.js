@@ -119,6 +119,22 @@ export const IntroH1 = styled.h1`
   }
 `;
 
+export const SightHeading = styled.h2`
+  color: #fff;
+  font-family: Futura;
+  font-size: 32px;
+
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(40%, 60%);
+  /* transform: translate(-80%, 40%);  */
+  /*  position: absolute;
+    right: 0;
+    top: 0; */
+`;
+
 export const IntroSubHeading = styled.p`
   color: #fff;
   font-size: 80px;
