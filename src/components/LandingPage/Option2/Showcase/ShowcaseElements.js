@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const IntroContainer = styled.div`
   background: var(--clr-gray);
-  height: 55vh;
+  height: 60vh;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -10,7 +10,7 @@ export const IntroContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 460px) {
-    height: 65vh;
+    height: 73vh;
     flex-direction: column;
     justify-content: flex-start;
   }
