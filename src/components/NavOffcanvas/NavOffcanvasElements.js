@@ -13,13 +13,14 @@ export const ButtonWrapper = styled.div`
 
 export const MobileIcon = styled.div`
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  transform: translate(-100%, 60%);
+  transform: translate(-80%, 40%);
   font-size: 1.8rem;
   cursor: pointer;
   color: #fff;
+  z-index: 100;
   /* display: none;
   @media screen and (max-width: 768px) {
     display: block;
