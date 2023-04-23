@@ -20,8 +20,12 @@ const Showcase = () => {
             platform
           </IntroSubHeading> */}
           <IntroH1>TL;DR</IntroH1>
-          <IntroSubHeading>1. Aggreate your social media feeds</IntroSubHeading>
-          <IntroSubHeading>2. Control that feed's algorithm</IntroSubHeading>
+          <IntroSubHeading>
+            1. Aggregate your social media feeds
+          </IntroSubHeading>
+          <IntroSubHeading>
+            2. Take control of your feed's algorithm
+          </IntroSubHeading>
           <IntroSubHeading>
             3. Save media by topic, not by platform
           </IntroSubHeading>

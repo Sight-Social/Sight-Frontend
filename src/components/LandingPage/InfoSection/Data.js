@@ -153,7 +153,7 @@ export const SaveSortShare = {
   topLine: 'Save by topic, Not by platform',
   headLine: 'Focal Points',
   description:
-    'No more digging through different apps to find the content you want. Our focal points allow you to easily save, sort, and share media from popular platforms like YouTube, Instagram, Spotify, and Twitter. Plus, each Focal Point has a custom consisting of content similar to what you have saved.',
+    'No more digging through different apps to find the content you want. Our focal points allow you to easily save, sort, and share media from popular platforms like YouTube, Instagram, Spotify, and Twitter. Plus, each Focal Point has a custom feed consisting of content similar to what you have saved.',
 
   /* Image Styling */
   imgStart: false /* alter this property to flip the positioning of the svg and text + button from left to right */,

@@ -39,6 +39,8 @@ export const IntroH1 = styled.h1`
   color: #fff;
   font-size: 40px;
   text-align: left;
+  font-style: italic;
+  font-family: Futura;
 
   @media screen and (max-width: 460px) {
     font-size: 24px;
