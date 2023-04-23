@@ -6,10 +6,16 @@ import {
   IntroContent,
   ShowcaseGrids,
   Img,
+  PictureAndButtonWrapper,
 } from './ShowcaseElements';
 import grid from '../../../../assets/LandingPage/FPGRID.png';
+import Button from 'react-bootstrap/Button';
 
 const Showcase = () => {
+  const onSignUp = () => {
+    console.log('Sign up clicked');
+    window.location.href = `/signup`;
+  };
   return (
     <>
       <IntroContainer>
@@ -30,9 +36,20 @@ const Showcase = () => {
             3. Save media by topic, not by platform
           </IntroSubHeading>
         </IntroContent>
-        <ShowcaseGrids>
-          <Img src={grid} />
-        </ShowcaseGrids>
+        <PictureAndButtonWrapper>
+          <ShowcaseGrids>
+            <Img src={grid} />
+          </ShowcaseGrids>
+          <Button
+            onClick={() => onSignUp()}
+            style={{
+              width: '250px',
+              marginTop: '7vh',
+            }}
+          >
+            Sign Up
+          </Button>
+        </PictureAndButtonWrapper>
       </IntroContainer>
     </>
   );
