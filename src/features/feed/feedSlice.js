@@ -43,8 +43,10 @@ const setInitialState = () => {
 const populateInitialCatalog = (subscriptions) => {
   let catalog = [];
   for (let i = 0; i < subscriptions.length; i++) {
-    const insights = subscriptions[i].insights;
-    catalog.push(...insights);
+    for (let j = 3; j < subscriptions[i].insights.length; j++) {
+      const insight = subscriptions[i].insights[j];
+      catalog.push(insight);
+    }
   }
   return catalog;
 };
@@ -134,9 +136,6 @@ export const modifyQueue = createAsyncThunk(
   }
 );
 
-
-
-
 /*********************************/
 //Slice
 const feedSlice = createSlice({
@@ -181,7 +180,7 @@ const feedSlice = createSlice({
     },
   },
 });
-
+ 
 export const { setFeedSubscriptions, setFilters, setQueue } = feedSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
