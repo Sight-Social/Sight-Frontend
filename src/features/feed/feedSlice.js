@@ -43,13 +43,10 @@ const setInitialState = () => {
 const populateInitialCatalog = (subscriptions) => {
   let catalog = [];
   for (let i = 0; i < subscriptions.length; i++) {
-    for (let j = 3; j < subscriptions[i].insights.length; j++) {
-      const insight = subscriptions[i].insights[j];
-      catalog.push(insight);
+      catalog.push(insight[0]);
     }
-  }
   return catalog;
-};
+}
 
 const populateInitialQueue = (subscriptions) => {
   let queue = [];
