@@ -100,7 +100,7 @@ export const addFocalPoint = createAsyncThunk(
         },
       };
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL_DEV}/${storedUser.username}/focalpoints`,
+        `${process.env.REACT_APP_API_URL_DEV}/user/${storedUser.username}/focalpoints`,
         { title: title, description: description },
         config
       );
