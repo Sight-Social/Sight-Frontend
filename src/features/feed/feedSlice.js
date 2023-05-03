@@ -44,7 +44,7 @@ const populateInitialCatalog = (subscriptions) => {
   let catalog = [];
   for (let i = 0; i < subscriptions.length; i++) {
     //just use the first insight from each subscription initially
-      catalog.push(insight[0]);
+      catalog.push(subscriptions[i].insights[0]);
     }
   return catalog;
 }
