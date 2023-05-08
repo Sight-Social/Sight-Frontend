@@ -17,7 +17,7 @@ export function AddMenu({ insight }) {
       (focalpoint) => focalpoint._id.toString() === focalpointId.toString()
     );
 
-    console.log('addInsightToFP insight: ', insight);
+    /* console.log('addInsightToFP insight: ', insight); */
     try {
       dispatch(
         addInsight({

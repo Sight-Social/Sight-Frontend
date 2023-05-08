@@ -16,8 +16,8 @@ export function DeleteInsight({ insight }) {
     )
   );
   async function handleInsightDeletion() {
-    console.log('insight: ', insight);
-    console.log('focalpointId: ', focalpointId);
+    /* console.log('insight: ', insight);
+    console.log('focalpointId: ', focalpointId); */
     await dispatch(
       deleteInsight({
         insight,
@@ -26,7 +26,7 @@ export function DeleteInsight({ insight }) {
         focalpointIndex,
         sightToken,
       })
-    ); 
+    );
   }
 
   return <StyledRiDeleteBinLine onClick={handleInsightDeletion} />;

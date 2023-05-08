@@ -19,8 +19,8 @@ export function RelatedVideos({ insight }) {
     )
   );
   async function handleInsightSelection() {
-    console.log('insight: ', insight);
-    console.log('focalpointId: ', focalpointId);
+    /* console.log('insight: ', insight);
+    console.log('focalpointId: ', focalpointId); */
 
     const config = {
       headers: {

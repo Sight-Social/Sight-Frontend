@@ -1,5 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilters, modifyQueue, setQueue } from '../../features/feed/feedSlice';
+import {
+  setFilters,
+  modifyQueue,
+  setQueue,
+} from '../../features/feed/feedSlice';
 import {
   Spacer,
   Container,
@@ -20,10 +24,10 @@ export function FeedFilterBar() {
   const { filters } = useSelector((state) => state.feed);
   const { queue } = useSelector((state) => state.feed);
 
- async function handleToggle(type, value){
+  async function handleToggle(type, value) {
     //Add or remove filter from filters object in store
     // Create a new object with the updated properties
-    console.log('type:', type, 'value:', value);
+    /* console.log('type:', type, 'value:', value); */
     const updatedFilters = {
       ...filters,
       [type]: filters[type].includes(value)
@@ -31,9 +35,11 @@ export function FeedFilterBar() {
         : [...filters[type], value],
     };
     dispatch(setFilters(updatedFilters));
-    const newQueue = await dispatch(modifyQueue({ queue: queue, filters: updatedFilters }));
+    const newQueue = await dispatch(
+      modifyQueue({ queue: queue, filters: updatedFilters })
+    );
     await dispatch(setQueue(newQueue.payload));
-  };
+  }
 
   return (
     <Container>
@@ -59,23 +65,17 @@ export function FeedFilterBar() {
       </SubscriptionsContainer>
       <List>
         <Header>Source</Header>
-        <ListItem 
-          onClick={() => handleToggle('source', 'YouTube')}
-        >
+        <ListItem onClick={() => handleToggle('source', 'YouTube')}>
           <ToggleSwitch />
           <FaYoutube style={{ color: '#FF0000', margin: '5px' }} />
           <Label>YouTube</Label>
         </ListItem>
-        <ListItem
-          onClick={() => handleToggle('source', 'Spotify')}
-        >
+        <ListItem onClick={() => handleToggle('source', 'Spotify')}>
           <ToggleSwitch />
           <FaSpotify style={{ color: '#1DB954', margin: '5px' }} />
           <Label>Spotify</Label>
         </ListItem>
-        <ListItem
-           onClick={() => handleToggle('source', 'Twitter')}
-        >
+        <ListItem onClick={() => handleToggle('source', 'Twitter')}>
           <ToggleSwitch />
           <FaTwitter style={{ color: '#00acee', margin: '5px' }} />
           <Label>Twitter</Label>
@@ -84,21 +84,15 @@ export function FeedFilterBar() {
       </List>
       <List>
         <Header>Media Type</Header>
-        <ListItem
-          onClick={() => handleToggle('mediaType', 'video')}
-        >
+        <ListItem onClick={() => handleToggle('mediaType', 'video')}>
           <ToggleSwitch />
           <Label>Video</Label>
         </ListItem>
-        <ListItem
-           onClick={() => handleToggle('mediaType', 'podcast')}
-        >
+        <ListItem onClick={() => handleToggle('mediaType', 'podcast')}>
           <ToggleSwitch />
           <Label>Podcasts</Label>
         </ListItem>
-        <ListItem
-          onClick={() => handleToggle('mediaType', 'tweet')}
-        >
+        <ListItem onClick={() => handleToggle('mediaType', 'tweet')}>
           <ToggleSwitch />
           <Label>Tweets</Label>
         </ListItem>

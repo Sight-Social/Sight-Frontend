@@ -20,12 +20,12 @@ export function Feed() {
     (state) => state.feed
   );
   const { isAuthenticated } = useSelector((state) => state.profile);
-  console.log('Feed queue: ', queue);
+  /* console.log('Feed queue: ', queue); */
 
   async function handleRefresh() {
-    console.log(
+    /* console.log(
       '[Feed.js]: handleRefresh() called, dispatching loadMoreCards action..'
-    );
+    ); */
     const action = await dispatch(
       loadMoreCards({
         catalog,

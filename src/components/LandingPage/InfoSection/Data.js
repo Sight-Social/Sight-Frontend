@@ -10,6 +10,7 @@ import feedImg from '../../../assets/LandingPage/FeedSettings.png';
 import discoverImg from '../../../assets/LandingPage/DiscoverSection.png';
 import FeedSettings from '../../../assets/LandingPage/FeedSettings.png';
 import FeedPic from '../../../assets/LandingPage/FeedRound.png';
+import RealFeed from '../../../assets/LandingPage/Feed.png';
 export const FocalPoints = {
   id: 'focalpoints',
   /* Main Color Choices */

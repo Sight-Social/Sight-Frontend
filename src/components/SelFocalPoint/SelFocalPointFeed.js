@@ -51,7 +51,7 @@ export function SelFocalPointFeed() {
   );
 
   async function handleRefresh() {
-    console.log('handleRefresh');
+    /* console.log('handleRefresh'); */
     const action = await dispatch(
       loadMoreCards({
         queue,

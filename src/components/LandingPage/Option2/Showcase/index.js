@@ -10,12 +10,15 @@ import {
 } from './ShowcaseElements';
 import grid from '../../../../assets/LandingPage/FPGRID.png';
 import Button from 'react-bootstrap/Button';
+import { useSelector } from 'react-redux';
 
 const Showcase = () => {
   const onSignUp = () => {
-    console.log('Sign up clicked');
+    /* console.log('Sign up clicked'); */
     window.location.href = `/signup`;
   };
+
+  const { isAuthenticated } = useSelector((state) => state.profile);
   return (
     <>
       <IntroContainer>
@@ -40,15 +43,21 @@ const Showcase = () => {
           <ShowcaseGrids>
             <Img src={grid} />
           </ShowcaseGrids>
-          <Button
-            onClick={() => onSignUp()}
-            style={{
-              width: '250px',
-              marginTop: '7vh',
-            }}
-          >
-            Sign Up
-          </Button>
+          {isAuthenticated ? (
+            <></>
+          ) : (
+            <>
+              <Button
+                onClick={() => onSignUp()}
+                style={{
+                  width: '250px',
+                  marginTop: '7vh',
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </PictureAndButtonWrapper>
       </IntroContainer>
     </>

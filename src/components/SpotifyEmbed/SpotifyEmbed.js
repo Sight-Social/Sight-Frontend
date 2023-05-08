@@ -8,9 +8,9 @@ export const SpotifyEmbed = ({
   allow = 'encrypted-media',
   ...props
 }) => {
-  console.log('SpotifyEmbed link: ' + link);
+  /* console.log('SpotifyEmbed link: ' + link); */
   const url = new URL(link);
-  console.log('URL: ' + url.pathname);
+  /* console.log('URL: ' + url.pathname); */
   // https://open.spotify.com/track/1KFxcj3MZrpBGiGA8ZWriv?si=f024c3aa52294aa1
   // https://open.spotify.com/episode/6417a917dbd85879ba32fc36
   // /episode/6417a917dbd85879ba32fc36

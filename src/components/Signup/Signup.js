@@ -37,7 +37,7 @@ export function Signup() {
       if (res.data) {
         console.log('Signup successful');
         alert('Signup successful');
-        console.log(res.data);
+        /* console.log(res.data); */
         //DISPATCH TO REDUX
         setProfile(res.data);
         navigate('/register/google');

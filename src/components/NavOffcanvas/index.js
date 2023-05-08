@@ -29,7 +29,7 @@ export function OffCanvasNav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    console.log('[NavBar/index.js] Logout btn clicked');
+    /* console.log('[NavBar/index.js] Logout btn clicked'); */
     localStorage.removeItem('user');
     dispatch(clearProfile());
     navigate('/');
@@ -40,7 +40,7 @@ export function OffCanvasNav() {
   let profileURL = `/user/${username}`;
   let loginURL = `/login`;
   const { isAuthenticated } = useSelector((state) => state.profile);
-  console.log('isAuthenticatedNavOff: ' + isAuthenticated);
+  /* console.log('isAuthenticatedNavOff: ' + isAuthenticated); */
   return (
     <>
       <MobileIcon onClick={toggleShow}>

@@ -12,7 +12,7 @@ import Spotify from '../../assets/IconTransistion/Spotify.png';
 export default function RegisterGoogle() {
   const { tokens } = useSelector((state) => state.profile.tokens);
   const onGoogleLogin = () => {
-    console.log('Google login clicked');
+    /* console.log('Google login clicked'); */
     window.location.href = `${process.env.REACT_APP_API_URL_DEV}/auth/google`;
   };
 

@@ -29,7 +29,7 @@ export function Navbar() {
   const profilePath = '/user/' + username;
 
   const handleLogout = () => {
-    console.log('[NavBar/index.js] Logout btn clicked');
+    /* console.log('[NavBar/index.js] Logout btn clicked'); */
     localStorage.removeItem('user');
     dispatch(clearProfile());
     navigate('/');

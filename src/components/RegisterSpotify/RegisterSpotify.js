@@ -13,11 +13,11 @@ import Spotify from '../../assets/IconTransistion/Spotify.png';
 export default function RegisterSpotify() {
   const { tokens } = useSelector((state) => state.profile.tokens);
   const onSpotifyLogin = () => {
-    console.log('Spotify login clicked');
+    /* console.log('Spotify login clicked'); */
     window.location.href = `${process.env.REACT_APP_API_URL_DEV}/auth/spotify`;
   };
 
-  console.log('RegisterPage popped');
+  /* console.log('RegisterPage popped'); */
   return (
     <MainContainer>
       <IconsWrapper>
